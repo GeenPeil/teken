@@ -11,6 +11,7 @@ sudo apt-get update
 # Install g++ for Node compilation
 sudo apt-get install -y g++
 
+# Install node
 echo 'export PATH=$HOME/local/bin:$PATH' >> ~/.bashrc
 . ~/.bashrc
 mkdir ~/local
@@ -21,22 +22,17 @@ curl http://nodejs.org/dist/node-latest.tar.gz | tar xz --strip-components=1
 ./configure --prefix=$HOME/local
 make install
 
-# Reload
-. ~/.profile
+# FIXME - Currently these steps are a little broken, you need to 'vagrant ssh' and run them manually
+# curl -L https://www.npmjs.org/install.sh | sh
 
-curl -L https://www.npmjs.org/install.sh | sh
+## Install Bower
+#npm install -g bower
 
-# Reload
-. ~/.profile
+## Install Ember-Cli
+#npm install -g ember-cli
 
-# Install Bower
-npm install -g bower
-
-# Install Ember-Cli
-npm install -g ember-cli
-
-# Setup Ember project
-cd /vagrant/geenpeil-ember
-npm install
-bower install
-ember build --environment production
+## Setup Ember project
+#cd /vagrant/geenpeil-ember
+#npm install
+#bower install
+#ember build --environment production
