@@ -1,0 +1,100 @@
+{
+    "form" : {
+    
+        "properties" : {
+            "width" : 826,
+            "height" : 1169,
+            "filename" : "34116-inleidend.png",
+            "characterWidth" : 18,
+            "characterHeight" : 27,
+            "characterMargin" : 4,
+            "spaceWidth" : 15
+        },
+        
+        "fields" : [
+            {
+                "_id" : "voornaam",
+                "name" : "Eerste offiële voornaam",
+                "length" : 17,
+                "x" : 51,
+                "y" : 548,
+                "regex" : "[a-zA-Z-']+"
+            },
+            {
+                "_id" : "tussenvoegsel",
+                "name" : "Tussenvoegsel",
+                "length" : 7,
+                "x" : 420,
+                "y" : 548,
+                "regex" : "[a-zA-Z-']*"
+            },
+            {
+                "_id" : "achternaam",
+                "name" : "Achternaam",
+                "length" : 25,
+                "x" : 51,
+                "y" : 596,
+                "regex" : "[a-zA-Z-']+"
+            },
+            {
+                "_id" : "straat",
+                "name" : "Straat",
+                "length" : 25,
+                "x" : 51,
+                "y" : 650,
+                "regex" : "[a-zA-Z-',.]+"
+            },
+            {
+                "_id" : "huisnummer",
+                "name" : "Huisnummer",
+                "length" : 5,
+                "x" : 587,
+                "y" : 650,
+                "regex" : "[0-9a-zA-Z-]+"
+            },
+            {
+                "_id" : "postcode",
+                "name" : "Postcode",
+                "length" : 6,
+                "x" : 51,
+                "y" : 999,
+                "regex" : "[0-9]{4}[a-zA-Z]{2}",
+                "display" : ".... .."
+            },
+            {
+                "_id" : "woonplaats",
+                "name" : "Woonplaats",
+                "length" : 25,
+                "x" : 258,
+                "y" : 999,
+                "regex" : "[a-zA-Z-',.]+"
+            },
+            {
+                "_id" : "geboortedatum",
+                "name" : "Geboortedatum",
+                "length" : 8,
+                "x" : 51,
+                "y" : 1048,
+                "regex" : "[0-9]{8}",
+                "display" : ".. .. ...."
+            },
+            {
+                "_id" : "geboorteplaats",
+                "name" : "Geboorteplaats",
+                "length" : 25,
+                "x" : 258,
+                "y" : 1048,
+                "regex" : "[a-zA-Z-',.]+"
+            },
+            {
+                "_id" : "handtekening",
+                "name" : "Handtekening",
+                "x" : 587,
+                "y" : 548,
+                "width" : 185,
+                "height" : 85
+            }
+        ] 
+    }
+    
+}
