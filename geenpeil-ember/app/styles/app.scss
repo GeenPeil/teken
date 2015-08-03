@@ -1,5 +1,9 @@
 @import 'cordova';
+@import 'animations';
+@import 'colors';
 
 body {
-    background-color: tomato;
+    background-color: $backgroundColor;
+    color: $fontColor;
+    font-family: Arial, sans-serif;
 }

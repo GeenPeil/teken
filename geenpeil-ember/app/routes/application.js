@@ -2,6 +2,7 @@ import Ember from 'ember';
 
 export default Ember.Route.extend({
 
+
     model : function() {
       console.log('loading application route model');
       return Ember.$.ajax({
@@ -15,6 +16,10 @@ export default Ember.Route.extend({
           console.error('no form data');
         }
       });
+    },
+
+    setupController : function(controller,transition) {
+      console.log('setupController',controller,transition);
     }
 
 });

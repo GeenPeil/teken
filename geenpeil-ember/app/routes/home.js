@@ -4,8 +4,14 @@ export default Ember.Route.extend({
 
   actions : {
 
-    clicky : function() {
+    share : function() {
       console.log('CLICKY!');
+      this.transitionTo('share');
+    },
+
+    form : function() {
+      console.log('action form');
+      this.transitionTo('disclaimer');
     }
 
   }
