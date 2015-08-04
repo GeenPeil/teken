@@ -1,7 +1,7 @@
 
 ## teken.geenpeil.nl
 
-![Project structuur](docs/structuur.png)
+[![Project structuur](docs/structuur.png)](https://raw.githubusercontent.com/GeenPeil/teken/master/docs/structuur.png)
 
 ### pechtold - API server (http api, encryption, storage)
 
