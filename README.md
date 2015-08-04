@@ -1,5 +1,9 @@
 
-### pechtold - teken.geenpeil.nl server application
+## teken.geenpeil.nl
+
+![Project structuur](docs/structuur.png)
+
+### pechtold - API server (http api, encryption, storage)
 
 #### API
 
@@ -39,7 +43,6 @@ Op deze manier zijn de gegevens gemakkelijk te downloaden.
 
 Om dubbele uploads te herkennen word er twee sha256 hashes gemaakt en opgeslagen. De eerste is een hash van het IP address van de client. Deze mag vaker voorkomen, maar zodra dit er erg veel worden zal het opvallen. De tweede is een hash van n.a.w., deze mag maar eenmaal voorkomen. De kans dat twee verschillende personen dezelfde n.a.w. hebben is nihil, en zo'n registratie zal dan ook door de kiesraad worden afgekeurd.
 
-
-### juncker - teken.geenpeil.nl printing application
+### juncker - printing application (decryption, pdf rendering)
 
 juncker converteert encrypted data naar printbare pdf's. juncker verwacht daarbij dezelfde directory structure waarmee pechtold opslaat.
