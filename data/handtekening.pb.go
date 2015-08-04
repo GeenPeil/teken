@@ -29,7 +29,7 @@ type Handtekening struct {
 	Postcode        string `protobuf:"bytes,8,opt,name=postcode" json:"postcode,omitempty"`
 	Woonplaats      string `protobuf:"bytes,9,opt,name=woonplaats" json:"woonplaats,omitempty"`
 	Handtekening    []byte `protobuf:"bytes,10,opt,name=handtekening,proto3" json:"handtekening,omitempty"`
-	CaptchaResponse string `protobuf:"bytes,11,opt,name=captchaResponse" json:"captchaResponse,omitempty"`
+	CaptchaResponse string `protobuf:"bytes,999,opt,name=captchaResponse" json:"captchaResponse,omitempty"`
 }
 
 func (m *Handtekening) Reset()         { *m = Handtekening{} }
