@@ -1,6 +1,7 @@
-## pechtold - teken.geenpeil.nl server application
 
-### API
+### pechtold - teken.geenpeil.nl server application
+
+#### API
 
 pechtold draait een HTTP API waarmee nieuwe handtekeningen kunnen worden opgeslagen op de server, om op een later tijdstip uitgeprint te worden.
 
@@ -16,24 +17,29 @@ Voor het opslaan van de gegevens is slechts een simpele HTTP POST call nodig, me
  - `postcode` (string)
  - `woonplaats` (string)
  - `handtekening` (string) - base64-encoded jpg of png (nog af te spreken)
- - `captcha-response` (string) - captcha response code, zie onder
+ - `captchaResponse` (string) - captcha response code, zie onder
 
-### Captcha
+#### Captcha
 
 Om misbruik te voorkomen gebruiken we reCaptcha v2. Het best is deze te gebruiken met callback functie in de javascript. Dit maakt de app gebruiksvriendelijk en foolproof.
 
 Meer informatie: https://developers.google.com/recaptcha/docs/verify
 
-### Encryptie van handtekeningen en n.a.w. gegevens
+#### Encryptie van handtekeningen en n.a.w. gegevens
 
 Handtekening en naw gegevens worden asymetrisch encrypted opgeslagen op de server. Op deze manier word gegarandeerd dat er geen opgeslagen persoonsgegevens in handen van hackers kunnen vallen.
-De data word ge-encodeerd met json en versleuteld met een RSA public key. De RSA private key is in handen van de GeenStijl redactie zodat deze de gegevens kunnen decrypten en uitprinten.
+De data word ge-encodeerd met protobuf en versleuteld met een RSA public key. De RSA private key is in handen van de GeenStijl redactie zodat deze de gegevens kunnen decrypten en uitprinten.
 
-### Opslag van encrypted gegevens
+#### Opslag van encrypted gegevens
 
 De gegevens worden direct op ssd opgeslagen. 1 bestand per handtekening met als naam `<ID>.gp`. 1000 bestanden per map. mapnamen zijn genummerd naar `floor(ID / 1000) + 1`.
 Op deze manier zijn de gegevens gemakkelijk te downloaden.
 
-### Hashing van IP en naw
+#### Hashing van IP en naw
 
 Om dubbele uploads te herkennen word er twee sha256 hashes gemaakt en opgeslagen. De eerste is een hash van het IP address van de client. Deze mag vaker voorkomen, maar zodra dit er erg veel worden zal het opvallen. De tweede is een hash van n.a.w., deze mag maar eenmaal voorkomen. De kans dat twee verschillende personen dezelfde n.a.w. hebben is nihil, en zo'n registratie zal dan ook door de kiesraad worden afgekeurd.
+
+
+### juncker - teken.geenpeil.nl printing application
+
+juncker converteert encrypted data naar printbare pdf's. juncker verwacht daarbij dezelfde directory structure waarmee pechtold opslaat.
