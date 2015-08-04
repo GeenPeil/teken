@@ -15,5 +15,5 @@ message Handtekening {
 	
 	bytes handtekening = 10;
 	
-	string captchaResponse = 11;
+	string captchaResponse = 11; // the captcha response will not be saved to storage, but the created struct is also used for json decoding.
 }
