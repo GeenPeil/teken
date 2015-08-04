@@ -1,1 +1,9 @@
-{{outlet}}
+<h1>Voorbeeld</h1>
+
+<img class="preview-form-image" src={{formImage}}>
+
+{{#each completedFormItems as |formItem|}}
+
+  {{generic-display formItem}}
+
+{{/each}}
