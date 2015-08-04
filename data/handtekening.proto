@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package data;
+
+message Handtekening {
+	string voornaam = 1;
+	string tussenvoegsel = 2;
+	string achternaam = 3;
+	string geboortedatum = 4;
+	string geboorteplaats = 5;
+	string straat = 6;
+	string huisnummer = 7;
+	string postcode = 8;
+	string woonplaats = 9;
+	
+	bytes handtekening = 10;
+	
+	string captchaResponse = 11; // the captcha response will not be saved to storage, but the created struct is also used for json decoding.
+}
