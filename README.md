@@ -23,6 +23,16 @@ Voor het opslaan van de gegevens is slechts een simpele HTTP POST call nodig, me
  - `handtekening` (string) - base64-encoded jpg of png (nog af te spreken)
  - `captchaResponse` (string) - captcha response code, zie onder
 
+De response bevat een JSON object met slechts twee mogelijke velden:
+
+ - `success` (boolean) - indien false zal het object ook de error bevatten
+ - `error` (string, optioneel) - error string welke aangeeft wat er mis is met het request, zie onder voor lijst mogelijk errors
+
+Mogelijke error values:
+
+ - `form values missing or invalid`
+ - `captcha invalid`
+
 #### Captcha
 
 Om misbruik te voorkomen gebruiken we reCaptcha v2. Het best is deze te gebruiken met callback functie in de javascript. Dit maakt de app gebruiksvriendelijk en foolproof.
