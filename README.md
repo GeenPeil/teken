@@ -16,8 +16,13 @@ Voor het opslaan van de gegevens is slechts een simpele HTTP POST call nodig, me
  - `postcode` (string)
  - `woonplaats` (string)
  - `handtekening` (string) - base64-encoded jpg of png (nog af te spreken)
+ - `captcha-response` (string) - captcha response code, zie onder
 
-TODO: captcha in de API meenemen
+### Captcha
+
+Om misbruik te voorkomen gebruiken we reCaptcha v2. Het best is deze te gebruiken met callback functie in de javascript. Dit maakt de app gebruiksvriendelijk en foolproof.
+
+Meer informatie: https://developers.google.com/recaptcha/docs/verify
 
 ### Encryptie van handtekeningen en n.a.w. gegevens
 
