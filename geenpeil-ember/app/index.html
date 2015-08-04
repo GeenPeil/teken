@@ -22,13 +22,16 @@
   </head>
   <body>
     {{content-for 'body'}}
-    
+
     <!--Cordova scripts-->
     <script type="text/javascript" src="cordova.js"></script>
-    
+
     <!--Ember scripts-->
     <script type="text/javascript" src="assets/vendor.js"></script>
     <script type="text/javascript" src="assets/geenpeil.js"></script>
+
+    <!--Load webfont-->
+    <link href='http://fonts.googleapis.com/css?family=Cutive+Mono' rel='stylesheet' type='text/css'>
 
     {{content-for 'body-footer'}}
   </body>

@@ -8,8 +8,8 @@ export default Ember.Route.extend({
   //TODO handle back button
   //TODO handle submit button
 
-  setupController : function(controller,model) {
-    //TODO - setup existing value if found in the form data map
+  setupController : function(controller,params) {
+    controller.set('inputName', params.input);
   }
 
 });

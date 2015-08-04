@@ -1,9 +1,34 @@
 @import 'cordova';
 @import 'animations';
 @import 'colors';
+@import 'components/components';
 
 body {
-    background-color: $backgroundColor;
-    color: $fontColor;
-    font-family: Arial, sans-serif;
+  background-color: $backgroundColor;
+  color: $fontColor;
+  font-family: Arial, sans-serif;
+}
+
+h1 {
+  margin: 1em;
+}
+
+.button-nav {
+
+  button {
+    transition: background-color 0.5s ease;
+    background-color:#0000CC;
+
+    &:hover {
+      background-color:#0066FF;
+    }
+
+    color: white;
+
+    font-size: 2em;
+    padding: 0.25em;
+
+    border: none;
+  }
+
 }
