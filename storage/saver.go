@@ -16,11 +16,14 @@ import (
 	"github.com/gogo/protobuf/proto"
 )
 
+// Saver is responsible for encoding+encrypting uploaded handtekeningen to storage.
 type Saver struct {
 	pubkey   *rsa.PublicKey
 	datapath string
 }
 
+// NewSaver returns a new *Saver instance with a public key loaded from the given pubkeyFilename.
+// The returned Saver will use datapash to write files to, using the specified directory structure.
 func NewSaver(pubkeyFilename string, datapath string) (*Saver, error) {
 	pubkeyFile, err := os.Open(pubkeyFilename)
 	if err != nil {

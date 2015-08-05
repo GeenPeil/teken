@@ -14,11 +14,14 @@ import (
 	"github.com/gogo/protobuf/proto"
 )
 
+// Fetcher is responsible for fetching and decrypting+decoding stored handtekeningen.
 type Fetcher struct {
 	privkey  *rsa.PrivateKey
 	datapath string
 }
 
+// NewFetcher creates a new *Fetcher instance with private key from given privkeyFilename.
+// The returned Fetcher will use datapath to lookup stored files.
 func NewFetcher(privkeyFilename string, datapath string) (*Fetcher, error) {
 	privkeyFile, err := os.Open(privkeyFilename)
 	if err != nil {
@@ -44,6 +47,7 @@ func NewFetcher(privkeyFilename string, datapath string) (*Fetcher, error) {
 	return f, nil
 }
 
+// Fetch loads a handtekening from file by number
 func (f *Fetcher) Fetch(n int) (*data.Handtekening, error) {
 	filename, foldername := fileFolderByNumber(n)
 	file, err := os.Open(filepath.Join(f.datapath, foldername, filename))
