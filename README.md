@@ -30,8 +30,9 @@ De response bevat een JSON object met slechts twee mogelijke velden:
 
 Mogelijke error values:
 
- - `form values missing or invalid`
+ - `form values missing or invalid` - one or more values are not correct or missing
  - `captcha invalid`
+ - `image invalid` - this could be either the base64 decoding, or the image format itself
 
 #### Captcha
 
