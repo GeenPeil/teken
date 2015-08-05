@@ -3,7 +3,7 @@
 CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.8.1-alpha1" last-position="1,8" last-zoom="1"
+<dbmodel pgmodeler-ver="0.8.1-alpha1" last-position="9,4" last-zoom="1"
 	 default-schema="public" default-owner="postgres">
 <database name="geenpeil">
 </database>
@@ -24,18 +24,21 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<column name="iphash" not-null="true">
 		<type name="char" length="32"/>
 	</column>
+	<constraint name="handtekeningen_id_primary" type="pk-constr" table="public.handtekeningen">
+		<columns names="ID" ref-type="src-columns"/>
+	</constraint>
 </table>
 
 <table name="nawhash">
 	<schema name="public"/>
 	<role name="postgres"/>
 	<position x="275" y="27"/>
-	<column name="ID" not-null="true">
-		<type name="serial"/>
-	</column>
 	<column name="hash" not-null="true">
 		<type name="char" length="32"/>
 	</column>
+	<constraint name="nawhash_unique" type="uq-constr" table="public.nawhash">
+		<columns names="hash" ref-type="src-columns"/>
+	</constraint>
 </table>
 
 </dbmodel>
