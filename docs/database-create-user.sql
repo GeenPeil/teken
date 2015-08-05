@@ -5,4 +5,7 @@ GRANT CONNECT ON DATABASE geenpeil TO pechtold;
 
 GRANT SELECT, INSERT ON ALL TABLES IN SCHEMA public TO pechtold;
 
-# edit pg_hba.conf to allow md5 auth for local unix socket connections
+# for testing: edit pg_hba.conf to allow md5 auth for local unix socket connections
+
+# for prod: run pechtold as user pechtold (system user)
+
