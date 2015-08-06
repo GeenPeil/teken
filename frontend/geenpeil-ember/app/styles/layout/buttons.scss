@@ -1,0 +1,31 @@
+.button-nav {
+
+  margin: 1em;
+
+  button {
+    transition: background-color 0.5s ease;
+    background-color:#0000CC;
+
+    &:hover {
+      background-color:#0066FF;
+    }
+
+    color: white;
+
+    font-size: 2em;
+    padding: 0.25em;
+    margin: 0.25em;
+
+    border: none;
+  }
+
+}
+
+.button-share {
+
+  button {
+    display: block;
+    background-color: tomato;
+  }
+
+}
