@@ -5,43 +5,56 @@ import (
 	"log"
 	"net/http"
 
+	_ "github.com/lib/pq" // import postgres driver (registers itself to database/sql)
+
 	"github.com/go-recaptcha/recaptcha"
 )
 
-var (
+type Server struct {
 	captcha *recaptcha.Recaptcha
 	db      *sql.DB
-)
+	options *Options
+}
 
-// Run is a forever blocking call that starts the pechtold server
-func Run() {
-	parseFlags()
+func New(o *Options) *Server {
+	return &Server{
+		options: o,
+	}
+}
 
-	setupDB()
+// Run is a forever blocking call that starts the pechtold server.
+// When setupDoneCh is not nil, it is closed by Run when most of the setup is done and the http server is started (blocking).
+func (s *Server) Run(setupDoneCh chan struct{}) {
+	s.setupDB()
 
-	setupCaptcha()
+	s.setupCaptcha()
 
-	http.HandleFunc("/pechtold/upload", handleUpload)
-	err := http.ListenAndServe(flags.HTTPAddress, nil)
+	http.HandleFunc("/pechtold/upload", s.newUploadHandlerFunc())
+
+	if setupDoneCh != nil {
+		close(setupDoneCh)
+	}
+
+	err := http.ListenAndServe(s.options.HTTPAddress, nil)
 	if err != nil {
 		log.Fatalf("error during ListenAndServe: %v", err)
 	}
 }
 
-func setupDB() {
+func (s *Server) setupDB() {
 	var err error
-	db, err = sql.Open("postgres", "user=geenpeil dbname=geenpeil") // TODO: use flags
+	s.db, err = sql.Open("postgres", "host=/var/run/postgresql sslmode=disable user=pechtold password=pechtold dbname=geenpeil")
 	if err != nil {
 		log.Fatalf("error setting up db conn (open): %v", err)
 	}
 
 	// force connection
-	err = db.Ping()
+	err = s.db.Ping()
 	if err != nil {
 		log.Fatalf("error setting up db conn (ping): %v", err)
 	}
 }
 
-func setupCaptcha() {
-	captcha = recaptcha.New(flags.CaptchaSecret)
+func (s *Server) setupCaptcha() {
+	s.captcha = recaptcha.New(s.options.CaptchaSecret)
 }
