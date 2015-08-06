@@ -11,13 +11,10 @@ export default Ember.Controller.extend({
   }),
 
   completedFormItems : Ember.computed('',function() {
-    var model = this.get('model'),
-        formItems = this.get('applicationController').get('model.form.fields');
+    var formItems = this.get('applicationController').get('model.form.fields');
 
-    //match each form item with one of the model values
-    return formItems.map(function(formItem) {
-      formItem.value = model[formItem._id];
-      return formItem;
+    return formItems.filter(function(formItem) {
+      return formItem.value;
     });
   })
 });
