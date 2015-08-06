@@ -4,6 +4,12 @@ export default Ember.Controller.extend({
 
   model : null,
 
+  formData : null,
+
+  onInit : Ember.on('init', function() {
+    this.set('formData',Ember.Object.create());
+  }),
+
   formItemForId : function(id) {
     return this.get('model.form.fields').findBy('_id',id);
   },

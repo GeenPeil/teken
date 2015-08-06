@@ -10,10 +10,20 @@ export default Ember.Controller.extend({
     return this.get('applicationController').formItemForId(this.get('inputName'));
   }),
 
+  inputNameChanged : Ember.observer('inputName', function() {
+    //TODO - return previously entered data if available
+    this.set('value',this.get('formItem.value') || undefined);
+  }),
+
+  valueChanged : Ember.observer('value', function() {
+    //TODO - store the new value
+    console.log('new value is',this.get('value'));
+    this.set('formItem.value',this.get('value'));
+  }),
+
   actions : {
     cancel : function() {
       var previous = this.get('applicationController').previousFormItem(this.get('formItem'));
-      console.log('previous',previous);
 
       if(previous) {
         this.transitionToRoute('input',previous._id);
@@ -27,7 +37,6 @@ export default Ember.Controller.extend({
 
     continue : function() {
       var next = this.get('applicationController').nextFormItem(this.get('formItem'));
-      console.log('next',next);
 
       if(next) {
         this.transitionTo('input',next._id);
@@ -36,14 +45,6 @@ export default Ember.Controller.extend({
         this.transitionToRoute('check');
       }
     }
-  },
-
-  isStringInput : Ember.computed('formItem', function() {
-    return this.get('formItem.type') === 'string';
-  }),
-
-  isSignatureInput : Ember.computed('formItem', function() {
-    return this.get('formItem.type') === 'signature';
-  }),
+  }
 
 });
