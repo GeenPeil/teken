@@ -1,1 +1,18 @@
 <h1>Controlleren</h1>
+
+<div class="text-block">
+  <span>Kijk uw gegevens goed na. U kunt ook een voorbeeld van het ingevulde formulier bekijken.</span>
+</div>
+
+{{#each completedFormItems as |formItem|}}
+
+  {{formItem.name}} : {{formItem.value}}
+  <br>
+
+{{/each}}
+
+<div class="button-nav">
+  <button class="back" {{action 'back'}}>Terug</button>
+  <button class="preview" {{action 'preview'}}>Voorbeeld</button>
+  <button class="send" {{action 'send'}}>Versturen</button>
+</div>
