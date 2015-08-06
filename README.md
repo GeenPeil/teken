@@ -45,6 +45,8 @@ Meer informatie: https://developers.google.com/recaptcha/docs/verify
 Handtekening en naw gegevens worden asymetrisch encrypted opgeslagen op de server. Op deze manier word gegarandeerd dat er geen opgeslagen persoonsgegevens in handen van hackers kunnen vallen.
 De data word ge-encodeerd met protobuf en versleuteld met een RSA public key. De RSA private key is in handen van de GeenStijl redactie zodat deze de gegevens kunnen decrypten en uitprinten.
 
+TODO: data is groter dan mogelijk is te encrypten met RSA. AES toevoegen en extra encoding layer (protobuf) om rsa-encrypted aes-key en aes-encrypted handtekening data op te slaan in 1 files. jay!!
+
 #### Opslag van encrypted gegevens
 
 De gegevens worden direct op ssd opgeslagen. 1 bestand per handtekening met als naam `<ID>.gp`. 1000 bestanden per map. mapnamen zijn genummerd naar `floor(ID / 1000) + 1`.
