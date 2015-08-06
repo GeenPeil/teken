@@ -1,1 +1,7 @@
-{{yield}}
+{{#if isStringField}}
+  {{string-field formItem=formItem value=value}}
+{{/if}}
+
+{{#if isSignatureField}}
+  {{signature-field formItem=formItem value=value}}
+{{/if}}

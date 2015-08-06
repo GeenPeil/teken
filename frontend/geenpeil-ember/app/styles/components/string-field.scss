@@ -1,8 +1,14 @@
 .string-field {
-  font-family: 'Cutive Mono', courier;
-  border: none;
-  display: block;
 
-  font-size: 2.5em;
-  margin-left: 1em;
+  input {
+    font-family: courier;
+    border: none;
+    display: block;
+
+    font-size: 2.5em;
+    margin-left: 1em;
+
+    text-transform: uppercase;
+  }
+
 }
