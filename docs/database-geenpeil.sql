@@ -17,25 +17,25 @@
 -- object: public.handtekeningen | type: TABLE --
 -- DROP TABLE IF EXISTS public.handtekeningen CASCADE;
 CREATE TABLE public.handtekeningen(
-	"ID" serial NOT NULL,
+	id serial NOT NULL,
 	insert_time timestamp NOT NULL,
-	iphash char(32) NOT NULL,
-	CONSTRAINT handtekeningen_id_primary PRIMARY KEY ("ID")
+	iphash bytea NOT NULL,
+	CONSTRAINT handtekeningen_id_primary PRIMARY KEY (id)
 
 );
 -- ddl-end --
 ALTER TABLE public.handtekeningen OWNER TO postgres;
 -- ddl-end --
 
--- object: public.nawhash | type: TABLE --
--- DROP TABLE IF EXISTS public.nawhash CASCADE;
-CREATE TABLE public.nawhash(
-	hash char(32) NOT NULL,
+-- object: public.nawhashes | type: TABLE --
+-- DROP TABLE IF EXISTS public.nawhashes CASCADE;
+CREATE TABLE public.nawhashes(
+	hash bytea NOT NULL,
 	CONSTRAINT nawhash_unique UNIQUE (hash)
 
 );
 -- ddl-end --
-ALTER TABLE public.nawhash OWNER TO postgres;
+ALTER TABLE public.nawhashes OWNER TO postgres;
 -- ddl-end --
 
 
