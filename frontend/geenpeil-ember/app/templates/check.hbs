@@ -1,18 +1,45 @@
 <h1>Controlleren</h1>
 
-<div class="text-block">
+<div class="content-block text-block">
   <span>Kijk uw gegevens goed na. U kunt ook een voorbeeld van het ingevulde formulier bekijken.</span>
+  <br><br>
+
+    {{applicationController.model.form.map.voornaam.name}} : <br>
+    {{applicationController.model.form.map.voornaam.value}}
+    <br><br>
+    {{applicationController.model.form.map.tussenvoegsel.name}} : <br>
+    {{applicationController.model.form.map.tussenvoegsel.value}}
+    <br><br>
+    {{applicationController.model.form.map.achternaam.name}} : <br>
+    {{applicationController.model.form.map.achternaam.value}}
+    <br><br>
+    {{applicationController.model.form.map.straat.name}} : <br>
+    {{applicationController.model.form.map.straat.value}}
+    <br><br>
+    {{applicationController.model.form.map.huisnummer.name}} : <br>
+    {{applicationController.model.form.map.huisnummer.value}}
+    <br><br>
+    {{applicationController.model.form.map.postcode.name}} : <br>
+    {{applicationController.model.form.map.postcode.value}}
+    <br><br>
+    {{applicationController.model.form.map.woonplaats.name}} : <br>
+    {{applicationController.model.form.map.woonplaats.value}}
+    <br><br>
+    {{applicationController.model.form.map.geboortedatum.name}} : <br>
+    {{applicationController.model.form.map.geboortedatum.value}}
+    <br><br>
+    {{applicationController.model.form.map.geboorteplaats.name}} : <br>
+    {{applicationController.model.form.map.geboorteplaats.value}}
+    <br><br>
+    {{applicationController.model.form.map.handtekening.name}} : <br>
+    <img style="background-color:white;" src={{applicationController.model.form.map.handtekening.value}}>
+    <br><br>
+
 </div>
 
-{{#each completedFormItems as |formItem|}}
-
-  {{formItem.name}} : {{formItem.value}}
-  <br>
-
-{{/each}}
-
-<div class="button-nav">
+<div class="content-block button-nav">
   <button class="back" {{action 'back'}}>Terug</button>
-  <button class="preview" {{action 'preview'}}>Voorbeeld</button>
-  <button class="send" {{action 'send'}}>Versturen</button>
+  <button class="send float-right" {{action 'send'}}>Versturen</button>
+  <button class="preview float-right" {{action 'preview'}}>Voorbeeld</button>
+
 </div>

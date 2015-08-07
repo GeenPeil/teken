@@ -11,5 +11,13 @@ body {
 }
 
 h1 {
+  height:55px;
+  line-height:55px;
+  font-size: 2em;
   margin: 1em;
+  margin-left: 0.5em;
+}
+
+.noScroll {
+  overflow: hidden;
 }

@@ -1,6 +1,6 @@
 .button-nav {
 
-  margin: 1em;
+  margin-top: 2.5em;
 
   button {
     transition: background-color 0.5s ease;
@@ -13,10 +13,18 @@
     color: white;
 
     font-size: 2em;
+
     padding: 0.25em;
-    margin: 0.25em;
+    margin-right: 0.5em;
+    margin-bottom: 0.5em;
 
     border: none;
+  }
+
+  .float-right {
+    float: right;
+    margin-right: 0;
+    margin-left: 0.5em;
   }
 
 }
