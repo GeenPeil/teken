@@ -11,10 +11,6 @@ export default Ember.Controller.extend({
   }),
 
   completedFormItems : Ember.computed('',function() {
-    var formItems = this.get('applicationController').get('model.form.fields');
-
-    return formItems.filter(function(formItem) {
-      return formItem.value;
-    });
+    return this.get('applicationController').get('model.form.fields');
   })
 });

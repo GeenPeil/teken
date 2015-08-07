@@ -1,9 +1,13 @@
-<h1>Voorbeeld</h1>
+<div class="fixed-header"><h1>Voorbeeld</h1></div>
 
-<img class="preview-form-image" src={{formImage}}>
+<div class="preview-container fixed-header-content">
 
-{{#each completedFormItems as |formItem|}}
+  <img class="preview-form-image" src={{formImage}}>
 
-  {{generic-display formItem=formItem}}
+  {{#each completedFormItems as |formItem|}}
 
-{{/each}}
+    {{generic-display formItem=formItem}}
+
+  {{/each}}
+
+</div>

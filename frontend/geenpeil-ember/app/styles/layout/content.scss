@@ -2,10 +2,46 @@
 
   margin: 0 1em 0 1em;
 
+  max-width: 560px;
+
 }
 
 .text-block {
 
   line-height: 1.4em;
 
+  color: white;
+
+}
+
+.logo {
+  display : inline-block;
+
+  background-image: url('geenpeillogo.png');
+  background-size: cover;
+
+  width: 55px;
+  height: 55px;
+}
+
+.logo-text {
+  display: inline-block;
+
+  margin-bottom: 35px;
+
+  vertical-align: middle;
+}
+
+.fixed-header {
+  position: fixed;
+  width:100%;
+  background-color: $backgroundColor;
+}
+
+.fixed-header-content {
+  padding-top: 100px;
+
+  .generic-display {
+    margin-top: 100px;
+  }
 }
