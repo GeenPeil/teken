@@ -19,12 +19,19 @@ export default Ember.Component.extend({
   actions : {
 
     erase : function() {
-              console.log('context',this.get('ctx'));
         var m = confirm("Wilt u de handtekening opnieuw zetten?");
         if (m) {
             this.get('ctx').clearRect(0, 0, this.get('width'), this.get('height'));
             document.getElementById("canvasimg").style.display = "none";
         }
+    },
+
+    redo : function() {
+      alert('TODO');
+    },
+
+    undo : function() {
+      alert('TODO');
     }
 
   },
@@ -32,8 +39,16 @@ export default Ember.Component.extend({
   save : function() {
     console.log('save');
     var dataURL = this.get('canvas').toDataURL();
-    this.set('value',dataURL);
+    this.set('formItem.value',dataURL);
   },
+
+  setupScrollBlock : Ember.on('didInsertElement',function() {
+    Ember.$('body').addClass('noScroll');
+  }),
+
+  tearDownScrollBlock : Ember.on('willDestroyElement', function() {
+    Ember.$('body').removeClass('noScroll');
+  }),
 
   onDidInsertElement : Ember.on('didInsertElement', function() {
     var canvas = this.get('canvas');
@@ -42,7 +57,7 @@ export default Ember.Component.extend({
     var h = canvas.height;
 
     // Apply existing image if found
-    var imageUrl = this.get('value');
+    var imageUrl = this.get('formItem.value');
     if(imageUrl) {
       var img = new Image;
       img.onload = function(){

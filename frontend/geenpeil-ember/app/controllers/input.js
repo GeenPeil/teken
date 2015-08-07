@@ -2,6 +2,7 @@ import Ember from 'ember';
 
 export default Ember.Controller.extend({
 
+  /** DEPRECATED
   applicationController: Ember.inject.controller('application'),
 
   inputName : null,
@@ -46,5 +47,6 @@ export default Ember.Controller.extend({
       }
     }
   }
+  **/
 
 });

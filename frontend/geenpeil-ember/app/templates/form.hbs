@@ -1,0 +1,27 @@
+<h1>Deel {{sectionNumber}} van {{totalSections}}</h1>
+
+<div class="content-block">
+  {{#each formItems as |formItem|}}
+
+    {{generic-field formItem=formItem}}
+
+  {{/each}}
+</div>
+
+<div class="content-block button-nav">
+  <button class="cancel" {{action 'cancel'}}>
+
+    {{#if isFirstSection}}
+      Stoppen
+    {{else}}
+      Terug
+    {{/if}}
+  </button>
+  <button class="continue float-right" {{action 'continue'}}>
+    {{#if isLastSection}}
+      Klaar
+    {{else}}
+      Verder
+    {{/if}}
+  </button>
+</div>

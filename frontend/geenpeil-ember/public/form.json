@@ -5,11 +5,19 @@
             "width" : 826,
             "height" : 1169,
             "filename" : "34116-inleidend.png",
+            "description" : "34116 - Wet Goedkeuring van de op 27 juni 2014 te Brussel tot stand gekomen Associatieovereenkomst tussen de Europese Unie en de Europese Gemeenschap voor Atoomenergie en haar lidstaten, enerzijds, en Oekraïne, anderzijds (Trb. 2014, 160)",
             "characterWidth" : 18,
             "characterHeight" : 27,
             "characterMargin" : 4,
             "spaceWidth" : 15
         },
+
+        "sections" : [
+          ["voornaam","tussenvoegsel","achternaam"],
+          ["straat","huisnummer","postcode","woonplaats"],
+          ["geboortedatum","geboorteplaats"],
+          ["handtekening"]
+        ],
 
         "fields" : [
             {
@@ -26,7 +34,7 @@
                 "_id" : "tussenvoegsel",
                 "type" : "string",
                 "name" : "Tussenvoegsel",
-                "placeholder" : "vul in",
+                "placeholder" : "vul in of laat leeg",
                 "length" : 7,
                 "x" : 420,
                 "y" : 548,
@@ -46,7 +54,7 @@
                 "_id" : "straat",
                 "type" : "string",
                 "name" : "Straat",
-                "placeholder" : "vul in",
+                "placeholder" : "vul in zonder huisnummer",
                 "length" : 25,
                 "x" : 51,
                 "y" : 650,
@@ -66,7 +74,7 @@
                 "_id" : "postcode",
                 "type" : "string",
                 "name" : "Postcode",
-                "placeholder" : "vul in",
+                "placeholder" : "vul in b.v. 1234AB",
                 "length" : 6,
                 "x" : 51,
                 "y" : 999,
@@ -87,7 +95,7 @@
                 "_id" : "geboortedatum",
                 "type" : "string",
                 "name" : "Geboortedatum",
-                "placeholder" : "vul in",
+                "placeholder" : "vul in b.v. 01-01-1970",
                 "length" : 8,
                 "x" : 51,
                 "y" : 1048,

@@ -5,8 +5,7 @@ export default Ember.Route.extend({
   actions : {
 
     accept : function() {
-      //TODO - get the first input name programatically
-      this.transitionTo('input','voornaam');
+      this.transitionTo('form',1);
     },
 
     decline : function() {

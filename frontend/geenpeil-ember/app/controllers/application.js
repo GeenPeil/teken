@@ -10,10 +10,19 @@ export default Ember.Controller.extend({
     this.set('formData',Ember.Object.create());
   }),
 
+  onModelChanged : Ember.observer('model', function() {
+    var formMap = {};
+    this.get('model.form.fields').forEach(function(field) {
+      formMap[field._id] = field;
+    });
+    this.set('model.form.map',formMap);
+  }),
+
   formItemForId : function(id) {
     return this.get('model.form.fields').findBy('_id',id);
   },
 
+  /** DEPRECATED
   formItemIndex : function(id) {
     return this.get('model.form.fields').indexOf(id);
   },
@@ -36,6 +45,15 @@ export default Ember.Controller.extend({
     else {
       return this.get('model.form.fields')[formItemIndex-1];
     }
+  },
+  */
+
+  getSection : function(sectionIndex) {
+    return this.get('model.form.sections')[sectionIndex];
+  },
+
+  getSections : function() {
+    return this.get('model.form.sections');
   }
 
 });

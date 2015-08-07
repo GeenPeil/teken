@@ -12,7 +12,9 @@ Router.map(function() {
 
   this.resource('disclaimer', { path: '/voorwaarden' });
 
-  this.resource('input', { path: '/invullen/:input' });
+  //DEPRECATED this.resource('input', { path: '/invullen/:input' });
+
+  this.resource('form', { path: '/formulier/:section' });
 
   this.resource('check', { path: '/controlleren' });
 
