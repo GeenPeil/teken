@@ -1,8 +1,13 @@
 <h1>Controlleren</h1>
 
 <div class="content-block text-block">
-  <span>Kijk uw gegevens goed na. U kunt ook een voorbeeld van het ingevulde formulier bekijken.</span>
-  <br><br>
+
+  {{#unless allValid}}
+    HET FORMULIER BEVAT FOUTEN OF NIET ALLE VERPLICHTE VELDEN ZIJN INGEVULD!
+
+  {{else}}
+    <span>Kijk uw gegevens goed na. U kunt ook een voorbeeld van het ingevulde formulier bekijken.</span>
+    <br><br>
 
     {{applicationController.model.form.map.voornaam.name}} : <br>
     {{applicationController.model.form.map.voornaam.value}}
@@ -35,11 +40,16 @@
     <img style="background-color:white;" src={{applicationController.model.form.map.handtekening.value}}>
     <br><br>
 
+  {{/unless}}
+
 </div>
 
 <div class="content-block button-nav">
   <button class="back" {{action 'back'}}>Terug</button>
-  <button class="send float-right" {{action 'send'}}>Versturen</button>
-  <button class="preview float-right" {{action 'preview'}}>Voorbeeld</button>
+
+  {{#if allValid}}
+    <button class="send float-right" {{action 'send'}}>Versturen</button>
+    <button class="preview float-right" {{action 'preview'}}>Voorbeeld</button>
+  {{/if}}
 
 </div>

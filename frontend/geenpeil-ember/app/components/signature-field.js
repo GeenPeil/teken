@@ -39,6 +39,7 @@ export default Ember.Component.extend({
   save : function() {
     console.log('save');
     var dataURL = this.get('canvas').toDataURL();
+    this.set('formItem.isValid',true);
     this.set('formItem.value',dataURL);
   },
 

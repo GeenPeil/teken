@@ -1,2 +1,7 @@
 <span class="label">{{formItem.name}}</span>
 {{input type='text' value=value placeholder=formItem.placeholder}}
+{{#if showError}}
+  {{formItem.instruction}}
+{{/if}}
+
+<br><span class="debug">valid : {{formItem.isValid}}</span>

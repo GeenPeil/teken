@@ -4,6 +4,10 @@ export default Ember.Controller.extend({
 
   applicationController: Ember.inject.controller('application'),
 
+  /*
+  * Section handling
+  */
+
   section : Ember.computed('sectionNumber', function() {
     var sectionNumber = this.get('sectionNumber');
     return this.get('applicationController').getSection(sectionNumber-1);
@@ -27,6 +31,18 @@ export default Ember.Controller.extend({
     return this.get('sectionNumber') === this.get('totalSections');
   }),
 
+  /*
+  * Input validation
+  */
+
+  noErrors : Ember.computed('formItems.@each.isValid', function() {
+    return !!this.get('formItems').findBy('isValid',false) === false;
+  }),
+
+  /*
+  * Actions
+  */
+
   actions : {
     cancel : function() {
       var notFirst = !this.get('isFirstSection');
@@ -44,14 +60,20 @@ export default Ember.Controller.extend({
     },
 
     continue : function() {
-      var notLast = !this.get('isLastSection');
+      if(this.get('noErrors')) {
+        var notLast = !this.get('isLastSection');
 
-      if(notLast) {
-        this.transitionTo('form',this.get('sectionNumber')+1);
+        if(notLast) {
+          this.transitionTo('form',this.get('sectionNumber')+1);
+        }
+        else {
+          this.transitionToRoute('check');
+        }
       }
       else {
-        this.transitionToRoute('check');
+        alert('Niet alle velden zijn geldig. Kijk bij het veld wat er mis is met de invoer.');
       }
+
     }
   }
 

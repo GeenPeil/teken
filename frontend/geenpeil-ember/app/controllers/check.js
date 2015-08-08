@@ -4,6 +4,21 @@ export default Ember.Controller.extend({
 
   applicationController: Ember.inject.controller('application'),
 
+  formItems : Ember.computed('',function() {
+    return this.get('applicationController').get('model.form.fields');
+  }),
+
+  allValid : Ember.computed('formItems.@each.isValid', function() {
+      var formItems = this.get('formItems');
+      var allValid = true;
+      formItems.forEach(function(formItem) {
+        if(formItem.isValid !== true) {
+          allValid = false;
+        }
+      });
+      return allValid;
+  }),
+
   actions : {
 
     send : function() {
@@ -22,8 +37,6 @@ export default Ember.Controller.extend({
     }
   },
 
-  completedFormItems : Ember.computed('',function() {
-    return this.get('applicationController').get('model.form.fields');
-  })
+
 
 });

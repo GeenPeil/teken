@@ -26,4 +26,12 @@
     text-transform: uppercase;
   }
 
+  &.error {
+
+    input {
+      border: 2px solid red;
+    }
+
+  }
+
 }
