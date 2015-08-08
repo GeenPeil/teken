@@ -7,10 +7,6 @@ export default Ember.Route.extend({
       return Ember.$.ajax({
         type : 'GET',
         url: 'form.json',
-        success : function(data) {
-          console.log('form data:',data);
-          return Ember.Object.create(data);
-        },
         error : function() {
           console.error('no form data');
         }
@@ -19,7 +15,14 @@ export default Ember.Route.extend({
 
     setupController : function(controller,model) {
       console.log('setupController',controller,model);
-      controller.set('model',model);
+
+      if(typeof model === 'string') {
+        model = JSON.parse(model);
+      }
+
+      //TODO - check for any stored form values here
+
+      controller.set('model',Ember.Object.create(model));
     }
 
 });
