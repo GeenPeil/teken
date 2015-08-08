@@ -25,60 +25,67 @@
                 "type" : "string",
                 "name" : "Eerste offciële voornaam",
                 "placeholder" : "vul in",
+                "instruction" : "Alleen letters. Maximaal 17 tekens.",
                 "length" : 17,
                 "x" : 51,
                 "y" : 548,
-                "regex" : "[a-zA-Z-']+"
+                "regex" : "^[a-zA-Z-']+$"
             },
             {
                 "_id" : "tussenvoegsel",
                 "type" : "string",
                 "name" : "Tussenvoegsel",
                 "placeholder" : "vul in of laat leeg",
+                "instruction" : "Alleen letters. Maximaal 7 tekens.",
                 "length" : 7,
                 "x" : 420,
                 "y" : 548,
-                "regex" : "[a-zA-Z-']*"
+                "regex" : "^[a-zA-Z -']*$"
             },
             {
                 "_id" : "achternaam",
                 "type" : "string",
                 "name" : "Achternaam",
                 "placeholder" : "vul in",
+                "instruction" : "Alleen letters. Maximaal 25 tekens.",
                 "length" : 25,
                 "x" : 51,
                 "y" : 596,
-                "regex" : "[a-zA-Z-']+"
+                "regex" : "^[a-zA-Z-']+$"
             },
             {
                 "_id" : "straat",
                 "type" : "string",
                 "name" : "Straat",
                 "placeholder" : "vul in zonder huisnummer",
+                "instruction" : "Alleen letters. Maximaal 25 tekens.",
                 "length" : 25,
                 "x" : 51,
                 "y" : 650,
-                "regex" : "[a-zA-Z-',.]+"
+                "regex" : "^[a-zA-Z -',.]+$"
             },
             {
                 "_id" : "huisnummer",
                 "type" : "string",
                 "name" : "Huisnummer",
                 "placeholder" : "vul in",
+                "instruction" : "Alleen letters en cijfers. Maximaal 5 tekens.",
                 "length" : 5,
                 "x" : 587,
                 "y" : 650,
-                "regex" : "[0-9a-zA-Z-]+"
+                "regex" : "^[0-9a-zA-Z -]+$"
             },
             {
                 "_id" : "postcode",
                 "type" : "string",
                 "name" : "Postcode",
-                "placeholder" : "vul in b.v. 1234AB",
-                "length" : 6,
+                "placeholder" : "vul in b.v. 1234 AB",
+                "instruction" : "Vul de postcode in als '1234 AB'",
+                "length" : 7,
                 "x" : 51,
                 "y" : 999,
-                "regex" : "[0-9]{4}[a-zA-Z]{2}",
+                "regex" : "^[0-9]{4}[ ]{1}[a-zA-Z]{2}$",
+                "separator" : " ",
                 "display" : ".... .."
             },
             {
@@ -86,20 +93,23 @@
                 "type" : "string",
                 "name" : "Woonplaats",
                 "placeholder" : "vul in",
+                "instruction" : "Alleen letters. Maximaal 25 tekens.",
                 "length" : 25,
                 "x" : 258,
                 "y" : 999,
-                "regex" : "[a-zA-Z-',.]+"
+                "regex" : "^[a-zA-Z -',.]+$"
             },
             {
                 "_id" : "geboortedatum",
                 "type" : "string",
                 "name" : "Geboortedatum",
                 "placeholder" : "vul in b.v. 01-01-1970",
-                "length" : 8,
+                "instruction" : "Vul de geboortedatum in als '01-01-1970'",
+                "length" : 10,
                 "x" : 51,
                 "y" : 1048,
-                "regex" : "[0-9]{8}",
+                "regex" : "^[0-9]{2}-[0-9]{2}-[0-9]{4}$",
+                "separator" : "-",
                 "display" : ".. .. ...."
             },
             {
@@ -107,10 +117,11 @@
                 "type" : "string",
                 "name" : "Geboorteplaats",
                 "placeholder" : "vul in",
+                "instruction" : "Alleen letters. Maximaal 25 tekens.",
                 "length" : 25,
                 "x" : 258,
                 "y" : 1048,
-                "regex" : "[a-zA-Z-',.]+"
+                "regex" : "^[a-zA-Z-',.]+$"
             },
             {
                 "_id" : "handtekening",
