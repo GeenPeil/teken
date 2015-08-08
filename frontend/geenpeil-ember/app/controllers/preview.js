@@ -7,7 +7,7 @@ export default Ember.Controller.extend({
   model : null,
 
   formImage : Ember.computed('',function() {
-    return this.get('applicationController').get('model.form.properties.filename');
+    return 'ext/'+this.get('applicationController').get('model.form.properties.filename');
   }),
 
   completedFormItems : Ember.computed('',function() {
