@@ -83,7 +83,7 @@
                 "instruction" : "Vul de postcode in als '1234 AB'",
                 "length" : 7,
                 "x" : 51,
-                "y" : 999,
+                "y" : 699,
                 "regex" : "^[0-9]{4}[ ]{1}[a-zA-Z]{2}$",
                 "separator" : " ",
                 "display" : ".... .."
@@ -96,7 +96,7 @@
                 "instruction" : "Alleen letters. Maximaal 25 tekens.",
                 "length" : 25,
                 "x" : 258,
-                "y" : 999,
+                "y" : 699,
                 "regex" : "^[a-zA-Z -',.]+$"
             },
             {
@@ -107,7 +107,7 @@
                 "instruction" : "Vul de geboortedatum in als '01-01-1970'",
                 "length" : 10,
                 "x" : 51,
-                "y" : 1048,
+                "y" : 745,
                 "regex" : "^[0-9]{2}-[0-9]{2}-[0-9]{4}$",
                 "separator" : "-",
                 "display" : ".. .. ...."
@@ -120,7 +120,7 @@
                 "instruction" : "Alleen letters. Maximaal 25 tekens.",
                 "length" : 25,
                 "x" : 258,
-                "y" : 1048,
+                "y" : 745,
                 "regex" : "^[a-zA-Z-',.]+$"
             },
             {
