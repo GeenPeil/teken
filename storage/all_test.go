@@ -1,7 +1,6 @@
 package storage
 
 import (
-	"fmt"
 	"reflect"
 	"testing"
 
@@ -25,25 +24,25 @@ func TestStorage(t *testing.T) {
 
 	saver, err := NewSaver("testpub.pem", "testdata")
 	if err != nil {
-		fmt.Printf("error creating new saver: %v\n", err)
+		t.Errorf("error creating new saver: %v\n", err)
 		return
 	}
 
 	err = saver.Save(1, h)
 	if err != nil {
-		fmt.Printf("error saving: %v\n", err)
+		t.Errorf("error saving: %v\n", err)
 		return
 	}
 
 	fetcher, err := NewFetcher("testkey.pem", "testdata")
 	if err != nil {
-		fmt.Printf("error creating new fetcher: %v\n", err)
+		t.Errorf("error creating new fetcher: %v\n", err)
 		return
 	}
 
 	h2, err := fetcher.Fetch(1)
 	if err != nil {
-		fmt.Printf("error fetching: %v\n", err)
+		t.Errorf("error fetching: %v\n", err)
 		return
 	}
 

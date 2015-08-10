@@ -1,6 +1,8 @@
 package storage
 
 import (
+	"crypto/aes"
+	"crypto/cipher"
 	"crypto/rand"
 	"crypto/rsa"
 	"crypto/sha1"
@@ -15,6 +17,8 @@ import (
 	"github.com/GeenPeil/teken/data"
 	"github.com/gogo/protobuf/proto"
 )
+
+const aesBlockSize = 256 / 8
 
 // Saver is responsible for encoding+encrypting uploaded handtekeningen to storage.
 type Saver struct {
@@ -56,17 +60,42 @@ func NewSaver(pubkeyFilename string, datapath string) (*Saver, error) {
 
 // Save stores the given handtekening in an encrypted file.
 // NOTE!: Save clears the CaptchaResponse field.
-func (s *Saver) Save(n int, h *data.Handtekening) error {
+func (s *Saver) Save(n uint64, h *data.Handtekening) error {
+	// empty captcha response, we're not saving it.
 	h.CaptchaResponse = ""
 
-	bufData, err := proto.Marshal(h)
+	// gpa protobuf is saved to disk
+	gph := data.GPH{}
+
+	// TODO: don't return errors from crypto/*, instead: print them and return ErrCryptoError
+
+	// marshall handtekening to proto buf
+	hBuf, err := proto.Marshal(h)
 	if err != nil {
 		return err
 	}
 
-	hash := sha1.New()
+	// read new aes key
+	aesKey := make([]byte, aesBlockSize) // TODO: use sync.Pool
+	_, err = rand.Read(aesKey)
+	if err != nil {
+		return err
+	}
+	// create AES cipher.Block
+	aesBlock, err := aes.NewCipher(aesKey)
+	if err != nil {
+		return err
+	}
 
-	encryptedData, err := rsa.EncryptOAEP(hash, rand.Reader, s.pubkey, bufData, nil)
+	// create new CFB encrypter and encrypt hbuf to itself (re-using allocation)
+	cfbEncrypter := cipher.NewCFBEncrypter(aesBlock, ivFromNumber(n))
+	cfbEncrypter.XORKeyStream(hBuf, hBuf)
+	gph.AESEncryptedData = hBuf
+
+	// use sha1 as hash in rsa
+	rsaHasher := sha1.New() // TODO: use sync.Pool
+
+	gph.RSAEncryptedAESKey, err = rsa.EncryptOAEP(rsaHasher, rand.Reader, s.pubkey, aesKey, nil)
 	if err != nil {
 		return err
 	}
@@ -84,7 +113,11 @@ func (s *Saver) Save(n int, h *data.Handtekening) error {
 		return err
 	}
 	defer file.Close()
-	_, err = file.Write(encryptedData)
+	gphBuf, err := proto.Marshal(&gph)
+	if err != nil {
+		return err
+	}
+	_, err = file.Write(gphBuf)
 	if err != nil {
 		return err
 	}

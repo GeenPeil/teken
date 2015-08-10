@@ -175,7 +175,7 @@ func (s *Server) newUploadHandlerFunc() http.HandlerFunc {
 				return
 			}
 			insertHandtekeningRows.Next()
-			var ID int
+			var ID uint64
 			err = insertHandtekeningRows.Scan(&ID)
 			if err != nil {
 				log.Printf("error getting ID for new handtekening entry for %s: %v", r.RemoteAddr, err)
