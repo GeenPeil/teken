@@ -14,7 +14,6 @@ export default Ember.Component.extend({
   }),
 
   formItemChanged : Ember.observer('formItem', function() {
-    console.log('formItemChanged');
     this.set('value',this.get('formItem.value') || "");
   }),
 
@@ -24,7 +23,7 @@ export default Ember.Component.extend({
         regex = new RegExp(this.get('formItem.regex'), "i"),
         isValid = false;
 
-    console.log('matched ',this.get('formItem._id'),value.match(regex));
+    //console.log('matched ',this.get('formItem._id'),value.match(regex));
 
     var match = !!value.match(regex);
 
@@ -35,17 +34,34 @@ export default Ember.Component.extend({
       isValid = match && value.length <= maxLength;
     }
 
-    console.log(this.get('formItem._id'),isValid);
-
     this.set('formItem.isValid',isValid);
 
-    //store the value
-    this.set('formItem.value',this.get('value'));
-  })
+    //
+    var separated = this.separateValue(this.get('value'));
 
-  //TODO - based on the pattern render one or more textfields
-  //TODO - check the text input with the regex (probably not so simple)
-  //TODO - do some good length checks
-  //TODO - save the string data in the form model
+    //set both values
+    this.set('value',separated);
+    this.set('formItem.value',separated.toUpperCase());
+  }),
+
+  separateValue : function(s) {
+    var display = this.get('formItem.display');
+
+    if(display) {
+      var separator = this.get('formItem.separator');
+      var parts = display.split(' ');
+      var index = 0;
+      for(var i=0;i<parts.length;i++) {
+        index += parts[i].length;
+
+        if(index < s.length) {
+          s = s.substr(0, index) + separator + s.substr(index+separator.length);
+        }
+
+        index += 1;
+      }
+    }
+    return s;
+  }
 
 });

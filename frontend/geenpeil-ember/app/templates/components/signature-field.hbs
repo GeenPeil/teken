@@ -1,3 +1,13 @@
-<canvas id="can" width={{width}} height={{height}}></canvas>
-<img id="canvasimg" style="display:none;">
-<button {{action 'erase'}}>ICON: Bin</button><button {{action 'undo'}}>ICON: Undo</button><button {{action 'redo'}}>ICON: Redo</button>
+<img class="image-preview" {{action 'clicked'}} src={{formItem.value}} width={{width}} height={{height}}>
+<br>
+<span>{{formItem.instruction}}</span>
+{{#if showEditor}}
+  <div class="signature-editor">
+    <div class="button-container">
+      <button {{action 'toggleEditor'}}>Klaar</button>
+      <button {{action 'clear'}}>Opnieuw</button>
+    </div>
+    <canvas id="can" width={{width}} height={{height}}></canvas>
+
+  </div>
+{{/if}}

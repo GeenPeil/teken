@@ -8,19 +8,19 @@
 
 <div class="content-block button-nav">
 
-  <button class="cancel" {{action 'cancel'}}>
-    {{#if isFirstSection}}
-      Stoppen
-    {{else}}
-      Terug
-    {{/if}}
-  </button>
-
   <button class="continue float-right" {{action 'continue'}}>
     {{#if isLastSection}}
       Controlleren
     {{else}}
       Verder
+    {{/if}}
+  </button>
+
+  <button class="cancel" {{action 'cancel'}}>
+    {{#if isFirstSection}}
+      Stoppen
+    {{else}}
+      Terug
     {{/if}}
   </button>
 

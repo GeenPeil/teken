@@ -8,39 +8,53 @@ export default Ember.Component.extend({
 
   height : 160,
 
-  canvas : Ember.computed('', function() {
-    return document.getElementById('can');
+  canvas : Ember.computed('showEditor', function() {
+    return document.getElementById('can'); //FIXME - ugly
   }),
 
-  ctx : Ember.computed('', function() {
+  ctx : Ember.computed('canvas', function() {
     return this.get('canvas').getContext("2d");
   }),
 
+  showEditor : false,
+
   actions : {
 
-    erase : function() {
-        var m = confirm("Wilt u de handtekening opnieuw zetten?");
-        if (m) {
-            this.get('ctx').clearRect(0, 0, this.get('width'), this.get('height'));
-            document.getElementById("canvasimg").style.display = "none";
+    clicked : function() {
+      if(this.get('formItem.isValid')) {
+        if(this.erase()) {
+          this.toggleProperty('showEditor');
         }
+      }
+      else {
+        this.send('toggleEditor');
+      }
     },
 
-    redo : function() {
-      alert('TODO');
+    toggleEditor : function() {
+      this.toggleProperty('showEditor');
     },
 
-    undo : function() {
-      alert('TODO');
+    clear : function() {
+      this.get('ctx').clearRect(0, 0, this.get('width'), this.get('height'));
     }
 
   },
 
   save : function() {
-    console.log('save');
+    console.log('saving');
     var dataURL = this.get('canvas').toDataURL();
     this.set('formItem.isValid',true);
     this.set('formItem.value',dataURL);
+  },
+
+  erase : function() {
+    var m = confirm("Wilt u de handtekening opnieuw zetten?");
+    if(m) {
+      this.set('formItem.isValid',undefined);
+      this.set('formItem.value',undefined);
+    }
+    return m;
   },
 
   setupScrollBlock : Ember.on('didInsertElement',function() {
@@ -51,18 +65,25 @@ export default Ember.Component.extend({
     Ember.$('body').removeClass('noScroll');
   }),
 
-  onDidInsertElement : Ember.on('didInsertElement', function() {
+  onShowEditor : Ember.observer('showEditor', function() {
+    if(this.get('showEditor')) {
+      Ember.run.next(this,function() {
+        this.setupCanvas();
+      }.bind(this),1);
+    }
+  }),
+
+  setupCanvas : function() {
+    console.log('setupCanvas');
     var canvas = this.get('canvas');
     var ctx = this.get('ctx');
-    var w = canvas.width;
-    var h = canvas.height;
 
     // Apply existing image if found
     var imageUrl = this.get('formItem.value');
     if(imageUrl) {
-      var img = new Image;
+      var img = new Image();
       img.onload = function(){
-        ctx.drawImage(img,0,0); // Or at whatever offset you like
+        ctx.drawImage(img,0,0);
       };
       img.src = imageUrl;
     }
@@ -78,16 +99,16 @@ export default Ember.Component.extend({
 
     // Setup mouse event listeners
     canvas.addEventListener("mousemove", function (e) {
-        findxy('move', e)
+        findxy('move', e);
     }, false);
     canvas.addEventListener("mousedown", function (e) {
-        findxy('down', e)
+        findxy('down', e);
     }, false);
     canvas.addEventListener("mouseup", function (e) {
-        findxy('up', e)
+        findxy('up', e);
     }, false);
     canvas.addEventListener("mouseout", function (e) {
-        findxy('out', e)
+        findxy('out', e);
     }, false);
 
     // Setup touch event listeners
@@ -112,12 +133,20 @@ export default Ember.Component.extend({
     }
 
     function findxy(res, e) {
-      // console.log('findXy',res,e);
+        var eventX = e.clientX;
+        var eventY = e.clientY;
+
+        //scale the events
+        var scale = 1.2;
+        var canvasCenterX = canvas.offsetLeft + (canvas.width / 2);
+        eventX = canvasCenterX + ((eventX - canvasCenterX)/scale);
+        eventY = canvas.offsetTop + ((eventY - canvas.offsetTop)/scale);
+
         if (res == 'down') {
             prevX = currX;
             prevY = currY;
-            currX = e.clientX - canvas.offsetLeft;
-            currY = e.clientY - canvas.offsetTop;
+            currX = eventX - canvas.offsetLeft;
+            currY = eventY - canvas.offsetTop;
 
             flag = true;
             dot_flag = true;
@@ -129,22 +158,24 @@ export default Ember.Component.extend({
                 dot_flag = false;
             }
         }
-        if (res == 'up' || res == "out") {
+        if (res == 'up') {
             flag = false;
 
             thiz.save();
-
+        }
+        if (res == 'out') {
+          flag = false;
         }
         if (res == 'move') {
             if (flag) {
                 prevX = currX;
                 prevY = currY;
-                currX = e.clientX - canvas.offsetLeft;
-                currY = e.clientY - canvas.offsetTop;
+                currX = eventX - canvas.offsetLeft;
+                currY = eventY - canvas.offsetTop;
                 draw();
             }
         }
     }
-  })
+  }
 
 });

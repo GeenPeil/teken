@@ -1,7 +1,6 @@
-<span class="label">{{formItem.name}}</span>
 {{input type='text' value=value placeholder=formItem.placeholder}}
 {{#if showError}}
-  {{formItem.instruction}}
+  <span class="instruction">{{formItem.instruction}}</span>
 {{/if}}
 
-<br><span class="debug">valid : {{formItem.isValid}}</span>
+{{!--<br><span class="debug">valid : {{formItem.isValid}}</span>--}}

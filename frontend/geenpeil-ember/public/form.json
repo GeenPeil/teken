@@ -127,6 +127,7 @@
                 "_id" : "handtekening",
                 "type" : "signature",
                 "name" : "Handtekening",
+                "instruction" : "Zet uw handtekening door op het vlak te drukken.",
                 "x" : 587,
                 "y" : 548,
                 "width" : 185,
