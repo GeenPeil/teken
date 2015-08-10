@@ -6,6 +6,18 @@ export default Ember.Controller.extend({
 
   model : null,
 
+  actions : {
+
+    close : function() {
+      window.history.back();
+    }
+
+  },
+
+  containerWidth : Ember.computed('model.form.properties.width', function() {
+    return 'width: '+this.get('model.form.properties.width')+'px;';
+  }),
+
   formImage : Ember.computed('',function() {
     return 'ext/'+this.get('applicationController').get('model.form.properties.filename');
   }),

@@ -2,25 +2,6 @@
 
   margin-top: 2.5em;
 
-  button {
-    transition: background-color 0.5s ease;
-    background-color:#0000CC;
-
-    &:hover {
-      background-color:#0066FF;
-    }
-
-    color: white;
-
-    font-size: 2em;
-
-    padding: 0.25em;
-    margin-right: 0.5em;
-    margin-bottom: 0.5em;
-
-    border: none;
-  }
-
   .float-right {
     float: right;
     margin-right: 0;
@@ -36,4 +17,23 @@
     background-color: tomato;
   }
 
+}
+
+button {
+  transition: background-color 0.5s ease;
+  background-color:#0000CC;
+
+  &:hover {
+    background-color:#0066FF;
+  }
+
+  color: white;
+
+  font-size: 2em;
+
+  padding: 0.25em;
+  margin-right: 0.5em;
+  margin-bottom: 0.5em;
+
+  border: none;
 }

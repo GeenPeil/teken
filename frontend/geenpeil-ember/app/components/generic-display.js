@@ -13,7 +13,6 @@ export default Ember.Component.extend({
   }),
 
   onDidInsertElement : Ember.on('didInsertElement', function() {
-    console.log('element',this.$('element'));
     this.$().css({ top: this.get('formItem.y') });
     this.$().css({ left: this.get('formItem.x') });
   })
