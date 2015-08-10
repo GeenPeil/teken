@@ -8,6 +8,9 @@ export default Ember.Route.extend({
 
     back : function() {
       this.transitionTo('home');
+    },
+    share : function(network) {
+      alert('TODO: '+network);
     }
 
   }
