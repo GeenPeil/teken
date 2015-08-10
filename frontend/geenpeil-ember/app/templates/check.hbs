@@ -3,38 +3,41 @@
 <div class="content-block text-block">
 
   {{#unless allValid}}
-    HET FORMULIER BEVAT FOUTEN OF NIET ALLE VERPLICHTE VELDEN ZIJN INGEVULD!
+
+    <span>Het formulier bevat fouten of niet alle verplichte velden zijn ingevuld!</span>
+    <br><br>
+    <span>Druk op 'Terug' om het formulier aan te vullen.</span>
 
   {{else}}
     <span>Kijk uw gegevens goed na. U kunt ook een voorbeeld van het ingevulde formulier bekijken.</span>
     <br><br>
 
     {{applicationController.model.form.map.voornaam.name}} : <br>
-    {{applicationController.model.form.map.voornaam.value}}
+    <b>{{applicationController.model.form.map.voornaam.value}}</b>
     <br><br>
     {{applicationController.model.form.map.tussenvoegsel.name}} : <br>
-    {{applicationController.model.form.map.tussenvoegsel.value}}
+    <b>{{applicationController.model.form.map.tussenvoegsel.value}}</b>
     <br><br>
     {{applicationController.model.form.map.achternaam.name}} : <br>
-    {{applicationController.model.form.map.achternaam.value}}
+    <b>{{applicationController.model.form.map.achternaam.value}}</b>
     <br><br>
     {{applicationController.model.form.map.straat.name}} : <br>
-    {{applicationController.model.form.map.straat.value}}
+    <b>{{applicationController.model.form.map.straat.value}}</b>
     <br><br>
     {{applicationController.model.form.map.huisnummer.name}} : <br>
-    {{applicationController.model.form.map.huisnummer.value}}
+    <b>{{applicationController.model.form.map.huisnummer.value}}</b>
     <br><br>
     {{applicationController.model.form.map.postcode.name}} : <br>
-    {{applicationController.model.form.map.postcode.value}}
+    <b>{{applicationController.model.form.map.postcode.value}}</b>
     <br><br>
     {{applicationController.model.form.map.woonplaats.name}} : <br>
-    {{applicationController.model.form.map.woonplaats.value}}
+    <b>{{applicationController.model.form.map.woonplaats.value}}</b>
     <br><br>
     {{applicationController.model.form.map.geboortedatum.name}} : <br>
-    {{applicationController.model.form.map.geboortedatum.value}}
+    <b>{{applicationController.model.form.map.geboortedatum.value}}</b>
     <br><br>
     {{applicationController.model.form.map.geboorteplaats.name}} : <br>
-    {{applicationController.model.form.map.geboorteplaats.value}}
+    <b>{{applicationController.model.form.map.geboorteplaats.value}}</b>
     <br><br>
     {{applicationController.model.form.map.handtekening.name}} : <br>
     <img style="background-color:white;" src={{applicationController.model.form.map.handtekening.value}}>
