@@ -8,6 +8,10 @@ export default Ember.Controller.extend({
 
   onInit : Ember.on('init', function() {
     this.set('formData',Ember.Object.create());
+
+    window.onbeforeunload = function() {
+      return "Als u de pagina verlaat of herlaad worden de door u tot nu toe ingevulde gegevens gewist. Bevestig om nu te wissen.";
+    };
   }),
 
   onModelChanged : Ember.observer('model', function() {
