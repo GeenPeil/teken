@@ -3,3 +3,5 @@ package data
 
 //go:generate protoc --go_out=. handtekening.proto
 //go:generate ffjson -noencoder handtekening.pb.go
+
+//go:generate protoc --go_out=. gph.proto

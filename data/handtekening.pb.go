@@ -35,3 +35,6 @@ type Handtekening struct {
 func (m *Handtekening) Reset()         { *m = Handtekening{} }
 func (m *Handtekening) String() string { return proto.CompactTextString(m) }
 func (*Handtekening) ProtoMessage()    {}
+
+func init() {
+}
