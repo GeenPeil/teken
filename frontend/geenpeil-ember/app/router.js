@@ -16,7 +16,7 @@ Router.map(function() {
 
   this.resource('form', { path: '/formulier/:section' });
 
-  this.resource('check', { path: '/controlleren' });
+  this.resource('check', { path: '/controleren' });
 
   this.resource('preview', { path: '/voorbeeld' });
 
