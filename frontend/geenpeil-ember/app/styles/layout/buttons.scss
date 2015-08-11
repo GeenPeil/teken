@@ -36,4 +36,8 @@ button {
   margin-bottom: 0.5em;
 
   border: none;
+
+  @media only screen and (max-device-width : 569px) {
+    font-size: 1.4em;
+  }
 }

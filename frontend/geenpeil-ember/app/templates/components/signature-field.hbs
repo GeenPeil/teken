@@ -1,4 +1,6 @@
-<img class="image-preview" {{action 'clicked'}} src={{formItem.value}} width={{width}} height={{height}}>
+<div {{action 'clicked'}} class="signature-preview">
+  <img class="signature-preview-image"  src={{formItem.value}}>
+</div>
 <br>
 <span>{{formItem.instruction}}</span>
 {{#if showEditor}}

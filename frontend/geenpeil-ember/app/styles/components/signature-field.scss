@@ -1,18 +1,33 @@
 .signature-field {
 
-  width:360px;
-  height:160px;
-  background-color: #eeeeee;
+  .signature-preview {
+
+    background-color: #eeeeee;
+
+    max-width: 280px;
+    min-height: 140px;
+
+    cursor:pointer;
+
+    .signature-preview-image {
+      width:100%;
+    }
+
+  }
 
   #can {
     position: absolute;
+
     top: 80px;
+    @media only screen and (max-device-width : 569px) {
+      font-size: 65px;
+    }
+
     left:0;
     right:0;
     margin:auto;
 
     transform-origin: top;
-    transform: scale(1.2);
 
     border: 1px solid black;
     background-color: #eeeeee;

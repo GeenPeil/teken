@@ -8,6 +8,8 @@ export default Ember.Component.extend({
 
   height : 160,
 
+  scale : 1.0,
+
   canvas : Ember.computed('showEditor', function() {
     return document.getElementById('can'); //FIXME - ugly
   }),
@@ -42,7 +44,6 @@ export default Ember.Component.extend({
   },
 
   save : function() {
-    console.log('saving');
     var dataURL = this.get('canvas').toDataURL();
     this.set('formItem.isValid',true);
     this.set('formItem.value',dataURL);
@@ -57,19 +58,28 @@ export default Ember.Component.extend({
     return m;
   },
 
-  setupScrollBlock : Ember.on('didInsertElement',function() {
-    Ember.$('body').addClass('noScroll');
-  }),
-
-  tearDownScrollBlock : Ember.on('willDestroyElement', function() {
-    Ember.$('body').removeClass('noScroll');
+  onValueChanged : Ember.observer('formItem.value', function() {
+    var value = this.get('formItem.value');
+    if(value) {
+      var imageElement = this.$('.image-preview');
+      if(imageElement) {
+        imageElement.css('background-image',value);
+      }
+    }
   }),
 
   onShowEditor : Ember.observer('showEditor', function() {
     if(this.get('showEditor')) {
       Ember.run.next(this,function() {
+        window.scrollTo(0,0);
         this.setupCanvas();
+        Ember.$('body').addClass('noScroll');
+        Ember.$('body').bind('touchmove', function(e){e.preventDefault()});
       }.bind(this),1);
+    }
+    else {
+      Ember.$('body').removeClass('noScroll');
+      Ember.$('body').unbind('touchmove');
     }
   }),
 
@@ -77,6 +87,18 @@ export default Ember.Component.extend({
     console.log('setupCanvas');
     var canvas = this.get('canvas');
     var ctx = this.get('ctx');
+
+    //measure the width of the screen
+    var baseWidth = this.get('width');
+    var maxScale  = 2.0;
+    var actualWidth = Ember.$(window).width();
+
+    var scale = (actualWidth / baseWidth) * 0.90;
+    scale = scale > maxScale ? maxScale : scale;
+    this.set('scale');
+    Ember.$(canvas).css('transform', 'scale(' + scale + ')');
+
+    console.log('setting scale',scale);
 
     // Apply existing image if found
     var imageUrl = this.get('formItem.value');
@@ -137,7 +159,6 @@ export default Ember.Component.extend({
         var eventY = e.clientY;
 
         //scale the events
-        var scale = 1.2;
         var canvasCenterX = canvas.offsetLeft + (canvas.width / 2);
         eventX = canvasCenterX + ((eventX - canvasCenterX)/scale);
         eventY = canvas.offsetTop + ((eventY - canvas.offsetTop)/scale);
@@ -175,6 +196,7 @@ export default Ember.Component.extend({
                 draw();
             }
         }
+
     }
   }
 
