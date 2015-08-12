@@ -39,17 +39,22 @@ func (s *Server) newSubmitHandlerFunc() http.HandlerFunc {
 	}
 
 	return func(w http.ResponseWriter, r *http.Request) {
+		remoteIP, _, _ := net.SplitHostPort(r.RemoteAddr)
+		if xRealIP := r.Header.Get("X-Real-IP"); xRealIP != "" {
+			remoteIP = xRealIP
+		}
+
 		h := &data.Handtekening{}
 		err := json.NewDecoder(r.Body).Decode(h)
 		if err != nil {
 			http.Error(w, "input json error", http.StatusInternalServerError)
-			log.Printf("error decoding json in request from %s: %v", r.RemoteAddr, err)
+			log.Printf("error decoding json in request from %s: %v", remoteIP, err)
+			return
 		}
 
 		out := &submitOutput{}
 
 		{
-			remoteIP, _, _ := net.SplitHostPort(r.RemoteAddr)
 
 			// check captcha
 			if !s.options.CaptchaDisable {
@@ -61,7 +66,7 @@ func (s *Server) newSubmitHandlerFunc() http.HandlerFunc {
 				}
 				if !valid {
 					out.Error = captchaErr
-					log.Printf("invalid captcha in request from %s", r.RemoteAddr)
+					log.Printf("invalid captcha in request from %s", remoteIP)
 					goto Response
 				}
 			}
@@ -69,55 +74,55 @@ func (s *Server) newSubmitHandlerFunc() http.HandlerFunc {
 			// checken of alle data is ingevuld
 			if len(h.Voornaam) == 0 {
 				out.Error = fieldErr
-				log.Printf("missing field voornaam in request from %s", r.RemoteAddr)
+				log.Printf("missing field voornaam in request from %s", remoteIP)
 				goto Response
 			}
 
 			if len(h.Achternaam) == 0 {
 				out.Error = fieldErr
-				log.Printf("missing field achternaam in request from %s", r.RemoteAddr)
+				log.Printf("missing field achternaam in request from %s", remoteIP)
 				goto Response
 			}
 
 			if len(h.Geboortedatum) == 0 {
 				out.Error = fieldErr
-				log.Printf("missing field geboortedatum in request from %s", r.RemoteAddr)
+				log.Printf("missing field geboortedatum in request from %s", remoteIP)
 				goto Response
 			}
 
 			if len(h.Geboorteplaats) == 0 {
 				out.Error = fieldErr
-				log.Printf("missing field geboorteplaats in request from %s", r.RemoteAddr)
+				log.Printf("missing field geboorteplaats in request from %s", remoteIP)
 				goto Response
 			}
 
 			if len(h.Straat) == 0 {
 				out.Error = fieldErr
-				log.Printf("missing field straat in request from %s", r.RemoteAddr)
+				log.Printf("missing field straat in request from %s", remoteIP)
 				goto Response
 			}
 
 			if len(h.Huisnummer) == 0 {
 				out.Error = fieldErr
-				log.Printf("missing field huisnummer in request from %s", r.RemoteAddr)
+				log.Printf("missing field huisnummer in request from %s", remoteIP)
 				goto Response
 			}
 
 			if len(h.Postcode) == 0 {
 				out.Error = fieldErr
-				log.Printf("missing field postcode in request from %s", r.RemoteAddr)
+				log.Printf("missing field postcode in request from %s", remoteIP)
 				goto Response
 			}
 
 			if len(h.Woonplaats) == 0 {
 				out.Error = fieldErr
-				log.Printf("missing field woonplaats in request from %s", r.RemoteAddr)
+				log.Printf("missing field woonplaats in request from %s", remoteIP)
 				goto Response
 			}
 
 			if len(h.Handtekening) == 0 {
 				out.Error = fieldErr
-				log.Printf("missing field handtekening in request from %s", r.RemoteAddr)
+				log.Printf("missing field handtekening in request from %s", remoteIP)
 				goto Response
 			}
 
@@ -126,14 +131,14 @@ func (s *Server) newSubmitHandlerFunc() http.HandlerFunc {
 			_, err = base64.StdEncoding.Decode(hImgPNG, h.Handtekening)
 			if err != nil {
 				out.Error = imgErr
-				log.Printf("invalid base64 image received from %s: %v", r.RemoteAddr, err)
+				log.Printf("invalid base64 image received from %s: %v", remoteIP, err)
 				goto Response
 			}
 
 			_, err = png.Decode(bytes.NewBuffer(hImgPNG))
 			if err != nil {
 				out.Error = imgErr
-				log.Printf("invalid image from %s: %v", r.RemoteAddr, err)
+				log.Printf("invalid image from %s: %v", remoteIP, err)
 				goto Response
 			}
 
@@ -155,10 +160,10 @@ func (s *Server) newSubmitHandlerFunc() http.HandlerFunc {
 			if err != nil {
 				if perr, ok := err.(*pq.Error); ok {
 					if perr.Code == "23505" {
-						log.Printf("duplicate n.a.w. hash from %s: %x", r.RemoteAddr, nawHashBytes)
+						log.Printf("duplicate n.a.w. hash from %s: %x", remoteIP, nawHashBytes)
 						goto Response // return direclty with a 'false positive'
 					} else {
-						log.Printf("error inserting naw hash from %s: %v", r.RemoteAddr, err)
+						log.Printf("error inserting naw hash from %s: %v", remoteIP, err)
 						http.Error(w, "server error", http.StatusInternalServerError)
 						return
 					}
@@ -170,7 +175,7 @@ func (s *Server) newSubmitHandlerFunc() http.HandlerFunc {
 			ipHashBytes := ipHash.Sum([]byte(remoteIP))
 			insertHandtekeningRows, err := stmtInsertHandtekening.Query(ipHashBytes)
 			if err != nil {
-				log.Printf("error inserting handtekening entry in db for %s: %v", r.RemoteAddr, err)
+				log.Printf("error inserting handtekening entry in db for %s: %v", remoteIP, err)
 				http.Error(w, "server error", http.StatusInternalServerError)
 				return
 			}
@@ -178,7 +183,7 @@ func (s *Server) newSubmitHandlerFunc() http.HandlerFunc {
 			var ID uint64
 			err = insertHandtekeningRows.Scan(&ID)
 			if err != nil {
-				log.Printf("error getting ID for new handtekening entry for %s: %v", r.RemoteAddr, err)
+				log.Printf("error getting ID for new handtekening entry for %s: %v", remoteIP, err)
 				http.Error(w, "server error", http.StatusInternalServerError)
 				return
 			}
@@ -186,7 +191,7 @@ func (s *Server) newSubmitHandlerFunc() http.HandlerFunc {
 			// save to disk
 			err = saver.Save(ID, h)
 			if err != nil {
-				log.Printf("error saving handtekening for %s: %v", r.RemoteAddr, err)
+				log.Printf("error saving handtekening for %s: %v", remoteIP, err)
 				http.Error(w, "server error", http.StatusInternalServerError)
 				return
 			}
