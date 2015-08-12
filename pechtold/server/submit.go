@@ -44,6 +44,21 @@ func (s *Server) newSubmitHandlerFunc() http.HandlerFunc {
 			remoteIP = xRealIP
 		}
 
+		if origin := r.Header.Get("Origin"); origin == "localhost" {
+			w.Header().Set("Access-Control-Allow-Origin", origin)
+			w.Header().Set("Access-Control-Allow-Methods", "POST, OPTIONS")
+			w.Header().Set("Access-Control-Allow-Headers",
+				"Accept, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization")
+		}
+		// Stop here if its Preflighted OPTIONS request
+		if r.Method == "OPTIONS" {
+			return
+		}
+		if r.Method != "POST" {
+			http.Error(w, "invalid http method", http.StatusBadRequest)
+			return
+		}
+
 		h := &data.Handtekening{}
 		err := json.NewDecoder(r.Body).Decode(h)
 		if err != nil {
