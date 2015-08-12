@@ -12,6 +12,7 @@ import (
 
 	"github.com/GeenPeil/teken/data"
 	"github.com/GeenPeil/teken/storage"
+	"github.com/davecgh/go-spew/spew"
 	"github.com/lib/pq"
 )
 
@@ -44,11 +45,12 @@ func (s *Server) newSubmitHandlerFunc() http.HandlerFunc {
 			remoteIP = xRealIP
 		}
 
+		s.verbosef("have request from remoteIP=%s origin=%s method=%s", remoteIP, r.Header.Get("Origin"), r.Method)
+
 		if origin := r.Header.Get("Origin"); origin == "localhost" {
 			w.Header().Set("Access-Control-Allow-Origin", origin)
 			w.Header().Set("Access-Control-Allow-Methods", "POST, OPTIONS")
-			w.Header().Set("Access-Control-Allow-Headers",
-				"Accept, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization")
+			w.Header().Set("Access-Control-Allow-Headers", "Accept, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization")
 		}
 		// Stop here if its Preflighted OPTIONS request
 		if r.Method == "OPTIONS" {
@@ -65,6 +67,10 @@ func (s *Server) newSubmitHandlerFunc() http.HandlerFunc {
 			http.Error(w, "input json error", http.StatusInternalServerError)
 			log.Printf("error decoding json in request from %s: %v", remoteIP, err)
 			return
+		}
+
+		if s.options.Verbose {
+			spew.Dump(h)
 		}
 
 		out := &submitOutput{}
@@ -213,6 +219,7 @@ func (s *Server) newSubmitHandlerFunc() http.HandlerFunc {
 		}
 
 	Response:
+		s.verbosef("response to request from %s is %b with err %s", remoteIP, out.Success, out.Error)
 		err = json.NewEncoder(w).Encode(out)
 		if err != nil {
 			http.Error(w, "server error", http.StatusInternalServerError)

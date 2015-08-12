@@ -59,3 +59,9 @@ func (s *Server) setupDB() {
 func (s *Server) setupCaptcha() {
 	s.captcha = recaptcha.New(s.options.CaptchaSecret)
 }
+
+func (s *Server) verbosef(format string, args ...interface{}) {
+	if s.options.Verbose {
+		log.Printf(format, args...)
+	}
+}
