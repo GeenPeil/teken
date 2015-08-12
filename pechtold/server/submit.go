@@ -21,7 +21,7 @@ var (
 	imgErr     = "image invalid"
 )
 
-func (s *Server) newUploadHandlerFunc() http.HandlerFunc {
+func (s *Server) newSubmitHandlerFunc() http.HandlerFunc {
 
 	stmtInsertNawHash, err := s.db.Prepare(`INSERT INTO nawhashes (hash) VALUES ($1)`)
 	if err != nil {
@@ -46,7 +46,7 @@ func (s *Server) newUploadHandlerFunc() http.HandlerFunc {
 			log.Printf("error decoding json in request from %s: %v", r.RemoteAddr, err)
 		}
 
-		out := &uploadOutput{}
+		out := &submitOutput{}
 
 		{
 			remoteIP, _, _ := net.SplitHostPort(r.RemoteAddr)

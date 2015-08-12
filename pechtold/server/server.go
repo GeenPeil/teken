@@ -29,7 +29,7 @@ func (s *Server) Run(setupDoneCh chan struct{}) {
 
 	s.setupCaptcha()
 
-	http.HandleFunc("/pechtold/upload", s.newUploadHandlerFunc())
+	http.HandleFunc("/pechtold/submit", s.newSubmitHandlerFunc())
 
 	if setupDoneCh != nil {
 		close(setupDoneCh)
@@ -43,7 +43,7 @@ func (s *Server) Run(setupDoneCh chan struct{}) {
 
 func (s *Server) setupDB() {
 	var err error
-	s.db, err = sql.Open("postgres", "host=/var/run/postgresql sslmode=disable user=pechtold password=pechtold dbname=geenpeil")
+	s.db, err = sql.Open("postgres", "host=/tmp sslmode=disable user=pechtold password=pechtold dbname=geenpeil")
 	if err != nil {
 		log.Fatalf("error setting up db conn (open): %v", err)
 	}
