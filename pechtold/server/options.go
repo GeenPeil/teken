@@ -10,7 +10,7 @@ type Options struct {
 	CaptchaSecret  string `long:"captcha-secret" description:"Google reCaptcha secret" default:"6Lfl0QoTAAAAAFKK76skXuJwlt5x2U_R8Lf7nHLP"` // TODO: remove default, make mandatory. -- testing server secret (localhost only), corresponding site key = 6Lfl0QoTAAAAAGA3RbwPfNj2th6gDYLEf0im51RY
 	CaptchaDisable bool   `long:"captcah-disable" description:"Disable captcha check"`
 
-	PostgresSocketLocation string `long:"postgres-socket-location" description:"PostgreSQL Unix socket location" default:"/var/lib/postgres/.s.PGSQL.5432"`
+	PostgresSocketLocation string `long:"postgres-socket-location" description:"PostgreSQL Unix socket location" default:"/var/run/postgresql"`
 
 	StoragePubkeyFile string `long:"storage-pubkey-file" description:"storage public key" default:"../storage/testpub.pem"` // TODO: remove default, make mandatory
 	StorageLocation   string `long:"storage-location" desciption:"storage location" default:"../storage/testdata"`          // TODO: remove default, make mandatory

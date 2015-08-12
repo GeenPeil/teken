@@ -2,6 +2,7 @@ package server
 
 import (
 	"database/sql"
+	"fmt"
 	"log"
 	"net/http"
 
@@ -43,7 +44,7 @@ func (s *Server) Run(setupDoneCh chan struct{}) {
 
 func (s *Server) setupDB() {
 	var err error
-	s.db, err = sql.Open("postgres", "host=/tmp sslmode=disable user=pechtold password=pechtold dbname=geenpeil")
+	s.db, err = sql.Open("postgres", fmt.Sprintf("host=%s sslmode=disable user=pechtold password=pechtold dbname=geenpeil", s.options.PostgresSocketLocation))
 	if err != nil {
 		log.Fatalf("error setting up db conn (open): %v", err)
 	}

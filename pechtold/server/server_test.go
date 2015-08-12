@@ -14,10 +14,11 @@ var handtekeningPNGBytes = []byte(`iVBORw0KGgoAAAANSUhEUgAAACkAAAAjCAYAAAAJ+yOQA
 func TestServer(t *testing.T) {
 	// start server async but wait for most of the setup to be done
 	o := &Options{
-		HTTPAddress:       ":8080",
-		CaptchaDisable:    true,
-		StoragePubkeyFile: "../../storage/testpub.pem",
-		StorageLocation:   "../../storage/testdata",
+		HTTPAddress:            ":8080",
+		CaptchaDisable:         true,
+		StoragePubkeyFile:      "../../storage/testpub.pem",
+		StorageLocation:        "../../storage/testdata",
+		PostgresSocketLocation: "/var/run/postgresql",
 	}
 	s := New(o)
 	setupDoneCh := make(chan struct{})
@@ -37,12 +38,12 @@ func TestServer(t *testing.T) {
 		Handtekening:    handtekeningPNGBytes,
 		CaptchaResponse: "foobar",
 	}
-	handtekeningJSON, err := json.Marshal(handtekening)
+	handtekeningJSON, err := json.MarshalIndent(handtekening, "", "\t")
 	if err != nil {
 		t.Fatalf("error creating test JSON data: %v", err)
 	}
 
-	resp, err := http.Post("http://localhost:8080/pechtold/upload", "application/json", bytes.NewBuffer(handtekeningJSON))
+	resp, err := http.Post("http://localhost:8080/pechtold/submit", "application/json", bytes.NewBuffer(handtekeningJSON))
 	if err != nil {
 		t.Fatalf("error making upload request: %v", err)
 	}
@@ -51,7 +52,7 @@ func TestServer(t *testing.T) {
 		t.Fatalf("http request returned non-200: %d", resp.StatusCode)
 	}
 
-	out := &uploadOutput{}
+	out := &submitOutput{}
 	err = json.NewDecoder(resp.Body).Decode(out)
 	resp.Body.Close()
 	if err != nil {
