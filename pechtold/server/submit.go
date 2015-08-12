@@ -3,7 +3,6 @@ package server
 import (
 	"bytes"
 	"crypto/sha256"
-	"encoding/base64"
 	"encoding/json"
 	"image/png"
 	"log"
@@ -47,7 +46,7 @@ func (s *Server) newSubmitHandlerFunc() http.HandlerFunc {
 
 		s.verbosef("have request from remoteIP=%s origin=%s method=%s", remoteIP, r.Header.Get("Origin"), r.Method)
 
-		if origin := r.Header.Get("Origin"); origin == "localhost" {
+		if origin := r.Header.Get("Origin"); origin != "" {
 			w.Header().Set("Access-Control-Allow-Origin", origin)
 			w.Header().Set("Access-Control-Allow-Methods", "POST, OPTIONS")
 			w.Header().Set("Access-Control-Allow-Headers", "Accept, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization")
@@ -147,16 +146,7 @@ func (s *Server) newSubmitHandlerFunc() http.HandlerFunc {
 				goto Response
 			}
 
-			// check (decode, etc.) handtekening
-			hImgPNG := make([]byte, base64.StdEncoding.DecodedLen(len(h.Handtekening)))
-			_, err = base64.StdEncoding.Decode(hImgPNG, h.Handtekening)
-			if err != nil {
-				out.Error = imgErr
-				log.Printf("invalid base64 image received from %s: %v", remoteIP, err)
-				goto Response
-			}
-
-			_, err = png.Decode(bytes.NewBuffer(hImgPNG))
+			_, err = png.Decode(bytes.NewBuffer(h.Handtekening))
 			if err != nil {
 				out.Error = imgErr
 				log.Printf("invalid image from %s: %v", remoteIP, err)
@@ -219,7 +209,7 @@ func (s *Server) newSubmitHandlerFunc() http.HandlerFunc {
 		}
 
 	Response:
-		s.verbosef("response to request from %s is %b with err %s", remoteIP, out.Success, out.Error)
+		s.verbosef("response to request from %s is %t with err %s", remoteIP, out.Success, out.Error)
 		err = json.NewEncoder(w).Encode(out)
 		if err != nil {
 			http.Error(w, "server error", http.StatusInternalServerError)
