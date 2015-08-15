@@ -12,8 +12,6 @@ Router.map(function() {
 
   this.resource('disclaimer', { path: '/voorwaarden' });
 
-  //DEPRECATED this.resource('input', { path: '/invullen/:input' });
-
   this.resource('form', { path: '/formulier/:section' });
 
   this.resource('check', { path: '/controleren' });
