@@ -3,19 +3,16 @@ import Ember from 'ember';
 export default Ember.Route.extend({
 
     model : function() {
-      console.log('loading application route model');
       return Ember.$.ajax({
         type : 'GET',
-        url: 'form.json',
-        error : function() {
-          console.error('no form data');
+        url: 'form_debug.json',
+        error : function(e) {
+          console.error('no form data:',e);
         }
       });
     },
 
     setupController : function(controller,model) {
-      console.log('setupController',controller,model);
-
       if(typeof model === 'string') {
         model = JSON.parse(model);
       }

@@ -84,11 +84,10 @@ export default Ember.Component.extend({
   }),
 
   setupCanvas : function() {
-    console.log('setupCanvas');
     var canvas = this.get('canvas');
     var ctx = this.get('ctx');
 
-    //measure the width of the screen
+    // Measure the width of the screen
     var baseWidth = this.get('width');
     var maxScale  = 2.0;
     var actualWidth = Ember.$(window).width();
@@ -97,8 +96,6 @@ export default Ember.Component.extend({
     scale = scale > maxScale ? maxScale : scale;
     this.set('scale');
     Ember.$(canvas).css('transform', 'scale(' + scale + ')');
-
-    console.log('setting scale',scale);
 
     // Apply existing image if found
     var imageUrl = this.get('formItem.value');
