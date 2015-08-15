@@ -29,7 +29,9 @@
                 "length" : 17,
                 "x" : 51,
                 "y" : 548,
-                "regex" : "^[a-zA-Z-']+$"
+                "regex" : "^[a-zA-Z-']+$",
+                "isValid" : true,
+                "value" : "foobar"
             },
             {
                 "_id" : "tussenvoegsel",
@@ -40,7 +42,9 @@
                 "length" : 7,
                 "x" : 420,
                 "y" : 548,
-                "regex" : "^[a-zA-Z -']*$"
+                "regex" : "^[a-zA-Z -']*$",
+                "isValid" : true,
+                "value" : "foobar"
             },
             {
                 "_id" : "achternaam",
@@ -51,7 +55,9 @@
                 "length" : 25,
                 "x" : 51,
                 "y" : 596,
-                "regex" : "^[a-zA-Z-']+$"
+                "regex" : "^[a-zA-Z-']+$",
+                "isValid" : true,
+                "value" : "foobar"
             },
             {
                 "_id" : "straat",
@@ -62,7 +68,9 @@
                 "length" : 25,
                 "x" : 51,
                 "y" : 650,
-                "regex" : "^[a-zA-Z -',.]+$"
+                "regex" : "^[a-zA-Z -',.]+$",
+                "isValid" : true,
+                "value" : "foobar"
             },
             {
                 "_id" : "huisnummer",
@@ -73,7 +81,9 @@
                 "length" : 5,
                 "x" : 587,
                 "y" : 650,
-                "regex" : "^[0-9a-zA-Z -]+$"
+                "regex" : "^[0-9a-zA-Z -]+$",
+                "isValid" : true,
+                "value" : "123"
             },
             {
                 "_id" : "postcode",
@@ -86,7 +96,9 @@
                 "y" : 699,
                 "regex" : "^[0-9]{4}[ ]{1}[a-zA-Z]{2}$",
                 "separator" : " ",
-                "display" : ".... .."
+                "display" : ".... ..",
+                "isValid" : true,
+                "value" : "1234 AB"
             },
             {
                 "_id" : "woonplaats",
@@ -97,7 +109,9 @@
                 "length" : 25,
                 "x" : 258,
                 "y" : 699,
-                "regex" : "^[a-zA-Z -',.]+$"
+                "regex" : "^[a-zA-Z -',.]+$",
+                "isValid" : true,
+                "value" : "foobar"
             },
             {
                 "_id" : "geboortedatum",
@@ -110,7 +124,9 @@
                 "y" : 745,
                 "regex" : "^[0-9]{2}-[0-9]{2}-[0-9]{4}$",
                 "separator" : "-",
-                "display" : ".. .. ...."
+                "display" : ".. .. ....",
+                "isValid" : true,
+                "value" : "01-01-1970"
             },
             {
                 "_id" : "geboorteplaats",
@@ -121,7 +137,9 @@
                 "length" : 25,
                 "x" : 258,
                 "y" : 745,
-                "regex" : "^[a-zA-Z-',.]+$"
+                "regex" : "^[a-zA-Z-',.]+$",
+                "isValid" : true,
+                "value" : "foobar"
             },
             {
                 "_id" : "handtekening",
