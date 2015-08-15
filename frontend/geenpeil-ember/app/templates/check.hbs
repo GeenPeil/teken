@@ -43,6 +43,11 @@
     <img style="background-color:white;" src={{applicationController.model.form.map.handtekening.value}}>
     <br><br>
 
+    <b>{{applicationController.model.form.map.captchaResponse.name}}</b> <br>
+    {{applicationController.model.form.map.captchaResponse.instruction}}
+    <br>
+    {{recaptcha-widget formItem=recaptchaItem}}
+
   {{/unless}}
 
 </div>
@@ -51,7 +56,11 @@
   <button class="back" {{action 'back'}}>Terug</button>
 
   {{#if allValid}}
-    <button class="send float-right" {{action 'send'}}>Versturen</button>
+
+    {{#if recaptchaItem.isValid}}
+      <button class="send float-right" {{action 'send'}}>Versturen</button>
+    {{/if}}
+
     <button class="preview float-right" {{action 'preview'}}>Voorbeeld</button>
   {{/if}}
 

@@ -12,28 +12,50 @@ export default Ember.Controller.extend({
       var formItems = this.get('formItems');
       var allValid = true;
       formItems.forEach(function(formItem) {
-        if(formItem.isValid !== true) {
+        if(formItem.type !== 'recaptcha' && formItem.isValid !== true) {
           allValid = false;
         }
       });
       return allValid;
   }),
 
+  recaptchaItem : Ember.computed('formItems', function() {
+    return this.get('formItems').findBy('_id','captchaResponse');
+  }),
+
   actions : {
 
     send : function() {
-      //TODO - check captcha
+      var message = {};
 
-      var obj = this.get('applicationController').get('model.form.fields').map(function(formItem) {
-        return {
-          _id : formItem._id,
-          value : formItem.value
-        };
+      this.get('applicationController').get('model.form.fields').forEach(function(item) {
+        message[item._id] = item.value;
       });
 
-      var data = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(obj));
+      // Strip the signature so only base64 is left
+      message['handtekening'] = message['handtekening'].replace(/^data:image\/(png|jpg);base64,/, "");
 
-      window.open(data,null);
+      // Send the data
+      //TODO - response handling
+      Ember.$.ajax({
+        type : 'POST',
+        url: 'https://teken.geenpeil.nl/pechtold/submit',
+        data : JSON.stringify(message),
+        contentType : 'application/json',
+        error : function(e) {
+          console.error('error:',e);
+        },
+        success : function(r) {
+          console.log('response:',r);
+        },
+        complete : function() {
+
+        }
+      });
+
+      //DEBUG
+      // var data = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(message));
+      // window.open(data,null);
     }
   },
 
