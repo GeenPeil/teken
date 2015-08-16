@@ -8,7 +8,7 @@ import (
 
 // fileFolderByNumber returns the filename and foldername by ID
 func fileFolderByNumber(n uint64) (string, string) {
-	return fmt.Sprintf("%d.gph", n), fmt.Sprintf("%04d", n/1000+1)
+	return fmt.Sprintf("%06d.gph", n), fmt.Sprintf("%04d", n/1000+1)
 }
 
 // iv used in AES-CFB encryption
