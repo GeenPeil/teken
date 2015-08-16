@@ -88,7 +88,8 @@ func (s *Saver) Save(n uint64, h *data.Handtekening) error {
 	}
 
 	// create new CFB encrypter and encrypt hbuf to itself (re-using allocation)
-	cfbEncrypter := cipher.NewCFBEncrypter(aesBlock, ivFromNumber(n))
+	gph.AESCFBIV = ivFromNumber(n)
+	cfbEncrypter := cipher.NewCFBEncrypter(aesBlock, gph.AESCFBIV)
 	cfbEncrypter.XORKeyStream(hBuf, hBuf)
 	gph.AESEncryptedData = hBuf
 

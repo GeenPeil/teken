@@ -39,6 +39,186 @@ func (m *Handtekening) Reset()         { *m = Handtekening{} }
 func (m *Handtekening) String() string { return proto.CompactTextString(m) }
 func (*Handtekening) ProtoMessage()    {}
 
+func (m *Handtekening) Marshal() (data []byte, err error) {
+	size := m.Size()
+	data = make([]byte, size)
+	n, err := m.MarshalTo(data)
+	if err != nil {
+		return nil, err
+	}
+	return data[:n], nil
+}
+
+func (m *Handtekening) MarshalTo(data []byte) (int, error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if len(m.Voornaam) > 0 {
+		data[i] = 0xa
+		i++
+		i = encodeVarintHandtekening(data, i, uint64(len(m.Voornaam)))
+		i += copy(data[i:], m.Voornaam)
+	}
+	if len(m.Tussenvoegsel) > 0 {
+		data[i] = 0x12
+		i++
+		i = encodeVarintHandtekening(data, i, uint64(len(m.Tussenvoegsel)))
+		i += copy(data[i:], m.Tussenvoegsel)
+	}
+	if len(m.Achternaam) > 0 {
+		data[i] = 0x1a
+		i++
+		i = encodeVarintHandtekening(data, i, uint64(len(m.Achternaam)))
+		i += copy(data[i:], m.Achternaam)
+	}
+	if len(m.Geboortedatum) > 0 {
+		data[i] = 0x22
+		i++
+		i = encodeVarintHandtekening(data, i, uint64(len(m.Geboortedatum)))
+		i += copy(data[i:], m.Geboortedatum)
+	}
+	if len(m.Geboorteplaats) > 0 {
+		data[i] = 0x2a
+		i++
+		i = encodeVarintHandtekening(data, i, uint64(len(m.Geboorteplaats)))
+		i += copy(data[i:], m.Geboorteplaats)
+	}
+	if len(m.Straat) > 0 {
+		data[i] = 0x32
+		i++
+		i = encodeVarintHandtekening(data, i, uint64(len(m.Straat)))
+		i += copy(data[i:], m.Straat)
+	}
+	if len(m.Huisnummer) > 0 {
+		data[i] = 0x3a
+		i++
+		i = encodeVarintHandtekening(data, i, uint64(len(m.Huisnummer)))
+		i += copy(data[i:], m.Huisnummer)
+	}
+	if len(m.Postcode) > 0 {
+		data[i] = 0x42
+		i++
+		i = encodeVarintHandtekening(data, i, uint64(len(m.Postcode)))
+		i += copy(data[i:], m.Postcode)
+	}
+	if len(m.Woonplaats) > 0 {
+		data[i] = 0x4a
+		i++
+		i = encodeVarintHandtekening(data, i, uint64(len(m.Woonplaats)))
+		i += copy(data[i:], m.Woonplaats)
+	}
+	if m.Handtekening != nil {
+		if len(m.Handtekening) > 0 {
+			data[i] = 0x52
+			i++
+			i = encodeVarintHandtekening(data, i, uint64(len(m.Handtekening)))
+			i += copy(data[i:], m.Handtekening)
+		}
+	}
+	if len(m.CaptchaResponse) > 0 {
+		data[i] = 0xba
+		i++
+		data[i] = 0x3e
+		i++
+		i = encodeVarintHandtekening(data, i, uint64(len(m.CaptchaResponse)))
+		i += copy(data[i:], m.CaptchaResponse)
+	}
+	return i, nil
+}
+
+func encodeFixed64Handtekening(data []byte, offset int, v uint64) int {
+	data[offset] = uint8(v)
+	data[offset+1] = uint8(v >> 8)
+	data[offset+2] = uint8(v >> 16)
+	data[offset+3] = uint8(v >> 24)
+	data[offset+4] = uint8(v >> 32)
+	data[offset+5] = uint8(v >> 40)
+	data[offset+6] = uint8(v >> 48)
+	data[offset+7] = uint8(v >> 56)
+	return offset + 8
+}
+func encodeFixed32Handtekening(data []byte, offset int, v uint32) int {
+	data[offset] = uint8(v)
+	data[offset+1] = uint8(v >> 8)
+	data[offset+2] = uint8(v >> 16)
+	data[offset+3] = uint8(v >> 24)
+	return offset + 4
+}
+func encodeVarintHandtekening(data []byte, offset int, v uint64) int {
+	for v >= 1<<7 {
+		data[offset] = uint8(v&0x7f | 0x80)
+		v >>= 7
+		offset++
+	}
+	data[offset] = uint8(v)
+	return offset + 1
+}
+func (m *Handtekening) Size() (n int) {
+	var l int
+	_ = l
+	l = len(m.Voornaam)
+	if l > 0 {
+		n += 1 + l + sovHandtekening(uint64(l))
+	}
+	l = len(m.Tussenvoegsel)
+	if l > 0 {
+		n += 1 + l + sovHandtekening(uint64(l))
+	}
+	l = len(m.Achternaam)
+	if l > 0 {
+		n += 1 + l + sovHandtekening(uint64(l))
+	}
+	l = len(m.Geboortedatum)
+	if l > 0 {
+		n += 1 + l + sovHandtekening(uint64(l))
+	}
+	l = len(m.Geboorteplaats)
+	if l > 0 {
+		n += 1 + l + sovHandtekening(uint64(l))
+	}
+	l = len(m.Straat)
+	if l > 0 {
+		n += 1 + l + sovHandtekening(uint64(l))
+	}
+	l = len(m.Huisnummer)
+	if l > 0 {
+		n += 1 + l + sovHandtekening(uint64(l))
+	}
+	l = len(m.Postcode)
+	if l > 0 {
+		n += 1 + l + sovHandtekening(uint64(l))
+	}
+	l = len(m.Woonplaats)
+	if l > 0 {
+		n += 1 + l + sovHandtekening(uint64(l))
+	}
+	if m.Handtekening != nil {
+		l = len(m.Handtekening)
+		if l > 0 {
+			n += 1 + l + sovHandtekening(uint64(l))
+		}
+	}
+	l = len(m.CaptchaResponse)
+	if l > 0 {
+		n += 2 + l + sovHandtekening(uint64(l))
+	}
+	return n
+}
+
+func sovHandtekening(x uint64) (n int) {
+	for {
+		n++
+		x >>= 7
+		if x == 0 {
+			break
+		}
+	}
+	return n
+}
+func sozHandtekening(x uint64) (n int) {
+	return sovHandtekening(uint64((x << 1) ^ uint64((int64(x) >> 63))))
+}
 func (m *Handtekening) Unmarshal(data []byte) error {
 	l := len(data)
 	iNdEx := 0
@@ -420,184 +600,3 @@ func skipHandtekening(data []byte) (n int, err error) {
 var (
 	ErrInvalidLengthHandtekening = fmt.Errorf("proto: negative length found during unmarshaling")
 )
-
-func (m *Handtekening) Size() (n int) {
-	var l int
-	_ = l
-	l = len(m.Voornaam)
-	if l > 0 {
-		n += 1 + l + sovHandtekening(uint64(l))
-	}
-	l = len(m.Tussenvoegsel)
-	if l > 0 {
-		n += 1 + l + sovHandtekening(uint64(l))
-	}
-	l = len(m.Achternaam)
-	if l > 0 {
-		n += 1 + l + sovHandtekening(uint64(l))
-	}
-	l = len(m.Geboortedatum)
-	if l > 0 {
-		n += 1 + l + sovHandtekening(uint64(l))
-	}
-	l = len(m.Geboorteplaats)
-	if l > 0 {
-		n += 1 + l + sovHandtekening(uint64(l))
-	}
-	l = len(m.Straat)
-	if l > 0 {
-		n += 1 + l + sovHandtekening(uint64(l))
-	}
-	l = len(m.Huisnummer)
-	if l > 0 {
-		n += 1 + l + sovHandtekening(uint64(l))
-	}
-	l = len(m.Postcode)
-	if l > 0 {
-		n += 1 + l + sovHandtekening(uint64(l))
-	}
-	l = len(m.Woonplaats)
-	if l > 0 {
-		n += 1 + l + sovHandtekening(uint64(l))
-	}
-	if m.Handtekening != nil {
-		l = len(m.Handtekening)
-		if l > 0 {
-			n += 1 + l + sovHandtekening(uint64(l))
-		}
-	}
-	l = len(m.CaptchaResponse)
-	if l > 0 {
-		n += 2 + l + sovHandtekening(uint64(l))
-	}
-	return n
-}
-
-func sovHandtekening(x uint64) (n int) {
-	for {
-		n++
-		x >>= 7
-		if x == 0 {
-			break
-		}
-	}
-	return n
-}
-func sozHandtekening(x uint64) (n int) {
-	return sovHandtekening(uint64((x << 1) ^ uint64((int64(x) >> 63))))
-}
-func (m *Handtekening) Marshal() (data []byte, err error) {
-	size := m.Size()
-	data = make([]byte, size)
-	n, err := m.MarshalTo(data)
-	if err != nil {
-		return nil, err
-	}
-	return data[:n], nil
-}
-
-func (m *Handtekening) MarshalTo(data []byte) (int, error) {
-	var i int
-	_ = i
-	var l int
-	_ = l
-	if len(m.Voornaam) > 0 {
-		data[i] = 0xa
-		i++
-		i = encodeVarintHandtekening(data, i, uint64(len(m.Voornaam)))
-		i += copy(data[i:], m.Voornaam)
-	}
-	if len(m.Tussenvoegsel) > 0 {
-		data[i] = 0x12
-		i++
-		i = encodeVarintHandtekening(data, i, uint64(len(m.Tussenvoegsel)))
-		i += copy(data[i:], m.Tussenvoegsel)
-	}
-	if len(m.Achternaam) > 0 {
-		data[i] = 0x1a
-		i++
-		i = encodeVarintHandtekening(data, i, uint64(len(m.Achternaam)))
-		i += copy(data[i:], m.Achternaam)
-	}
-	if len(m.Geboortedatum) > 0 {
-		data[i] = 0x22
-		i++
-		i = encodeVarintHandtekening(data, i, uint64(len(m.Geboortedatum)))
-		i += copy(data[i:], m.Geboortedatum)
-	}
-	if len(m.Geboorteplaats) > 0 {
-		data[i] = 0x2a
-		i++
-		i = encodeVarintHandtekening(data, i, uint64(len(m.Geboorteplaats)))
-		i += copy(data[i:], m.Geboorteplaats)
-	}
-	if len(m.Straat) > 0 {
-		data[i] = 0x32
-		i++
-		i = encodeVarintHandtekening(data, i, uint64(len(m.Straat)))
-		i += copy(data[i:], m.Straat)
-	}
-	if len(m.Huisnummer) > 0 {
-		data[i] = 0x3a
-		i++
-		i = encodeVarintHandtekening(data, i, uint64(len(m.Huisnummer)))
-		i += copy(data[i:], m.Huisnummer)
-	}
-	if len(m.Postcode) > 0 {
-		data[i] = 0x42
-		i++
-		i = encodeVarintHandtekening(data, i, uint64(len(m.Postcode)))
-		i += copy(data[i:], m.Postcode)
-	}
-	if len(m.Woonplaats) > 0 {
-		data[i] = 0x4a
-		i++
-		i = encodeVarintHandtekening(data, i, uint64(len(m.Woonplaats)))
-		i += copy(data[i:], m.Woonplaats)
-	}
-	if m.Handtekening != nil {
-		if len(m.Handtekening) > 0 {
-			data[i] = 0x52
-			i++
-			i = encodeVarintHandtekening(data, i, uint64(len(m.Handtekening)))
-			i += copy(data[i:], m.Handtekening)
-		}
-	}
-	if len(m.CaptchaResponse) > 0 {
-		data[i] = 0xba
-		i++
-		data[i] = 0x3e
-		i++
-		i = encodeVarintHandtekening(data, i, uint64(len(m.CaptchaResponse)))
-		i += copy(data[i:], m.CaptchaResponse)
-	}
-	return i, nil
-}
-
-func encodeFixed64Handtekening(data []byte, offset int, v uint64) int {
-	data[offset] = uint8(v)
-	data[offset+1] = uint8(v >> 8)
-	data[offset+2] = uint8(v >> 16)
-	data[offset+3] = uint8(v >> 24)
-	data[offset+4] = uint8(v >> 32)
-	data[offset+5] = uint8(v >> 40)
-	data[offset+6] = uint8(v >> 48)
-	data[offset+7] = uint8(v >> 56)
-	return offset + 8
-}
-func encodeFixed32Handtekening(data []byte, offset int, v uint32) int {
-	data[offset] = uint8(v)
-	data[offset+1] = uint8(v >> 8)
-	data[offset+2] = uint8(v >> 16)
-	data[offset+3] = uint8(v >> 24)
-	return offset + 4
-}
-func encodeVarintHandtekening(data []byte, offset int, v uint64) int {
-	for v >= 1<<7 {
-		data[offset] = uint8(v&0x7f | 0x80)
-		v >>= 7
-		offset++
-	}
-	data[offset] = uint8(v)
-	return offset + 1
-}

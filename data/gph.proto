@@ -5,4 +5,5 @@ package data;
 message GPH {
   bytes RSAEncryptedAESKey = 1;
   bytes AESEncryptedData = 2;
+  bytes AESCFBIV = 3;
 }

@@ -24,12 +24,119 @@ var _ = proto.Marshal
 type GPH struct {
 	RSAEncryptedAESKey []byte `protobuf:"bytes,1,opt,proto3" json:"RSAEncryptedAESKey,omitempty"`
 	AESEncryptedData   []byte `protobuf:"bytes,2,opt,proto3" json:"AESEncryptedData,omitempty"`
+	AESCFBIV           []byte `protobuf:"bytes,3,opt,proto3" json:"AESCFBIV,omitempty"`
 }
 
 func (m *GPH) Reset()         { *m = GPH{} }
 func (m *GPH) String() string { return proto.CompactTextString(m) }
 func (*GPH) ProtoMessage()    {}
 
+func (m *GPH) Marshal() (data []byte, err error) {
+	size := m.Size()
+	data = make([]byte, size)
+	n, err := m.MarshalTo(data)
+	if err != nil {
+		return nil, err
+	}
+	return data[:n], nil
+}
+
+func (m *GPH) MarshalTo(data []byte) (int, error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if m.RSAEncryptedAESKey != nil {
+		if len(m.RSAEncryptedAESKey) > 0 {
+			data[i] = 0xa
+			i++
+			i = encodeVarintGph(data, i, uint64(len(m.RSAEncryptedAESKey)))
+			i += copy(data[i:], m.RSAEncryptedAESKey)
+		}
+	}
+	if m.AESEncryptedData != nil {
+		if len(m.AESEncryptedData) > 0 {
+			data[i] = 0x12
+			i++
+			i = encodeVarintGph(data, i, uint64(len(m.AESEncryptedData)))
+			i += copy(data[i:], m.AESEncryptedData)
+		}
+	}
+	if m.AESCFBIV != nil {
+		if len(m.AESCFBIV) > 0 {
+			data[i] = 0x1a
+			i++
+			i = encodeVarintGph(data, i, uint64(len(m.AESCFBIV)))
+			i += copy(data[i:], m.AESCFBIV)
+		}
+	}
+	return i, nil
+}
+
+func encodeFixed64Gph(data []byte, offset int, v uint64) int {
+	data[offset] = uint8(v)
+	data[offset+1] = uint8(v >> 8)
+	data[offset+2] = uint8(v >> 16)
+	data[offset+3] = uint8(v >> 24)
+	data[offset+4] = uint8(v >> 32)
+	data[offset+5] = uint8(v >> 40)
+	data[offset+6] = uint8(v >> 48)
+	data[offset+7] = uint8(v >> 56)
+	return offset + 8
+}
+func encodeFixed32Gph(data []byte, offset int, v uint32) int {
+	data[offset] = uint8(v)
+	data[offset+1] = uint8(v >> 8)
+	data[offset+2] = uint8(v >> 16)
+	data[offset+3] = uint8(v >> 24)
+	return offset + 4
+}
+func encodeVarintGph(data []byte, offset int, v uint64) int {
+	for v >= 1<<7 {
+		data[offset] = uint8(v&0x7f | 0x80)
+		v >>= 7
+		offset++
+	}
+	data[offset] = uint8(v)
+	return offset + 1
+}
+func (m *GPH) Size() (n int) {
+	var l int
+	_ = l
+	if m.RSAEncryptedAESKey != nil {
+		l = len(m.RSAEncryptedAESKey)
+		if l > 0 {
+			n += 1 + l + sovGph(uint64(l))
+		}
+	}
+	if m.AESEncryptedData != nil {
+		l = len(m.AESEncryptedData)
+		if l > 0 {
+			n += 1 + l + sovGph(uint64(l))
+		}
+	}
+	if m.AESCFBIV != nil {
+		l = len(m.AESCFBIV)
+		if l > 0 {
+			n += 1 + l + sovGph(uint64(l))
+		}
+	}
+	return n
+}
+
+func sovGph(x uint64) (n int) {
+	for {
+		n++
+		x >>= 7
+		if x == 0 {
+			break
+		}
+	}
+	return n
+}
+func sozGph(x uint64) (n int) {
+	return sovGph(uint64((x << 1) ^ uint64((int64(x) >> 63))))
+}
 func (m *GPH) Unmarshal(data []byte) error {
 	l := len(data)
 	iNdEx := 0
@@ -98,6 +205,31 @@ func (m *GPH) Unmarshal(data []byte) error {
 				return io.ErrUnexpectedEOF
 			}
 			m.AESEncryptedData = append([]byte{}, data[iNdEx:postIndex]...)
+			iNdEx = postIndex
+		case 3:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field AESCFBIV", wireType)
+			}
+			var byteLen int
+			for shift := uint(0); ; shift += 7 {
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[iNdEx]
+				iNdEx++
+				byteLen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if byteLen < 0 {
+				return ErrInvalidLengthGph
+			}
+			postIndex := iNdEx + byteLen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.AESCFBIV = append([]byte{}, data[iNdEx:postIndex]...)
 			iNdEx = postIndex
 		default:
 			var sizeOfWire int
@@ -216,96 +348,3 @@ func skipGph(data []byte) (n int, err error) {
 var (
 	ErrInvalidLengthGph = fmt.Errorf("proto: negative length found during unmarshaling")
 )
-
-func (m *GPH) Size() (n int) {
-	var l int
-	_ = l
-	if m.RSAEncryptedAESKey != nil {
-		l = len(m.RSAEncryptedAESKey)
-		if l > 0 {
-			n += 1 + l + sovGph(uint64(l))
-		}
-	}
-	if m.AESEncryptedData != nil {
-		l = len(m.AESEncryptedData)
-		if l > 0 {
-			n += 1 + l + sovGph(uint64(l))
-		}
-	}
-	return n
-}
-
-func sovGph(x uint64) (n int) {
-	for {
-		n++
-		x >>= 7
-		if x == 0 {
-			break
-		}
-	}
-	return n
-}
-func sozGph(x uint64) (n int) {
-	return sovGph(uint64((x << 1) ^ uint64((int64(x) >> 63))))
-}
-func (m *GPH) Marshal() (data []byte, err error) {
-	size := m.Size()
-	data = make([]byte, size)
-	n, err := m.MarshalTo(data)
-	if err != nil {
-		return nil, err
-	}
-	return data[:n], nil
-}
-
-func (m *GPH) MarshalTo(data []byte) (int, error) {
-	var i int
-	_ = i
-	var l int
-	_ = l
-	if m.RSAEncryptedAESKey != nil {
-		if len(m.RSAEncryptedAESKey) > 0 {
-			data[i] = 0xa
-			i++
-			i = encodeVarintGph(data, i, uint64(len(m.RSAEncryptedAESKey)))
-			i += copy(data[i:], m.RSAEncryptedAESKey)
-		}
-	}
-	if m.AESEncryptedData != nil {
-		if len(m.AESEncryptedData) > 0 {
-			data[i] = 0x12
-			i++
-			i = encodeVarintGph(data, i, uint64(len(m.AESEncryptedData)))
-			i += copy(data[i:], m.AESEncryptedData)
-		}
-	}
-	return i, nil
-}
-
-func encodeFixed64Gph(data []byte, offset int, v uint64) int {
-	data[offset] = uint8(v)
-	data[offset+1] = uint8(v >> 8)
-	data[offset+2] = uint8(v >> 16)
-	data[offset+3] = uint8(v >> 24)
-	data[offset+4] = uint8(v >> 32)
-	data[offset+5] = uint8(v >> 40)
-	data[offset+6] = uint8(v >> 48)
-	data[offset+7] = uint8(v >> 56)
-	return offset + 8
-}
-func encodeFixed32Gph(data []byte, offset int, v uint32) int {
-	data[offset] = uint8(v)
-	data[offset+1] = uint8(v >> 8)
-	data[offset+2] = uint8(v >> 16)
-	data[offset+3] = uint8(v >> 24)
-	return offset + 4
-}
-func encodeVarintGph(data []byte, offset int, v uint64) int {
-	for v >= 1<<7 {
-		data[offset] = uint8(v&0x7f | 0x80)
-		v >>= 7
-		offset++
-	}
-	data[offset] = uint8(v)
-	return offset + 1
-}

@@ -83,7 +83,7 @@ func (f *Fetcher) Fetch(n uint64) (*data.Handtekening, error) {
 		return nil, err
 	}
 
-	cfbDecrypter := cipher.NewCFBDecrypter(aesBlock, ivFromNumber(n))
+	cfbDecrypter := cipher.NewCFBDecrypter(aesBlock, gph.AESCFBIV)
 	cfbDecrypter.XORKeyStream(gph.AESEncryptedData, gph.AESEncryptedData)
 	hBuf := gph.AESEncryptedData
 
