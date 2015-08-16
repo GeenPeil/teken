@@ -14,8 +14,12 @@ export default Ember.Controller.extend({
 
   },
 
+  properties : Ember.computed('model.form', function() {
+    return this.get('model.form.properties');
+  }),
+
   containerWidth : Ember.computed('model.form.properties.width', function() {
-    return 'width: '+this.get('model.form.properties.width')+'px;';
+    return 'width: '+this.get('properties.width')+'px;';
   }),
 
   formImage : Ember.computed('',function() {

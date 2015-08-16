@@ -1,1 +1,3 @@
-<span>{{formItem.value}}</span>
+{{#each parts as |part|}}
+  <span style={{part.style}}>{{part.value}}</span>
+{{/each}}
