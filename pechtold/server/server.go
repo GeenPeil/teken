@@ -55,6 +55,7 @@ func (s *Server) Run(setupDoneCh chan struct{}) {
 	s.setupCaptcha()
 
 	http.HandleFunc("/pechtold/submit", s.newSubmitHandlerFunc())
+	http.HandleFunc("/pechtold/health-check", s.newHealthCheckHandlerFunc())
 
 	if setupDoneCh != nil {
 		close(setupDoneCh)
