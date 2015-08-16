@@ -20,6 +20,7 @@ func TestServer(t *testing.T) {
 		StoragePubkeyFile:      "../../storage/testpub.pem",
 		StorageLocation:        "../../storage/testdata",
 		PostgresSocketLocation: "/var/run/postgresql",
+		HashingSalt:            "FWIrJHXXxb2+iGRluUz/sjS3X1zI3LBGTQJTsYcqu9I=",
 	}
 	s := New(o)
 	setupDoneCh := make(chan struct{})

@@ -14,4 +14,6 @@ type Options struct {
 
 	StoragePubkeyFile string `long:"storage-pubkey-file" description:"storage public key" default:"../storage/testpub.pem"` // TODO: remove default, make mandatory
 	StorageLocation   string `long:"storage-location" desciption:"storage location" default:"../storage/testdata"`          // TODO: remove default, make mandatory
+
+	HashingSalt string `long:"hashing-salt" description:"base-64 encoded hashing salt"`
 }

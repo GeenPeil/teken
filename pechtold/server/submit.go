@@ -158,6 +158,7 @@ func (s *Server) newSubmitHandlerFunc() http.HandlerFunc {
 
 			// naw hash check (false positive)
 			nawHash := sha256.New()
+			nawHash.Write(s.hashingSalt)
 			nawHash.Write([]byte(h.Voornaam))
 			nawHash.Write([]byte(h.Achternaam))
 			nawHash.Write([]byte(h.Geboortedatum))
@@ -183,6 +184,7 @@ func (s *Server) newSubmitHandlerFunc() http.HandlerFunc {
 
 			// insert handtekening entry into db, get inserted ID
 			ipHash := sha256.New()
+			ipHash.Write(s.hashingSalt)
 			ipHashBytes := ipHash.Sum([]byte(remoteIP))
 			insertHandtekeningRows, err := stmtInsertHandtekening.Query(ipHashBytes)
 			if err != nil {
