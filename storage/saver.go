@@ -18,8 +18,6 @@ import (
 	"github.com/gogo/protobuf/proto"
 )
 
-const aesBlockSize = 256 / 8
-
 // Saver is responsible for encoding+encrypting uploaded handtekeningen to storage.
 type Saver struct {
 	pubkey   *rsa.PublicKey
@@ -76,7 +74,7 @@ func (s *Saver) Save(n uint64, h *data.Handtekening) error {
 	}
 
 	// read new aes key
-	aesKey := make([]byte, aesBlockSize) // TODO: use sync.Pool
+	aesKey := make([]byte, aes.BlockSize) // TODO: use sync.Pool
 	_, err = rand.Read(aesKey)
 	if err != nil {
 		return err
