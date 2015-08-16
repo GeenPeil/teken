@@ -9,8 +9,11 @@ import (
 	"encoding/pem"
 	"fmt"
 	"io/ioutil"
+	"log"
 	"os"
 	"path/filepath"
+	"strconv"
+	"strings"
 
 	"github.com/GeenPeil/teken/data"
 	"github.com/gogo/protobuf/proto"
@@ -94,4 +97,43 @@ func (f *Fetcher) Fetch(n uint64) (*data.Handtekening, error) {
 	}
 
 	return h, nil
+}
+
+// ListPartition returns singles that were saved in a partition
+func (f *Fetcher) ListPartition(n uint64) ([]uint64, error) {
+	idList := make([]uint64, 0, 1000)
+
+	partitionPath := filepath.Join(f.datapath, folderByPartition(n))
+	err := filepath.Walk(partitionPath, func(path string, info os.FileInfo, err error) error {
+		if err != nil {
+			return err
+		}
+		if info.IsDir() {
+			if path == partitionPath {
+				return nil
+			}
+			return filepath.SkipDir
+		}
+
+		filename := info.Name()
+		if !strings.HasSuffix(filename, ".gph") {
+			log.Printf("skipping unrecognized file `%s` in partition %d\n", filename, n)
+			return nil
+		}
+
+		id, err := strconv.ParseUint(filename[:len(filename)-4], 10, 64)
+		if err != nil {
+			log.Printf("skipping file %s in partition %d because of bad filename format, expecting <number>.gph\n", filename, n)
+			return nil
+		}
+		idList = append(idList, id)
+
+		return nil
+	})
+
+	if err != nil {
+		return nil, err
+	}
+
+	return idList, nil
 }
