@@ -73,6 +73,8 @@ func (s *Server) setupDB() {
 		log.Fatalf("error setting up db conn (open): %v", err)
 	}
 
+	s.db.SetMaxOpenConns(10)
+
 	// force connection
 	err = s.db.Ping()
 	if err != nil {
