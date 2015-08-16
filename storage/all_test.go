@@ -34,6 +34,11 @@ func TestStorage(t *testing.T) {
 		return
 	}
 
+	if len(h.CaptchaResponse) != 0 {
+		t.Error("saver didn't empty field CaptchaResponse")
+		return
+	}
+
 	fetcher, err := NewFetcher("testkey.pem", "testdata")
 	if err != nil {
 		t.Errorf("error creating new fetcher: %v\n", err)
@@ -48,9 +53,11 @@ func TestStorage(t *testing.T) {
 
 	if !reflect.DeepEqual(h, h2) {
 		t.Error("saved handtekening doesn't match fetched handtekening")
+		return
 	}
 
 	if h2.CaptchaResponse != "" {
 		t.Error("CaptchaResponse on fetched handtekening is not empty")
+		return
 	}
 }
