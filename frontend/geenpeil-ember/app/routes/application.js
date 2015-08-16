@@ -12,12 +12,16 @@ export default Ember.Route.extend({
       });
     },
 
+    afterModel : function(model,transition) {
+      if(transition.intent.url !== '/') {
+        this.transitionTo('home');
+      }
+    },
+
     setupController : function(controller,model) {
       if(typeof model === 'string') {
         model = JSON.parse(model);
       }
-
-      //TODO - check for any stored form values here
 
       controller.set('model',Ember.Object.create(model));
     }
