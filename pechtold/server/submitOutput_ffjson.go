@@ -9,7 +9,7 @@ import (
 	fflib "github.com/pquerna/ffjson/fflib/v1"
 )
 
-func (mj *submitOutput) MarshalJSON() ([]byte, error) {
+func (mj *SubmitOutput) MarshalJSON() ([]byte, error) {
 	var buf fflib.Buffer
 	err := mj.MarshalJSONBuf(&buf)
 	if err != nil {
@@ -17,7 +17,7 @@ func (mj *submitOutput) MarshalJSON() ([]byte, error) {
 	}
 	return buf.Bytes(), nil
 }
-func (mj *submitOutput) MarshalJSONBuf(buf fflib.EncodingBuffer) error {
+func (mj *SubmitOutput) MarshalJSONBuf(buf fflib.EncodingBuffer) error {
 	var err error
 	var obj []byte
 	_ = obj

@@ -72,7 +72,7 @@ func (s *Server) newSubmitHandlerFunc() http.HandlerFunc {
 			spew.Dump(h)
 		}
 
-		out := &submitOutput{}
+		out := &SubmitOutput{}
 
 		{
 

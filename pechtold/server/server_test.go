@@ -54,7 +54,7 @@ func TestServer(t *testing.T) {
 		t.Fatalf("http request returned non-200: %d", resp.StatusCode)
 	}
 
-	out := &submitOutput{}
+	out := &SubmitOutput{}
 	err = json.NewDecoder(resp.Body).Decode(out)
 	resp.Body.Close()
 	if err != nil {
