@@ -20,6 +20,7 @@ func TestServer(t *testing.T) {
 		StoragePubkeyFile:      "../../storage/testpub.pem",
 		StorageLocation:        "../../storage/testdata",
 		PostgresSocketLocation: "/var/run/postgresql",
+		HashingSalt:            "FWIrJHXXxb2+iGRluUz/sjS3X1zI3LBGTQJTsYcqu9I=",
 	}
 	s := New(o)
 	setupDoneCh := make(chan struct{})
@@ -53,7 +54,7 @@ func TestServer(t *testing.T) {
 		t.Fatalf("http request returned non-200: %d", resp.StatusCode)
 	}
 
-	out := &submitOutput{}
+	out := &SubmitOutput{}
 	err = json.NewDecoder(resp.Body).Decode(out)
 	resp.Body.Close()
 	if err != nil {

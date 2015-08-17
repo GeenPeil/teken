@@ -39,6 +39,7 @@ func (s *Server) newSubmitHandlerFunc() http.HandlerFunc {
 	}
 
 	return func(w http.ResponseWriter, r *http.Request) {
+		defer r.Body.Close()
 		remoteIP, _, _ := net.SplitHostPort(r.RemoteAddr)
 		if xRealIP := r.Header.Get("X-Real-IP"); xRealIP != "" {
 			remoteIP = xRealIP
@@ -62,6 +63,7 @@ func (s *Server) newSubmitHandlerFunc() http.HandlerFunc {
 
 		h := &data.Handtekening{}
 		err := json.NewDecoder(r.Body).Decode(h)
+		r.Body.Close()
 		if err != nil {
 			http.Error(w, "input json error", http.StatusInternalServerError)
 			log.Printf("error decoding json in request from %s: %v", remoteIP, err)
@@ -72,7 +74,7 @@ func (s *Server) newSubmitHandlerFunc() http.HandlerFunc {
 			spew.Dump(h)
 		}
 
-		out := &submitOutput{}
+		out := &SubmitOutput{}
 
 		{
 
@@ -158,16 +160,17 @@ func (s *Server) newSubmitHandlerFunc() http.HandlerFunc {
 
 			// naw hash check (false positive)
 			nawHash := sha256.New()
-			nawHash.Write([]byte(h.Voornaam))
-			nawHash.Write([]byte(h.Achternaam))
-			nawHash.Write([]byte(h.Geboortedatum))
-			nawHash.Write([]byte(h.Geboorteplaats))
-			nawHash.Write([]byte(h.Straat))
-			nawHash.Write([]byte(h.Huisnummer))
-			nawHash.Write([]byte(h.Postcode))
-			nawHash.Write([]byte(h.Woonplaats))
+			nawHash.Write(s.hashingSalt)
+			nawHash.Write(bytes.ToLower(bytes.TrimSpace([]byte(h.Voornaam))))
+			nawHash.Write(bytes.ToLower(bytes.TrimSpace([]byte(h.Achternaam))))
+			nawHash.Write(bytes.ToLower(bytes.TrimSpace([]byte(h.Geboortedatum))))
+			nawHash.Write(bytes.ToLower(bytes.TrimSpace([]byte(h.Geboorteplaats))))
+			nawHash.Write(bytes.ToLower(bytes.TrimSpace([]byte(h.Straat))))
+			nawHash.Write(bytes.ToLower(bytes.TrimSpace([]byte(h.Huisnummer))))
+			nawHash.Write(bytes.ToLower(bytes.TrimSpace([]byte(h.Postcode))))
+			nawHash.Write(bytes.ToLower(bytes.TrimSpace([]byte(h.Woonplaats))))
 			nawHashBytes := nawHash.Sum(nil)
-			_, err = stmtInsertNawHash.Exec(nawHashBytes)
+			_, err := stmtInsertNawHash.Exec(nawHashBytes)
 			if err != nil {
 				if perr, ok := err.(*pq.Error); ok {
 					if perr.Code == "23505" {
@@ -183,6 +186,7 @@ func (s *Server) newSubmitHandlerFunc() http.HandlerFunc {
 
 			// insert handtekening entry into db, get inserted ID
 			ipHash := sha256.New()
+			ipHash.Write(s.hashingSalt)
 			ipHashBytes := ipHash.Sum([]byte(remoteIP))
 			insertHandtekeningRows, err := stmtInsertHandtekening.Query(ipHashBytes)
 			if err != nil {
@@ -196,8 +200,10 @@ func (s *Server) newSubmitHandlerFunc() http.HandlerFunc {
 			if err != nil {
 				log.Printf("error getting ID for new handtekening entry for %s: %v", remoteIP, err)
 				http.Error(w, "server error", http.StatusInternalServerError)
+				insertHandtekeningRows.Close()
 				return
 			}
+			insertHandtekeningRows.Close()
 
 			// save to disk
 			err = saver.Save(ID, h)

@@ -43,9 +43,8 @@ Meer informatie: https://developers.google.com/recaptcha/docs/verify
 #### Encryptie van handtekeningen en n.a.w. gegevens
 
 Handtekening en naw gegevens worden asymetrisch encrypted opgeslagen op de server. Op deze manier word gegarandeerd dat er geen opgeslagen persoonsgegevens in handen van hackers kunnen vallen.
-De data word ge-encodeerd met protobuf en versleuteld met een RSA public key. De RSA private key is in handen van de GeenStijl redactie zodat deze de gegevens kunnen decrypten en uitprinten.
-
-TODO: data is groter dan mogelijk is te encrypten met RSA. AES-CFB toevoegen en extra encoding layer (protobuf) om rsa-encrypted aes-key en aes-encrypted handtekening data op te slaan in 1 files. jay!!
+De data word ge-encodeerd met protobuf (`handtekening.proto`) en versleuteld met een AES-CFB met een random key. De random key word opnieuw versleuteld met RSA. Alleen de RSA public key is aanwezig op de server.
+De AES encrypted data en de RSA encrypted AES key worden tesamen opnieuw ge-encodeerd met profobuf (`gph.proto`).
 
 #### Opslag van encrypted gegevens
 

@@ -13,8 +13,8 @@ var flags struct {
 	Single    *uint64 `short:"s" long:"single" description:"Single handtekening to render"`
 	Partition *uint64 `short:"p" long:"partitie" description:"Partition of handtekeningen to render"`
 
-	StoragePrivkeyFile string `long:"storage-pubkey-file" description:"storage public key" default:"../storage/testpub.pem"` // TODO: remove default, make mandatory
-	StorageLocation    string `long:"storage-location" desciption:"storage location" default:"../storage/testdata"`          // TODO: remove default, make mandatory
+	StoragePrivkeyFile string `long:"storage-privkey-file" description:"storage private key" default:"../storage/testpriv.pem"` // TODO: remove default, make mandatory
+	StorageLocation    string `long:"storage-location" desciption:"storage location" default:"../storage/testdata"`             // TODO: remove default, make mandatory
 }
 
 func parseFlags() {

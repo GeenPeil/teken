@@ -2,7 +2,6 @@ package main
 
 import (
 	"bytes"
-	"encoding/base64"
 	"fmt"
 
 	"github.com/jung-kurt/gofpdf"
@@ -44,9 +43,8 @@ func (p *pdf) AddHandtekening(h *data.Handtekening) error {
 	p.fpdf.Text(50, 80, h.Huisnummer)
 	p.fpdf.Text(50, 90, h.Postcode)
 	p.fpdf.Text(50, 100, h.Woonplaats)
-	handtekeningReader := base64.NewDecoder(base64.StdEncoding, bytes.NewBuffer(h.Handtekening))
 	imgName := fmt.Sprintf("h-%d", p.inc.Next())
-	p.fpdf.RegisterImageReader(imgName, pngtp, handtekeningReader)
+	p.fpdf.RegisterImageReader(imgName, pngtp, bytes.NewBuffer(h.Handtekening))
 	p.fpdf.Image(imgName, 50, 110, 0, 0, false, pngtp, 0, "")
 
 	return nil

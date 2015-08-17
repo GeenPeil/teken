@@ -1,7 +1,9 @@
 package server
 
 import (
+	"crypto/rand"
 	"database/sql"
+	"encoding/base64"
 	"fmt"
 	"log"
 	"net/http"
@@ -11,16 +13,38 @@ import (
 	"github.com/go-recaptcha/recaptcha"
 )
 
+const reqHashingSaltBits = 256
+
 type Server struct {
-	captcha *recaptcha.Recaptcha
-	db      *sql.DB
-	options *Options
+	captcha     *recaptcha.Recaptcha
+	db          *sql.DB
+	options     *Options
+	hashingSalt []byte
 }
 
 func New(o *Options) *Server {
-	return &Server{
+	s := &Server{
 		options: o,
 	}
+
+	var err error
+	s.hashingSalt, err = base64.StdEncoding.DecodeString(o.HashingSalt)
+	if err != nil {
+		log.Fatalf("error setting up server, invalid hashing salt: %v", err)
+	}
+	if len(s.hashingSalt) != reqHashingSaltBits/8 {
+		salt := make([]byte, reqHashingSaltBits/8)
+		_, err := rand.Read(salt)
+		var saltStr string
+		if err != nil {
+			saltStr = fmt.Sprintf("error generating, %v", err)
+		} else {
+			saltStr = base64.StdEncoding.EncodeToString(salt)
+		}
+		log.Fatalf("invalid hashing salt, expecting %d bits, generating one now: `%s`", reqHashingSaltBits, saltStr)
+	}
+
+	return s
 }
 
 // Run is a forever blocking call that starts the pechtold server.
@@ -31,6 +55,7 @@ func (s *Server) Run(setupDoneCh chan struct{}) {
 	s.setupCaptcha()
 
 	http.HandleFunc("/pechtold/submit", s.newSubmitHandlerFunc())
+	http.HandleFunc("/pechtold/health-check", s.newHealthCheckHandlerFunc())
 
 	if setupDoneCh != nil {
 		close(setupDoneCh)
@@ -48,6 +73,8 @@ func (s *Server) setupDB() {
 	if err != nil {
 		log.Fatalf("error setting up db conn (open): %v", err)
 	}
+
+	s.db.SetMaxOpenConns(10)
 
 	// force connection
 	err = s.db.Ping()
