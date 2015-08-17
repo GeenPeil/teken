@@ -26,6 +26,9 @@ export default Ember.Controller.extend({
   actions : {
 
     send : function() {
+      // console.log('send!');
+      // this.transitionToRoute('send');
+
       var message = {};
 
       this.get('applicationController').get('model.form.fields').forEach(function(item) {
@@ -44,21 +47,28 @@ export default Ember.Controller.extend({
         contentType : 'application/json',
         error : function(e) {
           console.error('error:',e);
+          alert('Er is een probleem opgetreden bij het versturen.');
         },
         success : function(r) {
           console.log('response:',r);
-        },
-        complete : function() {
 
-        }
+          var response = JSON.parse(r);
+
+          if(response && response.success === true) {
+            this.transitionToRoute('complete');
+          }
+          else {
+            alert('Er is een probleem opgetreden bij het versturen.');
+          }
+
+        }.bind(this),
       });
 
       //DEBUG
       // var data = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(message));
       // window.open(data,null);
     }
-  },
 
-
+  }
 
 });

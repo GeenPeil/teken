@@ -18,17 +18,18 @@
   #can {
     position: absolute;
 
-    top: 80px;
     @media only screen and (max-device-width : 569px) {
       font-size: 65px;
     }
 
+    top: 80px;
     left:0;
     right:0;
     margin:auto;
 
     transform-origin: top;
     -webkit-transform-origin: top;
+    -ms-transform-origin: top;
 
     border: 1px solid black;
     background-color: #eeeeee;

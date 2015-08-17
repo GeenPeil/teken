@@ -25,7 +25,7 @@ export default Ember.Route.extend({
     model : function() {
       return Ember.$.ajax({
         type : 'GET',
-        url: 'form_debug.json',
+        url: 'form.json',
         error : function(e) {
           console.error('no form data:',e);
         }

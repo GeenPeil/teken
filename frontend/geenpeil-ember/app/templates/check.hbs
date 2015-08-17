@@ -43,10 +43,16 @@
     <img style="background-color:white;" src={{applicationController.model.form.map.handtekening.value}}>
     <br><br>
 
+
     <b>{{applicationController.model.form.map.captchaResponse.name}}</b> <br>
-    {{applicationController.model.form.map.captchaResponse.instruction}}
+
+    {{#unless recaptchaItem.isValid}}
+      {{applicationController.model.form.map.captchaResponse.instruction}}
+    {{/unless}}
+
     <br>
     {{recaptcha-widget formItem=recaptchaItem}}
+
 
   {{/unless}}
 
