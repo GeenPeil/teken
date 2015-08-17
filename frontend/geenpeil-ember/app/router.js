@@ -20,6 +20,7 @@ Router.map(function() {
 
   this.resource('complete', { path: '/klaar' });
 
+  this.resource('down', { path: '/kapot' });
 });
 
 
