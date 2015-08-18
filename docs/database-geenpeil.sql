@@ -20,6 +20,9 @@ CREATE TABLE public.handtekeningen(
 	id serial NOT NULL,
 	insert_time timestamp NOT NULL,
 	iphash bytea NOT NULL,
+	mailhash bytea NOT NULL,
+	mailcheckhash bytea NOT NULL,
+	mailcheckdone bool NOT NULL DEFAULT false,
 	CONSTRAINT handtekeningen_id_primary PRIMARY KEY (id)
 
 );

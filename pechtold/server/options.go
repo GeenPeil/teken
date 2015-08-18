@@ -16,4 +16,6 @@ type Options struct {
 	StorageLocation   string `long:"storage-location" desciption:"storage location" default:"../storage/testdata"`          // TODO: remove default, make mandatory
 
 	HashingSalt string `long:"hashing-salt" description:"base-64 encoded hashing salt"`
+
+	SMTPServer string `long:"smtp-server" description:"smtp server to use" default:"localhost:25"`
 }

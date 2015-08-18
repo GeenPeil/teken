@@ -37,6 +37,8 @@ const (
 
 	ffj_t_Handtekening_Handtekening
 
+	ffj_t_Handtekening_Email
+
 	ffj_t_Handtekening_CaptchaResponse
 )
 
@@ -59,6 +61,8 @@ var ffj_key_Handtekening_Postcode = []byte("postcode")
 var ffj_key_Handtekening_Woonplaats = []byte("woonplaats")
 
 var ffj_key_Handtekening_Handtekening = []byte("handtekening")
+
+var ffj_key_Handtekening_Email = []byte("email")
 
 var ffj_key_Handtekening_CaptchaResponse = []byte("captchaResponse")
 
@@ -137,6 +141,14 @@ mainparse:
 						goto mainparse
 					}
 
+				case 'e':
+
+					if bytes.Equal(ffj_key_Handtekening_Email, kn) {
+						currentKey = ffj_t_Handtekening_Email
+						state = fflib.FFParse_want_colon
+						goto mainparse
+					}
+
 				case 'g':
 
 					if bytes.Equal(ffj_key_Handtekening_Geboortedatum, kn) {
@@ -207,6 +219,12 @@ mainparse:
 
 				if fflib.EqualFoldRight(ffj_key_Handtekening_CaptchaResponse, kn) {
 					currentKey = ffj_t_Handtekening_CaptchaResponse
+					state = fflib.FFParse_want_colon
+					goto mainparse
+				}
+
+				if fflib.SimpleLetterEqualFold(ffj_key_Handtekening_Email, kn) {
+					currentKey = ffj_t_Handtekening_Email
 					state = fflib.FFParse_want_colon
 					goto mainparse
 				}
@@ -317,6 +335,9 @@ mainparse:
 
 				case ffj_t_Handtekening_Handtekening:
 					goto handle_Handtekening
+
+				case ffj_t_Handtekening_Email:
+					goto handle_Email
 
 				case ffj_t_Handtekening_CaptchaResponse:
 					goto handle_CaptchaResponse
@@ -592,6 +613,32 @@ handle_Handtekening:
 
 			v := reflect.ValueOf(&uj.Handtekening).Elem()
 			v.SetBytes(b[0:n])
+
+		}
+	}
+
+	state = fflib.FFParse_after_value
+	goto mainparse
+
+handle_Email:
+
+	/* handler: uj.Email type=string kind=string quoted=false*/
+
+	{
+
+		{
+			if tok != fflib.FFTok_string && tok != fflib.FFTok_null {
+				return fs.WrapErr(fmt.Errorf("cannot unmarshal %s into Go value for string", tok))
+			}
+		}
+
+		if tok == fflib.FFTok_null {
+
+		} else {
+
+			outBuf := fs.Output.Bytes()
+
+			uj.Email = string(string(outBuf))
 
 		}
 	}
