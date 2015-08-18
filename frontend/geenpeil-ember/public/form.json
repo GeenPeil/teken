@@ -30,7 +30,7 @@
         "sections" : [
           ["voornaam","tussenvoegsel","achternaam"],
           ["straat","huisnummer","postcode","woonplaats"],
-          ["geboortedatum","geboorteplaats"],
+          ["geboortedatum","geboorteplaats","email"],
           ["handtekening"]
         ],
 
@@ -137,6 +137,17 @@
                 "x" : 258,
                 "y" : 745,
                 "regex" : "^[a-zA-Z-',.]+$"
+            },
+            {
+                "_id" : "email",
+                "type" : "string",
+                "name" : "E-mailadres",
+                "explanation" : "Via dit e-mailadres moet u de ondersteuningsverklaring bevestigen na verzending.",
+                "placeholder" : "vul in",
+                "instruction" : "Voer een geldig e-mailadres in. Maximaal 128 tekens.",
+                "case-sensitive" : true,
+                "length" : 128,
+                "regex" : "\\S+@\\S+"
             },
             {
                 "_id" : "handtekening",
