@@ -3,6 +3,8 @@ package server
 import (
 	"bytes"
 	"crypto/sha256"
+	"crypto/tls"
+	"encoding/base64"
 	"encoding/json"
 	"fmt"
 	"image/png"
@@ -14,9 +16,9 @@ import (
 
 	"github.com/GeenPeil/teken/data"
 	"github.com/GeenPeil/teken/storage"
+	"gopkg.in/gomail.v2-unstable"
 
 	"github.com/davecgh/go-spew/spew"
-	"github.com/jpoehls/gophermail"
 	"github.com/lib/pq"
 )
 
@@ -27,10 +29,10 @@ var (
 	mailErr    = "mail has been used"
 )
 var (
-	mailFrom = mail.Address{
-		Name:    "GeenPeil no-reply",
+	mailFrom = (&mail.Address{
+		Name:    "GeenPeil verificatie",
 		Address: "no-reply@teken.geenpeil.nl",
-	}
+	}).String()
 	mailSubject = "GeenPeil verificatie mail"
 )
 
@@ -59,12 +61,12 @@ func (s *Server) newSubmitHandlerFunc() http.HandlerFunc {
 		log.Fatalf("error preparing stmtInsertNAWHash: %v", err)
 	}
 
-	stmtInsertHandtekening, err := s.db.Prepare(`INSERT INTO handtekeningen (insert_time, iphash) VALUES (NOW(), $1) RETURNING ID`)
+	stmtInsertHandtekening, err := s.db.Prepare(`INSERT INTO handtekeningen (insert_time, iphash, mailHash, mailcheckhash) VALUES (NOW(), $1, $2, $3) RETURNING ID`)
 	if err != nil {
 		log.Fatalf("error preparing stmtInsertHandtekening: %v", err)
 	}
 
-	stmtSelectMail, err := s.db.Prepare(`SELECT COUNT(*) FROM handtekeningen WHERE mailhash = $1 AND mailcheckdone = true`)
+	stmtSelectMail, err := s.db.Prepare(`SELECT COUNT(*) FROM handtekeningen WHERE mailHash = $1 AND mailcheckdone = true`)
 	if err != nil {
 		log.Fatalf("error preparing stmtSelectMail: %v", err)
 	}
@@ -78,6 +80,9 @@ func (s *Server) newSubmitHandlerFunc() http.HandlerFunc {
 		Handtekening    *data.Handtekening
 		VerificatieLink string
 	}
+
+	mailDialer := gomail.NewPlainDialer("localhost", "", "", 25)
+	mailDialer.TLSConfig = &tls.Config{InsecureSkipVerify: true}
 
 	return func(w http.ResponseWriter, r *http.Request) {
 		defer r.Body.Close()
@@ -203,7 +208,8 @@ func (s *Server) newSubmitHandlerFunc() http.HandlerFunc {
 
 			mailHash := sha256.New()
 			mailHash.Write(s.hashingSalt)
-			mailHashBytes := mailHash.Sum(bytes.ToLower(bytes.TrimSpace([]byte(h.Email))))
+			mailHash.Write(bytes.ToLower(bytes.TrimSpace([]byte(h.Email))))
+			mailHashBytes := mailHash.Sum(nil)
 			var exists int
 			err := stmtSelectMail.QueryRow(mailHashBytes).Scan(&exists)
 			if err != nil {
@@ -248,11 +254,14 @@ func (s *Server) newSubmitHandlerFunc() http.HandlerFunc {
 			// insert handtekening entry into db, get inserted ID
 			ipHash := sha256.New()
 			ipHash.Write(s.hashingSalt)
-			ipHashBytes := ipHash.Sum([]byte(remoteIP))
-			mailcheckString := randomString(25)
-			mailcheckHashBytes := sha256.New().Sum([]byte(mailcheckString))
+			ipHash.Write([]byte(remoteIP))
+			ipHashBytes := ipHash.Sum(nil)
+			mailCheck := randomString(25)
+			mailCheckHash := sha256.New()
+			mailCheckHash.Write([]byte(mailCheck))
+			mailCheckHashBytes := mailCheckHash.Sum(nil)
 			var ID uint64
-			err = stmtInsertHandtekening.QueryRow(ipHashBytes, mailHashBytes, mailcheckHashBytes).Scan(&ID)
+			err = stmtInsertHandtekening.QueryRow(ipHashBytes, mailHashBytes, mailCheckHashBytes).Scan(&ID)
 			if err != nil {
 				log.Printf("error inserting handtekening entry in db for %s: %v", remoteIP, err)
 				http.Error(w, "server error", http.StatusInternalServerError)
@@ -270,7 +279,7 @@ func (s *Server) newSubmitHandlerFunc() http.HandlerFunc {
 			// send mail
 			md := &mailData{
 				Handtekening:    h,
-				VerificatieLink: fmt.Sprintf("https://teken.geenpeil.nl/pechtold/verify?mailhash=%s&check=%s", string(mailHashBytes), mailcheckString),
+				VerificatieLink: fmt.Sprintf("https://teken.geenpeil.nl/pechtold/verify?mailhash=%s&check=%s", base64.URLEncoding.EncodeToString(mailHashBytes), mailCheck),
 			}
 			var bodyBuf = &bytes.Buffer{}
 			var htmlBuf = &bytes.Buffer{}
@@ -286,19 +295,19 @@ func (s *Server) newSubmitHandlerFunc() http.HandlerFunc {
 				http.Error(w, "server error", http.StatusInternalServerError)
 				return
 			}
-			mailMessage := &gophermail.Message{
-				From: mailFrom,
-				To: []mail.Address{
-					{
-						Name:    fmt.Sprintf("%s %s %s", h.Voornaam, h.Tussenvoegsel, h.Achternaam),
-						Address: h.Email,
-					},
-				},
-				Subject:  mailSubject,
-				Body:     bodyBuf.String(),
-				HTMLBody: htmlBuf.String(),
-			}
-			err = gophermail.SendMail(s.options.SMTPServer, nil, mailMessage)
+
+			mailTo := (&mail.Address{
+				Name:    fmt.Sprintf("%s %s %s", h.Voornaam, h.Tussenvoegsel, h.Achternaam),
+				Address: h.Email,
+			}).String()
+
+			mailMessage := gomail.NewMessage()
+			mailMessage.SetHeader("From", mailFrom)
+			mailMessage.SetHeader("To", mailTo)
+			mailMessage.SetHeader("Subject", mailSubject)
+			mailMessage.SetBody("text/plain", bodyBuf.String())
+			// m.SetBody("html", htmlBuf.String())
+			err = mailDialer.DialAndSend(mailMessage)
 			if err != nil {
 				log.Printf("error sending verification mail: %v", err)
 				http.Error(w, "server error", http.StatusInternalServerError)
