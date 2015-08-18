@@ -4,12 +4,12 @@
 
   {{#unless allValid}}
 
-    <span>Het formulier bevat fouten of niet alle verplichte velden zijn ingevuld!</span>
+    <span>Het formulier bevat fouten of niet alle verplichte velden zijn ingevuld.</span>
     <br><br>
     <span>Druk op 'Terug' om het formulier aan te vullen.</span>
 
   {{else}}
-    <span>Kijk uw gegevens goed na. U kunt ook een voorbeeld van het ingevulde formulier bekijken.</span>
+    <span>{{form.text.check}}</span>
     <br><br>
 
     {{applicationController.model.form.map.voornaam.name}} : <br>

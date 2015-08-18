@@ -4,6 +4,10 @@ export default Ember.Controller.extend({
 
   applicationController: Ember.inject.controller('application'),
 
+  form : Ember.computed('',function() {
+    return this.get('applicationController').get('model.form');
+  }),
+
   formItems : Ember.computed('',function() {
     return this.get('applicationController').get('model.form.fields');
   }),
@@ -26,9 +30,6 @@ export default Ember.Controller.extend({
   actions : {
 
     send : function() {
-      // console.log('send!');
-      // this.transitionToRoute('send');
-
       var message = {};
 
       this.get('applicationController').get('model.form.fields').forEach(function(item) {
@@ -39,7 +40,6 @@ export default Ember.Controller.extend({
       message['handtekening'] = message['handtekening'].replace(/^data:image\/(png|jpg);base64,/, "");
 
       // Send the data
-      //TODO - response handling
       Ember.$.ajax({
         type : 'POST',
         url: 'https://teken.geenpeil.nl/pechtold/submit',
