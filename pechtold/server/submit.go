@@ -270,7 +270,7 @@ func (s *Server) newSubmitHandlerFunc() http.HandlerFunc {
 			// send mail
 			md := &mailData{
 				Handtekening:    h,
-				VerificatieLink: fmt.Sprintf("https://teken.geenpeil.nl/pechtold/verify?ID=%d&check=%s", ID, mailcheckString),
+				VerificatieLink: fmt.Sprintf("https://teken.geenpeil.nl/pechtold/verify?mailhash=%s&check=%s", string(mailHashBytes), mailcheckString),
 			}
 			var bodyBuf = &bytes.Buffer{}
 			var htmlBuf = &bytes.Buffer{}
