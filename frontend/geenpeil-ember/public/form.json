@@ -5,11 +5,26 @@
             "width" : 826,
             "height" : 1169,
             "filename" : "34116-inleidend.png",
-            "description" : "34116 - Wet Goedkeuring van de op 27 juni 2014 te Brussel tot stand gekomen Associatieovereenkomst tussen de Europese Unie en de Europese Gemeenschap voor Atoomenergie en haar lidstaten, enerzijds, en Oekraïne, anderzijds (Trb. 2014, 160)",
             "characterWidth" : 18,
             "characterHeight" : 27,
             "characterMargin" : 4,
             "spaceWidth" : 15
+        },
+
+        "preferences" : {
+          "stopOnEmpty" : true
+        },
+
+        "text" : {
+          "home" : "",
+          "disclaimer_1" : "Door uw gegevens in te vullen steunt u het inleidend verzoek tot het houden van een referendum over de volgende wet / het volgende verdrag.",
+          "disclaimer_2" : "34116 - Wet Goedkeuring van de op 27 juni 2014 te Brussel tot stand gekomen Associatieovereenkomst tussen de Europese Unie en de Europese Gemeenschap voor Atoomenergie en haar lidstaten, enerzijds, en Oekraïne, anderzijds (Trb. 2014, 160)",
+          "disclaimer_3" : "U kunt een verzoek indienen indien u Nederlander bent, 18 jaar of ouder bent op 06-08-2015 en niet uitgesloten bent van het kiesrecht.",
+          "disclaimer_4" : "Indien u buiten Nederland woont kunt u geen gebruik maken van deze app.",
+          "disclaimer_5" : "De gegevens worden niet met derden gedeeld en niet gebruikt voor andere doeleinden dan het printen van het formulier. Terwijl de informatie wordt verwerkt zal deze wanneer mogelijk altijd versleuteld zijn.",
+          "disclaimer_6" : "U verklaart dat u slechts eenmaal een verzoek heeft ingediend ten behoeve van dit inleidend verzoek. Door op ‘Verder’ te drukken gaat u akkoord met deze voorwaarden.",
+          "check" : "Kijk uw gegevens goed na. U kunt een voorbeeld van het ingevulde formulier bekijken. Het formulier kan pas verzonden worden als u de beveiliginsvraag heeft beantwoord.",
+          "complete" : "Uw gegevens zijn succesvol verwerkt."
         },
 
         "sections" : [
@@ -79,7 +94,7 @@
                 "_id" : "postcode",
                 "type" : "string",
                 "name" : "Postcode",
-                "placeholder" : "vul in b.v. 1234 AB",
+                "placeholder" : "vul in bijv. 1234 AB",
                 "instruction" : "Vul de postcode in als '1234 AB'",
                 "length" : 7,
                 "x" : 53,
@@ -103,7 +118,7 @@
                 "_id" : "geboortedatum",
                 "type" : "string",
                 "name" : "Geboortedatum",
-                "placeholder" : "vul in b.v. 01-01-1970",
+                "placeholder" : "vul in bijv. 01-01-1970",
                 "instruction" : "Vul de geboortedatum in als '01-01-1970'",
                 "length" : 10,
                 "x" : 52,
