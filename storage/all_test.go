@@ -20,6 +20,7 @@ func TestStorage(t *testing.T) {
 		Woonplaats:      "Woonplaats",
 		Handtekening:    []byte("Handtekening"),
 		CaptchaResponse: "foobar",
+		Email:           "fdsa@fdsa.com",
 	}
 
 	saver, err := NewSaver("testpub.pem", "testdata")

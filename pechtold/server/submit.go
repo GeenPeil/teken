@@ -4,14 +4,19 @@ import (
 	"bytes"
 	"crypto/sha256"
 	"encoding/json"
+	"fmt"
 	"image/png"
 	"log"
 	"net"
 	"net/http"
+	"net/mail"
+	"text/template"
 
 	"github.com/GeenPeil/teken/data"
 	"github.com/GeenPeil/teken/storage"
+
 	"github.com/davecgh/go-spew/spew"
+	"github.com/jpoehls/gophermail"
 	"github.com/lib/pq"
 )
 
@@ -19,6 +24,32 @@ var (
 	fieldErr   = "form values missing or invalid"
 	captchaErr = "captcha invalid"
 	imgErr     = "image invalid"
+	mailErr    = "mail has been used"
+)
+var (
+	mailFrom = mail.Address{
+		Name:    "GeenPeil no-reply",
+		Address: "no-reply@teken.geenpeil.nl",
+	}
+	mailSubject = "GeenPeil verificatie mail"
+)
+
+var (
+	tmplVerificationMailPlainText = template.Must(template.New("plain").Parse(`Beste {{.Handtekening.Voornaam}} {{.Handtekening.Tussenvoegsel}} {{.Handtekening.Achternaam}},
+
+{{.VerificatieLink}}
+
+Bedankt,
+Leger des Peils`))
+
+	tmplVerificationMailHTML = template.Must(template.New("html").Parse(`Beste {{.Handtekening.Voornaam}} {{.Handtekening.Tussenvoegsel}} {{.Handtekening.Achternaam}},
+
+<a href="{{.VerificatieLink}}" >Klik hier</a> of gebruik onderstaande URL.
+
+{{.VerificatieLink}}
+
+Bedankt,
+Leger des Peils`))
 )
 
 func (s *Server) newSubmitHandlerFunc() http.HandlerFunc {
@@ -33,9 +64,19 @@ func (s *Server) newSubmitHandlerFunc() http.HandlerFunc {
 		log.Fatalf("error preparing stmtInsertHandtekening: %v", err)
 	}
 
+	stmtSelectMail, err := s.db.Prepare(`SELECT COUNT(*) FROM handtekeningen WHERE mailhash = $1 AND mailcheckdone = true`)
+	if err != nil {
+		log.Fatalf("error preparing stmtSelectMail: %v", err)
+	}
+
 	saver, err := storage.NewSaver(s.options.StoragePubkeyFile, s.options.StorageLocation)
 	if err != nil {
 		log.Fatalf("error creating storage.Saver: %v", err)
+	}
+
+	type mailData struct {
+		Handtekening    *data.Handtekening
+		VerificatieLink string
 	}
 
 	return func(w http.ResponseWriter, r *http.Request) {
@@ -77,7 +118,6 @@ func (s *Server) newSubmitHandlerFunc() http.HandlerFunc {
 		out := &SubmitOutput{}
 
 		{
-
 			// check captcha
 			if !s.options.CaptchaDisable {
 				valid, err := s.captcha.Verify(h.CaptchaResponse, remoteIP)
@@ -142,6 +182,12 @@ func (s *Server) newSubmitHandlerFunc() http.HandlerFunc {
 				goto Response
 			}
 
+			if len(h.Email) == 0 {
+				out.Error = fieldErr
+				log.Printf("missing field email in request from %s", remoteIP)
+				goto Response
+			}
+
 			if len(h.Handtekening) == 0 {
 				out.Error = fieldErr
 				log.Printf("missing field handtekening in request from %s", remoteIP)
@@ -152,6 +198,21 @@ func (s *Server) newSubmitHandlerFunc() http.HandlerFunc {
 			if err != nil {
 				out.Error = imgErr
 				log.Printf("invalid image from %s: %v", remoteIP, err)
+				goto Response
+			}
+
+			mailHash := sha256.New()
+			mailHash.Write(s.hashingSalt)
+			mailHashBytes := mailHash.Sum(bytes.ToLower(bytes.TrimSpace([]byte(h.Email))))
+			var exists int
+			err := stmtSelectMail.QueryRow(mailHashBytes).Scan(&exists)
+			if err != nil {
+				http.Error(w, "server error", http.StatusInternalServerError)
+				log.Printf("error checking for duplicate email hash: %v", err)
+				return
+			}
+			if exists > 0 {
+				out.Error = mailErr
 				goto Response
 			}
 
@@ -170,7 +231,7 @@ func (s *Server) newSubmitHandlerFunc() http.HandlerFunc {
 			nawHash.Write(bytes.ToLower(bytes.TrimSpace([]byte(h.Postcode))))
 			nawHash.Write(bytes.ToLower(bytes.TrimSpace([]byte(h.Woonplaats))))
 			nawHashBytes := nawHash.Sum(nil)
-			_, err := stmtInsertNawHash.Exec(nawHashBytes)
+			_, err = stmtInsertNawHash.Exec(nawHashBytes)
 			if err != nil {
 				if perr, ok := err.(*pq.Error); ok {
 					if perr.Code == "23505" {
@@ -188,27 +249,58 @@ func (s *Server) newSubmitHandlerFunc() http.HandlerFunc {
 			ipHash := sha256.New()
 			ipHash.Write(s.hashingSalt)
 			ipHashBytes := ipHash.Sum([]byte(remoteIP))
-			insertHandtekeningRows, err := stmtInsertHandtekening.Query(ipHashBytes)
+			mailcheckString := randomString(25)
+			mailcheckHashBytes := sha256.New().Sum([]byte(mailcheckString))
+			var ID uint64
+			err = stmtInsertHandtekening.QueryRow(ipHashBytes, mailHashBytes, mailcheckHashBytes).Scan(&ID)
 			if err != nil {
 				log.Printf("error inserting handtekening entry in db for %s: %v", remoteIP, err)
 				http.Error(w, "server error", http.StatusInternalServerError)
 				return
 			}
-			insertHandtekeningRows.Next()
-			var ID uint64
-			err = insertHandtekeningRows.Scan(&ID)
-			if err != nil {
-				log.Printf("error getting ID for new handtekening entry for %s: %v", remoteIP, err)
-				http.Error(w, "server error", http.StatusInternalServerError)
-				insertHandtekeningRows.Close()
-				return
-			}
-			insertHandtekeningRows.Close()
 
 			// save to disk
 			err = saver.Save(ID, h)
 			if err != nil {
 				log.Printf("error saving handtekening for %s: %v", remoteIP, err)
+				http.Error(w, "server error", http.StatusInternalServerError)
+				return
+			}
+
+			// send mail
+			md := &mailData{
+				Handtekening:    h,
+				VerificatieLink: fmt.Sprintf("https://teken.geenpeil.nl/pechtold/verify?mailhash=%s&check=%s", string(mailHashBytes), mailcheckString),
+			}
+			var bodyBuf = &bytes.Buffer{}
+			var htmlBuf = &bytes.Buffer{}
+			err = tmplVerificationMailPlainText.Execute(bodyBuf, md)
+			if err != nil {
+				log.Printf("error executing tmplVerificationMailPlainText: %v", err)
+				http.Error(w, "server error", http.StatusInternalServerError)
+				return
+			}
+			err = tmplVerificationMailHTML.Execute(htmlBuf, md)
+			if err != nil {
+				log.Printf("error executing tmplVerificationMailHTML: %v", err)
+				http.Error(w, "server error", http.StatusInternalServerError)
+				return
+			}
+			mailMessage := &gophermail.Message{
+				From: mailFrom,
+				To: []mail.Address{
+					{
+						Name:    fmt.Sprintf("%s %s %s", h.Voornaam, h.Tussenvoegsel, h.Achternaam),
+						Address: h.Email,
+					},
+				},
+				Subject:  mailSubject,
+				Body:     bodyBuf.String(),
+				HTMLBody: htmlBuf.String(),
+			}
+			err = gophermail.SendMail(s.options.SMTPServer, nil, mailMessage)
+			if err != nil {
+				log.Printf("error sending verification mail: %v", err)
 				http.Error(w, "server error", http.StatusInternalServerError)
 				return
 			}

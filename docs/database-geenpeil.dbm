@@ -3,7 +3,7 @@
 CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.8.1-alpha1" last-position="0,4" last-zoom="1"
+<dbmodel pgmodeler-ver="0.8.1-alpha1" last-position="0,0" last-zoom="1"
 	 default-schema="public" default-owner="postgres">
 <database name="geenpeil">
 </database>
@@ -24,6 +24,15 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<column name="iphash" not-null="true">
 		<type name="bytea" length="32"/>
 	</column>
+	<column name="mailhash" not-null="true">
+		<type name="bytea"/>
+	</column>
+	<column name="mailcheckhash" not-null="true">
+		<type name="bytea"/>
+	</column>
+	<column name="mailcheckdone" not-null="true" default-value="false">
+		<type name="bool"/>
+	</column>
 	<constraint name="handtekeningen_id_primary" type="pk-constr" table="public.handtekeningen">
 		<columns names="id" ref-type="src-columns"/>
 	</constraint>
@@ -32,7 +41,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="nawhashes">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<position x="275" y="27"/>
+	<position x="309" y="40"/>
 	<column name="hash" not-null="true">
 		<type name="bytea" length="32"/>
 	</column>
