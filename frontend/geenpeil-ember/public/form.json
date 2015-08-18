@@ -4,7 +4,7 @@
         "properties" : {
             "width" : 826,
             "height" : 1169,
-            "filename" : "34116-inleidend.png",
+            "filename" : "34116-definitief.png",
             "characterWidth" : 18,
             "characterHeight" : 27,
             "characterMargin" : 4,
@@ -16,13 +16,13 @@
         },
 
         "text" : {
-          "home" : "",
-          "disclaimer_1" : "Door uw gegevens in te vullen steunt u het inleidend verzoek tot het houden van een referendum over de volgende wet / het volgende verdrag.",
+          "home" : "300.000 handtekeningen op papier? Dat kan slimmer! Vul in de volgende vier schermen je gegevens in en teken digitaal. Wij zorgen de verscheping naar de Kiesraad.",
+          "disclaimer_1" : "Door uw gegevens in te vullen steunt u het definitief verzoek tot het houden van een referendum over de volgende wet / het volgende verdrag:",
           "disclaimer_2" : "34116 - Wet Goedkeuring van de op 27 juni 2014 te Brussel tot stand gekomen Associatieovereenkomst tussen de Europese Unie en de Europese Gemeenschap voor Atoomenergie en haar lidstaten, enerzijds, en Oekraïne, anderzijds (Trb. 2014, 160)",
-          "disclaimer_3" : "U kunt een verzoek indienen indien u Nederlander bent, 18 jaar of ouder bent op 06-08-2015 en niet uitgesloten bent van het kiesrecht.",
-          "disclaimer_4" : "Indien u buiten Nederland woont kunt u geen gebruik maken van deze app.",
+          "disclaimer_3" : "U kunt een ondersteuningsverklaring afleggen indien u Nederlander bent, 18 jaar of ouder bent op 28-09-2015 en niet uitgesloten bent van het kiesrecht.",
+          "disclaimer_4" : "Indien u buiten Nederland woont kunt u geen gebruik maken van dit online-formulier.",
           "disclaimer_5" : "De gegevens worden niet met derden gedeeld en niet gebruikt voor andere doeleinden dan het printen van het formulier. Terwijl de informatie wordt verwerkt zal deze wanneer mogelijk altijd versleuteld zijn.",
-          "disclaimer_6" : "U verklaart dat u slechts eenmaal een verzoek heeft ingediend ten behoeve van dit inleidend verzoek. Door op ‘Verder’ te drukken gaat u akkoord met deze voorwaarden.",
+          "disclaimer_6" : "U verklaart dat u slechts eenmaal een verzoek indient ten behoeve van dit definitief verzoek en de gegevens naar waarheid invult. Door op \"Akkoord\" te drukken gaat u akkoord met deze voorwaarden en verklaart u daaraan te voldoen.",
           "check" : "Kijk uw gegevens goed na. U kunt een voorbeeld van het ingevulde formulier bekijken. Het formulier kan pas verzonden worden als u de beveiliginsvraag heeft beantwoord.",
           "complete" : "Uw gegevens zijn succesvol verwerkt."
         },
