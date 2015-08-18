@@ -5,16 +5,16 @@ export default Ember.Route.extend({
     healthy : true,
 
     beforeModel : function(transition) {
-      console.log('Application beforeModel',transition);
+      // console.log('Application beforeModel',transition);
       if(transition.targetName !== 'down') {
         return Ember.$.ajax({
           type : 'GET',
           url: 'https://teken.geenpeil.nl/pechtold/health-check',
           success : function(d) {
-            console.log('health check ok',d);
+            console.log('health check success:',d);
           }.bind(this),
           error : function(e) {
-            console.log('health check not ok',e);
+            console.log('health check error:',e);
             this.set('healthy',false);
             this.transitionTo('down');
           }.bind(this)

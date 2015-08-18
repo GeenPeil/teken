@@ -55,6 +55,7 @@ export default Ember.Controller.extend({
           var response = JSON.parse(r);
 
           if(response && response.success === true) {
+            this.set('form.sent',true);
             this.transitionToRoute('complete');
           }
           else {
