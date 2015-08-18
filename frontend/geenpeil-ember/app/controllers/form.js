@@ -36,7 +36,15 @@ export default Ember.Controller.extend({
   */
 
   noErrors : Ember.computed('formItems.@each.isValid', function() {
-    return !!this.get('formItems').findBy('isValid',false) === false;
+    var stopOnEmpty = this.get('applicationController.model.form.preferences.stopOnEmpty');
+    
+    if(stopOnEmpty) {
+      return this.get('formItems').findBy('isValid',false) === undefined && this.get('formItems').findBy('isValid',undefined) === undefined;
+    }
+    else {
+      return !!this.get('formItems').findBy('isValid',false) === false;
+    }
+
   }),
 
   /*
@@ -47,15 +55,11 @@ export default Ember.Controller.extend({
     cancel : function() {
       var notFirst = !this.get('isFirstSection');
 
-      console.log('cancel',notFirst);
-
       if(notFirst) {
         this.transitionToRoute('form',this.get('sectionNumber')-1);
       }
       else {
-        //TODO - ask user for permission to dump data
-        //TODO - dump data
-        this.transitionToRoute('home');
+        location.reload();
       }
     },
 
@@ -64,7 +68,7 @@ export default Ember.Controller.extend({
         var notLast = !this.get('isLastSection');
 
         if(notLast) {
-          this.transitionTo('form',this.get('sectionNumber')+1);
+          this.transitionToRoute('form',this.get('sectionNumber')+1);
         }
         else {
           this.transitionToRoute('check');
