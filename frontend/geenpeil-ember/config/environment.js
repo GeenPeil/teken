@@ -15,7 +15,13 @@ module.exports = function(environment) {
     APP: {
       // Here you can pass flags/options to your application instance
       // when it is created
-    }
+    },
+
+    noScript: {
+      'content': "Dit online-formulier vereist JavaScript ondersteuing. Raadpleeg " +
+              "de hulpbronnen van uw internet-browser voor nadere informatie " +
+              "over hoe u JavaScript kunt inschakelen."
+      }
   };
 
   if (environment === 'development') {
