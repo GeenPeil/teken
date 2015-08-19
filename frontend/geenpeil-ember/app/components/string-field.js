@@ -4,7 +4,22 @@ export default Ember.Component.extend({
 
   classNames : ['string-field'],
 
-  classNameBindings: ['showError:error'],
+  classNameBindings: ['showError:error','formItem.case-sensitive:case-sensitive'],
+
+  inputType : Ember.computed('formItem.type', function() {
+    var type = this.get('formItem.type');
+
+    switch(type) {
+
+      case('email') :
+        return 'email';
+        break;
+      case('string') :
+      case('date') :
+      default :
+        return 'text';
+    }
+  }),
 
   showError : Ember.computed('formItem.isValid','formItem.value.length', function() {
     var isValid = this.get('formItem.isValid'),
@@ -20,6 +35,7 @@ export default Ember.Component.extend({
   valueChanged : Ember.observer('value', function() {
     var value = this.get('value'),
         maxLength = this.get('formItem.length'),
+        caseSensitive = this.get('formItem.case-sensitive'),
         regex = new RegExp(this.get('formItem.regex'), "i"),
         isValid = false;
 
@@ -34,14 +50,39 @@ export default Ember.Component.extend({
       isValid = match && value.length <= maxLength;
     }
 
-    this.set('formItem.isValid',isValid);
+
 
     //
-    var separated = this.separateValue(this.get('value'));
+    var tmp;
 
-    //set both values
-    this.set('value',separated);
-    this.set('formItem.value',separated.toUpperCase());
+    tmp = this.separateValue(this.get('value'));
+
+    if(!caseSensitive) {
+      tmp = tmp.toUpperCase();
+    }
+
+    //before date check
+    if(this.get('formItem.type') === 'date') {
+      var beforeDate = this.get('formItem.beforeDate'),
+          separator = this.get('formItem.separator');
+      if(beforeDate) {
+
+        //chop em up
+        var inputDate = parseInt(tmp.split(separator).reverse().join(''));
+        var testDate = parseInt(beforeDate.split(separator).reverse().join(''));
+
+        if(inputDate > testDate) {
+          isValid = false;
+        }
+
+      }
+    }
+
+
+    //set all values
+    this.set('formItem.isValid',isValid);
+    this.set('value',tmp);
+    this.set('formItem.value',tmp);
   }),
 
   separateValue : function(s) {

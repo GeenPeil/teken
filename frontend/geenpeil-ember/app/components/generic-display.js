@@ -5,7 +5,17 @@ export default Ember.Component.extend({
   classNames : ['generic-display'],
 
   isStringField : Ember.computed('formItem.type',function() {
-    return this.get('formItem.type') === 'string';
+    var type = this.get('formItem.type');
+
+    switch(type) {
+
+      case('string') :
+      case('date') :
+        return true;
+      default :
+        return false;
+
+    }
   }),
 
   isSignatureField : Ember.computed('formItem.type',function() {

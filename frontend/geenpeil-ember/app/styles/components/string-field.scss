@@ -19,12 +19,25 @@
     text-transform: uppercase;
   }
 
+  &.case-sensitive {
+
+    input {
+      text-transform: none;
+    }
+
+  }
+
   &.error {
 
     input {
       border: 2px solid red;
     }
 
+  }
+
+  .explanation {
+    margin-left: 15px;
+    line-height: 35px;
   }
 
 }

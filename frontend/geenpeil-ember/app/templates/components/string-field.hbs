@@ -1,6 +1,7 @@
-{{input type='text' value=value placeholder=formItem.placeholder}}
+{{#if formItem.explanation}}
+  <span class="explanation">{{formItem.explanation}}</span>
+{{/if}}
+{{input type=inputType autocomplete=formItem.autocomplete value=value placeholder=formItem.placeholder}}
 {{#if showError}}
   <span class="instruction">{{formItem.instruction}}</span>
 {{/if}}
-
-{{!--<br><span class="debug">valid : {{formItem.isValid}}</span>--}}
