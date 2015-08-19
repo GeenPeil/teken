@@ -12,6 +12,7 @@ import (
 	"net"
 	"net/http"
 	"net/mail"
+	"strings"
 	"text/template"
 
 	"github.com/GeenPeil/teken/data"
@@ -37,21 +38,18 @@ var (
 )
 
 var (
-	tmplVerificationMailPlainText = template.Must(template.New("plain").Parse(`Beste {{.Handtekening.Voornaam}} {{.Handtekening.Tussenvoegsel}} {{.Handtekening.Achternaam}},
+	tmplVerificationMailPlainText = template.Must(template.New("plain").Parse(`Beste {{.Naam}},
 
-Er is zojuist een ondersteuningsverklaring getekend met gebruik van dit e-mailadres. 
+Dank voor uw ondersteuningsverklaring!
 
-Open deze link om uw aanvraag definitief te maken:
+Er is zojuist een ondersteuningsverklaring aangevraagd met gebruik van dit e-mailadres. 
+
+Als u dit niet was dan kunt u deze e-mail verwijderen. 
+
+Als u dit wel was moet u op de onderstaande link klikken om deze aanvraag definitief in te dienen. Gelieve deze e-mail te bewaren zo lang het process loopt.
+
+Klik op deze link om uw aanvraag definitief te maken:
 {{.VerificatieLink}}
-
-Gelieve deze e-mail te bewaren zo lang het proces loopt.
-
-Heeft u geen ondersteuningsverklaring getekend, dan hoeft u niets te doen en kunt u deze mail verwijderen. 
-
-Met vriendelijke groet,
-GeenPeil
-
-- Dit is een automatisch verzonden bericht, u kunt hier niet op reageren. -
 `))
 )
 
@@ -78,7 +76,7 @@ func (s *Server) newSubmitHandlerFunc() http.HandlerFunc {
 	}
 
 	type mailData struct {
-		Handtekening    *data.Handtekening
+		Naam            string
 		VerificatieLink string
 	}
 
@@ -278,9 +276,10 @@ func (s *Server) newSubmitHandlerFunc() http.HandlerFunc {
 				return
 			}
 
+			toNaam := fmt.Sprintf("%s %s %s", strings.Title(strings.ToLower(h.Voornaam)), strings.ToLower(h.Tussenvoegsel), strings.Title(strings.ToLower(h.Achternaam)))
 			// send mail
 			md := &mailData{
-				Handtekening:    h,
+				Naam:            toNaam,
 				VerificatieLink: fmt.Sprintf("https://teken.geenpeil.nl/pechtold/verify?mailhash=%s&check=%s", base64.URLEncoding.EncodeToString(mailHashBytes), mailCheck),
 			}
 			var bodyBuf = &bytes.Buffer{}
@@ -292,7 +291,7 @@ func (s *Server) newSubmitHandlerFunc() http.HandlerFunc {
 			}
 
 			mailTo := (&mail.Address{
-				Name:    fmt.Sprintf("%s %s %s", h.Voornaam, h.Tussenvoegsel, h.Achternaam),
+				Name:    toNaam,
 				Address: h.Email,
 			}).String()
 
