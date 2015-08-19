@@ -25,7 +25,7 @@
           "disclaimer_4" : "Indien u buiten Nederland woont kunt u geen gebruik maken van dit online-formulier.",
           "disclaimer_5" : "De gegevens worden niet met derden gedeeld en niet gebruikt voor andere doeleinden dan het printen van het formulier. Terwijl de informatie wordt verwerkt zal deze wanneer mogelijk altijd versleuteld zijn.",
           "disclaimer_6" : "U verklaart dat u slechts eenmaal een verzoek indient ten behoeve van dit definitief verzoek en de gegevens naar waarheid invult. Door op \"Akkoord\" te drukken gaat u akkoord met deze voorwaarden en verklaart u daaraan te voldoen.",
-          "check" : "Kijk uw gegevens goed na. U kunt een voorbeeld van het ingevulde formulier bekijken. Het formulier kan pas verzonden worden als u de beveiliginsvraag heeft beantwoord.",
+          "check" : "Kijk uw gegevens goed na. U kunt een voorbeeld van het ingevulde formulier bekijken. Het formulier kan pas verzonden worden als u de beveiligingsvraag heeft beantwoord.",
           "complete1" : "U ontvangt van ons per mail een unieke link. Na het klikken op die link wordt de ondersteuning pas definitief. Check uw mail dus! Een e-mailadres kan slechts eenmaal worden gebruikt.",
           "complete2" : "LET OP!  Door de drukte kan de e-mail er langer over doen om aan te komen. Ook kan de e-mail soms in de spambox terecht komen."
         },
@@ -171,7 +171,7 @@
                 "_id" : "captchaResponse",
                 "type" : "recaptcha",
                 "name" : "Verificatie",
-                "instruction" : "Beantwoord de beveiliginsvraag.",
+                "instruction" : "Beantwoord de beveiligingsvraag.",
                 "sitekey" : "6LeQfgsTAAAAAFk7f53bfW3UvcGzTDrti4Cr3zJ_",
                 "theme" : "light"
             }
