@@ -44,6 +44,7 @@
                 "name" : "Eerste officiële voornaam",
                 "placeholder" : "vul in",
                 "instruction" : "Alleen letters. Maximaal 17 tekens.",
+                "explanation" : "Let op: gebruik de naam die hoort bij de eerste letter van uw initialen.",
                 "length" : 17,
                 "x" : 51,
                 "y" : 548,
