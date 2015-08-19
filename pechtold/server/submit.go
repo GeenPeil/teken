@@ -39,19 +39,20 @@ var (
 var (
 	tmplVerificationMailPlainText = template.Must(template.New("plain").Parse(`Beste {{.Handtekening.Voornaam}} {{.Handtekening.Tussenvoegsel}} {{.Handtekening.Achternaam}},
 
+Er is zojuist een ondersteuningsverklaring getekend met gebruik van dit e-mailadres. 
+
+Open deze link om uw aanvraag definitief te maken:
 {{.VerificatieLink}}
 
-Bedankt,
-Leger des Peils`))
+Gelieve deze e-mail te bewaren zo lang het proces loopt.
 
-	tmplVerificationMailHTML = template.Must(template.New("html").Parse(`Beste {{.Handtekening.Voornaam}} {{.Handtekening.Tussenvoegsel}} {{.Handtekening.Achternaam}},
+Heeft u geen ondersteuningsverklaring getekend, dan hoeft u niets te doen en kunt u deze mail verwijderen. 
 
-<a href="{{.VerificatieLink}}" >Klik hier</a> of gebruik onderstaande URL.
+Met vriendelijke groet,
+GeenPeil
 
-{{.VerificatieLink}}
-
-Bedankt,
-Leger des Peils`))
+- Dit is een automatisch verzonden bericht, u kunt hier niet op reageren. -
+`))
 )
 
 func (s *Server) newSubmitHandlerFunc() http.HandlerFunc {
@@ -283,16 +284,9 @@ func (s *Server) newSubmitHandlerFunc() http.HandlerFunc {
 				VerificatieLink: fmt.Sprintf("https://teken.geenpeil.nl/pechtold/verify?mailhash=%s&check=%s", base64.URLEncoding.EncodeToString(mailHashBytes), mailCheck),
 			}
 			var bodyBuf = &bytes.Buffer{}
-			var htmlBuf = &bytes.Buffer{}
 			err = tmplVerificationMailPlainText.Execute(bodyBuf, md)
 			if err != nil {
 				log.Printf("error executing tmplVerificationMailPlainText: %v", err)
-				http.Error(w, "server error", http.StatusInternalServerError)
-				return
-			}
-			err = tmplVerificationMailHTML.Execute(htmlBuf, md)
-			if err != nil {
-				log.Printf("error executing tmplVerificationMailHTML: %v", err)
 				http.Error(w, "server error", http.StatusInternalServerError)
 				return
 			}
