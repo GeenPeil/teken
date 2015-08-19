@@ -41,7 +41,7 @@
             {
                 "_id" : "voornaam",
                 "type" : "string",
-                "name" : "Eerste offciële voornaam",
+                "name" : "Eerste officiële voornaam",
                 "placeholder" : "vul in",
                 "instruction" : "Alleen letters. Maximaal 17 tekens.",
                 "length" : 17,
