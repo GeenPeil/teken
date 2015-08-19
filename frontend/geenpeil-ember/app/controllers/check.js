@@ -59,7 +59,14 @@ export default Ember.Controller.extend({
             this.transitionToRoute('complete');
           }
           else {
-            alert('Er is een probleem opgetreden bij het versturen.');
+
+            if(response.error === 'mail has been used') {
+              alert('Dit e-mailadres is al gebruikt.');
+            }
+            else {
+              alert('Er is een probleem opgetreden bij het versturen.');
+            }
+
           }
 
         }.bind(this),
