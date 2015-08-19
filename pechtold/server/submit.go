@@ -236,6 +236,7 @@ func (s *Server) newSubmitHandlerFunc() http.HandlerFunc {
 			nawHash.Write(bytes.ToLower(bytes.TrimSpace([]byte(h.Huisnummer))))
 			nawHash.Write(bytes.ToLower(bytes.TrimSpace([]byte(h.Postcode))))
 			nawHash.Write(bytes.ToLower(bytes.TrimSpace([]byte(h.Woonplaats))))
+			nawHash.Write(bytes.ToLower(bytes.TrimSpace([]byte(h.Email))))
 			nawHashBytes := nawHash.Sum(nil)
 			_, err = stmtInsertNawHash.Exec(nawHashBytes)
 			if err != nil {
