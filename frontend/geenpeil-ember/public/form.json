@@ -17,6 +17,8 @@
 
         "text" : {
           "home" : "300.000 handtekeningen op papier? Dat kan slimmer! Vul in de volgende vier schermen je gegevens in en teken digitaal. Wij verzorgen de verscheping naar de Kiesraad.",
+          "disclaimer_intro1" : "Omdat dit serieuze zaken zijn, volgt nu een serieus stukje tekst. De disclaimer. Gaarne goed lezen als u wilt weten waar u aan moet voldoen en wat wij met uw gegevens doen [SPOILERALERT: zwaar beveiligen en alleen gebruiken om uw handtekening bij de Kiesraad te krijgen].",
+          "disclaimer_intro2" : "PS bent u emigrant? Nederland in den vreemde? Dit online-formulier geldt niet voor u. Kijk in de FAQ op GeenPeil.nl wat u kunt doen om te tekenen.",
           "disclaimer_1" : "Door uw gegevens in te vullen steunt u het definitief verzoek tot het houden van een referendum over de volgende wet / het volgende verdrag:",
           "disclaimer_2" : "34116 - Wet Goedkeuring van de op 27 juni 2014 te Brussel tot stand gekomen Associatieovereenkomst tussen de Europese Unie en de Europese Gemeenschap voor Atoomenergie en haar lidstaten, enerzijds, en Oekraïne, anderzijds (Trb. 2014, 160)",
           "disclaimer_3" : "U kunt een ondersteuningsverklaring afleggen indien u Nederlander bent, 18 jaar of ouder bent op 28-09-2015 en niet uitgesloten bent van het kiesrecht.",
@@ -24,7 +26,8 @@
           "disclaimer_5" : "De gegevens worden niet met derden gedeeld en niet gebruikt voor andere doeleinden dan het printen van het formulier. Terwijl de informatie wordt verwerkt zal deze wanneer mogelijk altijd versleuteld zijn.",
           "disclaimer_6" : "U verklaart dat u slechts eenmaal een verzoek indient ten behoeve van dit definitief verzoek en de gegevens naar waarheid invult. Door op \"Akkoord\" te drukken gaat u akkoord met deze voorwaarden en verklaart u daaraan te voldoen.",
           "check" : "Kijk uw gegevens goed na. U kunt een voorbeeld van het ingevulde formulier bekijken. Het formulier kan pas verzonden worden als u de beveiliginsvraag heeft beantwoord.",
-          "complete" : "LET OP: Er is een e-mail naar u gestuurd met een verificatie-link. Het verzoek is pas definitief nadat u deze link heeft geopend."
+          "complete1" : "U ontvangt van ons per mail een unieke link. Na het klikken op die link wordt de ondersteuning pas definitief. Check uw mail dus! Een e-mailadres kan slechts eenmaal worden gebruikt.",
+          "complete2" : "LET OP!  De e-mail kan soms in de spambox terecht komen."
         },
 
         "sections" : [
@@ -145,7 +148,7 @@
                 "_id" : "email",
                 "type" : "email",
                 "name" : "E-mailadres",
-                "explanation" : "Via dit e-mailadres moet u de ondersteuningsverklaring bevestigen.",
+                "explanation" : "Uw e-mailadres hebben wij nodig ter authenticatie.",
                 "placeholder" : "vul in",
                 "instruction" : "Voer een geldig e-mailadres in. Maximaal 128 tekens.",
                 "autocomplete" : "on",
