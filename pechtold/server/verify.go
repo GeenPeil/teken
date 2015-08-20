@@ -6,7 +6,6 @@ import (
 	"database/sql"
 	"encoding/base64"
 	"log"
-	"net"
 	"net/http"
 	"text/template"
 )
@@ -68,10 +67,7 @@ func (s *Server) newVerifyHandlerFunc() http.HandlerFunc {
 
 	return func(w http.ResponseWriter, r *http.Request) {
 		defer r.Body.Close()
-		remoteIP, _, _ := net.SplitHostPort(r.RemoteAddr)
-		if xRealIP := r.Header.Get("X-Real-IP"); xRealIP != "" {
-			remoteIP = xRealIP
-		}
+		remoteIP := s.resolveRemoteIP(r)
 
 		out := &pageData{}
 

@@ -9,7 +9,6 @@ import (
 	"fmt"
 	"image/png"
 	"log"
-	"net"
 	"net/http"
 	"net/mail"
 	"strings"
@@ -85,10 +84,7 @@ func (s *Server) newSubmitHandlerFunc() http.HandlerFunc {
 
 	return func(w http.ResponseWriter, r *http.Request) {
 		defer r.Body.Close()
-		remoteIP, _, _ := net.SplitHostPort(r.RemoteAddr)
-		if xRealIP := r.Header.Get("X-Real-IP"); xRealIP != "" {
-			remoteIP = xRealIP
-		}
+		remoteIP := s.resolveRemoteIP(r)
 
 		s.verbosef("have request from remoteIP=%s origin=%s method=%s", remoteIP, r.Header.Get("Origin"), r.Method)
 

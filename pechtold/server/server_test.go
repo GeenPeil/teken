@@ -39,6 +39,7 @@ func TestServer(t *testing.T) {
 		Woonplaats:      "Woonplaats",
 		Handtekening:    handtekeningPNGBytes,
 		CaptchaResponse: "foobar",
+		Email:           "gjr19912@gmail.com",
 	}
 	handtekeningJSON, err := json.MarshalIndent(handtekening, "", "\t")
 	if err != nil {

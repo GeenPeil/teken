@@ -18,4 +18,6 @@ type Options struct {
 	HashingSalt string `long:"hashing-salt" description:"base-64 encoded hashing salt"`
 
 	SMTPServer string `long:"smtp-server" description:"smtp server to use" default:"localhost:25"`
+
+	APIKey string `long:"api-key" description:"api authentication key"`
 }

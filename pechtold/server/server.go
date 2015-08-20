@@ -6,6 +6,7 @@ import (
 	"encoding/base64"
 	"fmt"
 	"log"
+	"net"
 	"net/http"
 
 	_ "github.com/lib/pq" // import postgres driver (registers itself to database/sql)
@@ -57,6 +58,7 @@ func (s *Server) Run(setupDoneCh chan struct{}) {
 	http.HandleFunc("/pechtold/submit", s.newSubmitHandlerFunc())
 	http.HandleFunc("/pechtold/verify", s.newVerifyHandlerFunc())
 	http.HandleFunc("/pechtold/health-check", s.newHealthCheckHandlerFunc())
+	http.HandleFunc("/pechtold/api/stats", s.newAPIStatsHandlerFunc())
 
 	if setupDoneCh != nil {
 		close(setupDoneCh)
@@ -86,6 +88,14 @@ func (s *Server) setupDB() {
 
 func (s *Server) setupCaptcha() {
 	s.captcha = recaptcha.New(s.options.CaptchaSecret)
+}
+
+func (s *Server) resolveRemoteIP(r *http.Request) string {
+	remoteIP, _, _ := net.SplitHostPort(r.RemoteAddr)
+	if xRealIP := r.Header.Get("X-Real-IP"); xRealIP != "" {
+		remoteIP = xRealIP
+	}
+	return remoteIP
 }
 
 func (s *Server) verbosef(format string, args ...interface{}) {
