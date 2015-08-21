@@ -1,8 +1,25 @@
-<div {{action 'clicked'}} class="signature-preview">
-  <img class="signature-preview-image"  src={{formItem.value}}>
-</div>
 <br>
-<span>{{formItem.instruction}}</span>
+<span class="instruction">{{formItem.instruction}}</span>
+<br><br>
+<span class="explanation">{{formItem.explanation}}</span>
+<br>
+{{#if formItem.isValid}}
+  <br>
+  <div class="signature-preview">
+    <img class="signature-preview-image"  src={{formItem.value}}>
+  </div>
+{{/if}}
+
+<button class="sign-button" {{action 'clicked'}}>
+  {{#if formItem.isValid}}
+    Opnieuw zetten
+  {{else}}
+    Nu zetten
+  {{/if}}
+</button>
+
+
+{{!-- Pop-over editor --}}
 {{#if showEditor}}
   <div class="signature-editor">
     <div class="button-container">
@@ -10,6 +27,5 @@
       <button {{action 'clear'}}>Opnieuw</button>
     </div>
     <canvas id="can" width={{width}} height={{height}}></canvas>
-
   </div>
 {{/if}}

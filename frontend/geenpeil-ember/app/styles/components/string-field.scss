@@ -30,14 +30,22 @@
   &.error {
 
     input {
-      border: 2px solid red;
+      border: 3px solid red;
     }
 
   }
 
   .explanation {
+    display: inline-block;
     margin-left: 15px;
-    line-height: 35px;
+    margin-top: 7px;
+  }
+
+  .instruction {
+    color: red;
+    font-style: italic;
+    display: inline-block;
+    margin-top: 7px;
   }
 
 }
