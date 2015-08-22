@@ -43,7 +43,7 @@
                 "type" : "string",
                 "name" : "Eerste officiële voornaam",
                 "placeholder" : "vul in",
-                "instruction" : "Alleen letters. Maximaal 17 tekens.",
+                "instruction" : "Maximaal 17 tekens.",
                 "explanation" : "Kijk hiervoor op uw paspoort of identiteitskaart.",
                 "length" : 17,
                 "x" : 51,
