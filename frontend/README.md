@@ -12,6 +12,8 @@ Install the following on your system:
 3. (optional) Apache Cordova ( http://cordova.apache.org/docs/en/5.0.0//guide_cli_index.md.html#The%20Command-Line%20Interface )
 4. (optional) Android SDK
 
+Base Image:
+https://drive.google.com/open?id=0B3XfTcKvAVIQUmcwVXRZeURRUEU
 
 Go into the folder geenpeil-ember/ and run:
 
@@ -24,5 +26,3 @@ If everthing worked the web application is reachable on http://localhost:4200/
 
 
 //TODO - Cordova and Android instructions
-
-//TODO - create Vagrant box for the stack

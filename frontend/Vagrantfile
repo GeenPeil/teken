@@ -12,10 +12,23 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # Ember live reload port
   config.vm.network :forwarded_port, host: 35729, guest: 35729
 
-  # Configure VM hardware usage
-  config.vm.provider "virtualbox" do |v|
-    v.memory = 512
-    v.cpus = 1
+
+
+  # The development box builds on the base box
+  config.vm.define "dev" do |dev|
+    
+    # Specify the Vagrant box to build on
+    dev.vm.box = "geenpeil-base-1.box"
+    dev.vm.box_url = "geenpeil-base-1.box"
+
+    # Specify bootstrappings
+    dev.vm.provision :shell, path: "scripts/dev-provision.sh", privileged: false
+
+    # Configure VM hardware usage
+    config.vm.provider "virtualbox" do |v|
+      v.memory = 512
+    end
+
   end
 
   # The base box with all the required software installed
@@ -24,8 +37,16 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     # Specify the Vagrant box to build on
     base.vm.box = "ubuntu/trusty64"
 
-    # Specify bootstrapping
-    base.vm.provision :shell, path: "bootstrap.sh", privileged: false
+    # Specify bootstrappings
+    base.vm.provision :shell, path: "scripts/base-provision.sh", privileged: false
+
+    # Configure VM hardware usage
+    config.vm.provider "virtualbox" do |v|
+      # minimum 1024MB RAM 
+      v.memory = 1024
+      # consider increasing cpu count
+      v.cpus = 1
+    end
 
   end
 
