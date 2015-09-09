@@ -16,7 +16,8 @@
         },
 
         "text" : {
-          "home" : "300.000 handtekeningen op papier? Dat kan slimmer! Vul in de volgende vier schermen je gegevens in en teken digitaal. Wij verzorgen de verscheping naar de Kiesraad.",
+          "home1" : "300.000 handtekeningen op papier? Dat kan slimmer! Vul in de volgende vier schermen je gegevens in en teken digitaal. Wij verzorgen de verscheping naar de Kiesraad.",
+          "home2" : "Meer info over GEENPEIL? <a target=\"blank\" href=\"http://www.geenpeil.nl\">www.geenpeil.nl</a>",
           "disclaimer_intro1" : "Omdat dit serieuze zaken zijn, volgt nu een serieus stukje tekst. De disclaimer. Gaarne goed lezen als u wilt weten waar u aan moet voldoen en wat wij met uw gegevens doen [SPOILERALERT: zwaar beveiligen en alleen gebruiken om uw handtekening bij de Kiesraad te krijgen].",
           "disclaimer_intro2" : "PS bent u emigrant? Nederland in den vreemde? Dit online-formulier geldt niet voor u. Kijk in de FAQ op GeenPeil.nl wat u kunt doen om te tekenen.",
           "disclaimer_1" : "Door uw gegevens in te vullen steunt u het definitief verzoek tot het houden van een referendum over de volgende wet / het volgende verdrag:",
