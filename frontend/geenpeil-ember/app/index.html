@@ -25,12 +25,29 @@
 
     {{content-for 'head'}}
 
+    <!--CSS loading-->
     <link rel="stylesheet" type="text/css" href="assets/vendor.css">
     <link rel="stylesheet" type="text/css" href="assets/geenpeil.css">
+
+    <!--Modernizr-->
+    <script>
+      function onModernizrLoaded() {
+        //check for basic compatibility
+        if(!Modernizr.canvas) {
+          window.location.href = "ext/incompatible.html";
+        }
+      }
+    </script>
+    <script src="ext/modernizr.custom.20926.js"></script>
 
     {{content-for 'head-footer'}}
   </head>
   <body>
+
+    <script>
+    onModernizrLoaded();
+    </script>
+
     {{content-for 'body'}}
 
     <!--Cordova scripts-->
