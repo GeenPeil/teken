@@ -50,13 +50,13 @@ export default Ember.Component.extend({
       isValid = match && value.length <= maxLength;
     }
 
+    // fetch value
+    var tmp = this.get('value');
 
+    // auto replace separators
+    // tmp = this.separateValue(this.get('value'));
 
-    //
-    var tmp;
-
-    tmp = this.separateValue(this.get('value'));
-
+    // only upper case the value if it is not case sensitive
     if(!caseSensitive) {
       tmp = tmp.toUpperCase();
     }
