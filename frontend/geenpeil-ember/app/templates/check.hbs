@@ -11,6 +11,8 @@
   {{else}}
     <span>{{form.text.check}}</span>
     <br><br>
+    <button class="preview" {{action 'preview'}}>Voorbeeld</button>
+    <br><br>
 
     {{applicationController.model.form.map.voornaam.name}} : <br>
     <b>{{applicationController.model.form.map.voornaam.value}}</b>
@@ -70,7 +72,6 @@
       <button class="send float-right" {{action 'send'}}>Versturen</button>
     {{/if}}
 
-    <button class="preview float-right" {{action 'preview'}}>Voorbeeld</button>
   {{/if}}
 
 </div>
