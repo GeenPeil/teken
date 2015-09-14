@@ -1,7 +1,11 @@
 {{#if formItem.explanation}}
-  <span class="explanation">{{formItem.explanation}}</span>
+  <span class="explanation">{{{formItem.explanation}}}</span>
 {{/if}}
-{{input type=inputType autocomplete=formItem.autocomplete value=value placeholder=formItem.placeholder}}
+{{input type=inputType autocomplete=formItem.autocomplete value=value placeholder=formItem.placeholder maxlength=formItem.length}}
 {{#if showError}}
-  <span class="instruction">{{formItem.instruction}}</span>
+  <span class="instruction">{{{formItem.instruction}}}</span>
+  <br>
+{{/if}}
+{{#if showLengthWarning}}
+  {{{preferences.lengthWarningText}}}{{formItem.length}}.
 {{/if}}

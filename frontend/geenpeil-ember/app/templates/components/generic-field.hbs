@@ -1,9 +1,9 @@
 <span class="label">{{formItem.name}}</span>
 
 {{#if isStringField}}
-  {{string-field formItem=formItem}}
+  {{string-field formItem=formItem preferences=preferences}}
 {{/if}}
 
 {{#if isSignatureField}}
-  {{signature-field formItem=formItem}}
+  {{signature-field formItem=formItem preferences=preferences}}
 {{/if}}

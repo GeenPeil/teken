@@ -21,11 +21,13 @@ export default Ember.Component.extend({
     }
   }),
 
+  showLengthWarning : false,
+
   showError : Ember.computed('formItem.isValid','formItem.value.length', function() {
     var isValid = this.get('formItem.isValid'),
         value = this.get('formItem.value');
 
-    return !isValid && value.length > 0;
+    return isValid === undefined ? false : !isValid;
   }),
 
   formItemChanged : Ember.observer('formItem', function() {
@@ -41,14 +43,30 @@ export default Ember.Component.extend({
 
     //console.log('matched ',this.get('formItem._id'),value.match(regex));
 
+    // check the value against the regex
     var match = !!value.match(regex);
 
+    // if the regex does not match because there was no input
     if(!match && value.length === 0) {
+      // validity is kept or set as undefined
       isValid = undefined;
     }
     else {
+      // check that the length does not exceed the maximum
       isValid = match && value.length <= maxLength;
     }
+
+    // check if the value equals the maximum
+    var maxLengthReached = value.length === maxLength;
+    this.set('showLengthWarning',maxLengthReached);
+
+    // for fields that have 'display' (FIXME),
+    // check that input length matches to be valid
+    if(this.get('formItem.display')) {
+      isValid = maxLengthReached ? isValid : undefined;
+      this.set('showLengthWarning',false);
+    }
+
 
     // fetch value
     var tmp = this.get('value');
@@ -78,6 +96,7 @@ export default Ember.Component.extend({
       }
     }
 
+    console.log('isValid',isValid);
 
     //set all values
     this.set('formItem.isValid',isValid);

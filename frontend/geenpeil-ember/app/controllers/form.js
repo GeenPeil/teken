@@ -17,6 +17,10 @@ export default Ember.Controller.extend({
     return this.get('applicationController.model.form.sections.length');
   }),
 
+  preferences : Ember.computed('model.form', function() {
+    return this.get('applicationController.model.form.preferences');
+  }),
+
   formItems : Ember.computed('section', function() {
     return this.get('section').map(function(id) {
       return this.get('applicationController').formItemForId(id);
@@ -37,7 +41,7 @@ export default Ember.Controller.extend({
 
   noErrors : Ember.computed('formItems.@each.isValid', function() {
     var stopOnEmpty = this.get('applicationController.model.form.preferences.stopOnEmpty');
-    
+
     if(stopOnEmpty) {
       return this.get('formItems').findBy('isValid',false) === undefined && this.get('formItems').findBy('isValid',undefined) === undefined;
     }
@@ -75,7 +79,7 @@ export default Ember.Controller.extend({
         }
       }
       else {
-        alert('Niet alle velden zijn geldig. Kijk bij het veld wat er mis is met de invoer.');
+        alert('U moet alle velden geldig ingevuld hebben om verder te kunnen gaan.');
       }
 
     }
