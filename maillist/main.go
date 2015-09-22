@@ -37,8 +37,13 @@ func main() {
 				chIDs <- id
 			}
 			close(chIDs)
-		} else if flags.All {
-			for i := uint64(1); true; i++ {
+		} else if flags.All || flags.StartID != nil {
+			var startID = uint64(1)
+			if flags.StartID != nil {
+				startID = *flags.StartID
+			}
+			startPartition := (startID-1)/1000 + 1
+			for i := startPartition; true; i++ {
 				fmt.Printf("walking partition %04d\n", i)
 				handtekeningenIDList, err := fetcher.ListPartition(i)
 				if err != nil {
@@ -46,6 +51,9 @@ func main() {
 					break
 				}
 				for _, id := range handtekeningenIDList {
+					if id < startID {
+						continue
+					}
 					chIDs <- id
 				}
 			}

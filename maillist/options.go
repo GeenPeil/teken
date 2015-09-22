@@ -13,6 +13,7 @@ var flags struct {
 	Single    *uint64 `short:"s" long:"single" description:"Single handtekening to render"`
 	Partition *uint64 `short:"p" long:"partitie" description:"Partition of handtekeningen to render"`
 	All       bool    `short:"a" long:"all" description:"Get all mail addresses"`
+	StartID   *uint64 `long:"start-id" description:"Starting id for the scanning"`
 
 	StoragePrivkeyFile string `long:"storage-privkey-file" description:"storage private key" default:"../storage/testpriv.pem"` // TODO: remove default, make mandatory
 	StorageLocation    string `long:"storage-location" desciption:"storage location" default:"../storage/testdata"`             // TODO: remove default, make mandatory
@@ -60,8 +61,8 @@ func parseFlags() {
 	}
 
 	// required flags
-	if !flags.All && flags.Single == nil && flags.Partition == nil {
-		fmt.Println("Require either --single, --partition or --all flag to render a single or partition of handtekeningen to pdf.")
+	if !flags.All && flags.Single == nil && flags.Partition == nil && flags.StartID == nil {
+		fmt.Println("Require either --single, --partition, --all or --start-id flag to render a single or partition of handtekeningen to pdf.")
 		os.Exit(42)
 	}
 }
