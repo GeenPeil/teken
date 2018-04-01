@@ -4,14 +4,14 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/GeenPeil/teken/pechtold/server"
+	"github.com/GeenPeil/teken/cupido"
 
 	goflags "github.com/jessevdk/go-flags"
 )
 
 func main() {
 
-	flags := &server.Options{}
+	flags := &cupido.Options{}
 
 	parser := goflags.NewParser(flags, goflags.HelpFlag|goflags.PrintErrors)
 
@@ -40,6 +40,6 @@ func main() {
 		os.Exit(0)
 	}
 
-	s := server.New(flags)
+	s := cupido.New(flags)
 	s.Run(nil)
 }

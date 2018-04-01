@@ -1,4 +1,4 @@
-package server
+package cupido
 
 import (
 	"math/rand"

@@ -9,7 +9,7 @@ export default Ember.Route.extend({
       if(transition.targetName !== 'down') {
         return Ember.$.ajax({
           type : 'GET',
-          url: 'https://teken.geenpeil.nl/pechtold/health-check',
+          url: 'https://teken.geenpeil.nl/cupido/health-check',
           success : function(d) {
             console.log('health check success:',d);
           }.bind(this),

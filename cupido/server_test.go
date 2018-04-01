@@ -1,4 +1,4 @@
-package server
+package cupido
 
 import (
 	"bytes"
@@ -46,7 +46,7 @@ func TestServer(t *testing.T) {
 		t.Fatalf("error creating test JSON data: %v", err)
 	}
 
-	resp, err := http.Post("http://localhost:8080/pechtold/submit", "application/json", bytes.NewBuffer(handtekeningJSON))
+	resp, err := http.Post("http://localhost:8080/cupido/submit", "application/json", bytes.NewBuffer(handtekeningJSON))
 	if err != nil {
 		t.Fatalf("error making upload request: %v", err)
 	}

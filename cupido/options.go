@@ -1,4 +1,4 @@
-package server
+package cupido
 
 // Options is used to create a new server instance.
 // It's meant to be used with github.com/jessevdk/go-flags, but is seperated from the actual parsing to allow overrides in tests and benchmarks.

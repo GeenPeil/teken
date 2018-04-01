@@ -1,4 +1,4 @@
-package server
+package cupido
 
 //go:generate ffjson -nodecoder $GOFILE
 

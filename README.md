@@ -3,11 +3,11 @@
 
 [![Project structuur](docs/structuur.png)](https://raw.githubusercontent.com/GeenPeil/teken/master/docs/structuur.png)
 
-### pechtold - API server (http api, encryption, storage)
+### cupido - API server (http api, encryption, storage)
 
 #### API
 
-pechtold draait een HTTP API waarmee nieuwe handtekeningen kunnen worden opgeslagen op de server, om op een later tijdstip uitgeprint te worden.
+cupido draait een HTTP API waarmee nieuwe handtekeningen kunnen worden opgeslagen op de server, om op een later tijdstip uitgeprint te worden.
 
 Voor het opslaan van de gegevens is slechts een simpele HTTP POST call nodig, met in de body JSON data. De JSON data is een object met de volgende velden:
 
@@ -59,6 +59,6 @@ Om dubbele uploads te herkennen word er twee sha256 hashes gemaakt en opgeslagen
 Database structuur: *(`.dbm` file in docs is te bewerken met pgmodeler)*
 [![Database geenpeil](docs/database-geenpeil.png)](https://raw.githubusercontent.com/GeenPeil/teken/master/docs/database-geenpeil.png)
 
-### juncker - printing application (decryption, pdf rendering)
+### kantklosser - printing application (decryption, pdf rendering)
 
-juncker converteert encrypted data naar printbare pdf's. juncker verwacht daarbij dezelfde directory structure waarmee pechtold opslaat.
+kantklosser converteert encrypted data naar printbare pdf's. kantklosser verwacht daarbij dezelfde directory structure waarmee cupido opslaat.

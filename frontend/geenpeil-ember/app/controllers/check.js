@@ -42,7 +42,7 @@ export default Ember.Controller.extend({
       // Send the data
       Ember.$.ajax({
         type : 'POST',
-        url: 'https://teken.geenpeil.nl/pechtold/submit',
+        url: 'https://teken.geenpeil.nl/cupido/submit',
         data : JSON.stringify(message),
         contentType : 'application/json',
         error : function(e) {

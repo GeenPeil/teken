@@ -3,7 +3,7 @@
 // source: outputtypes.go
 // DO NOT EDIT!
 
-package server
+package cupido
 
 import (
 	fflib "github.com/pquerna/ffjson/fflib/v1"

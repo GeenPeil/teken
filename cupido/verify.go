@@ -1,4 +1,4 @@
-package server
+package cupido
 
 import (
 	"bytes"
@@ -32,7 +32,7 @@ var (
 			}
 			.logo{
 				display: inline-block;
-				background-image: url(/pechtold-static/geenpeillogo.png);
+				background-image: url(/cupido-static/geenpeillogo.png);
 				background-size: cover;
 				width: 55px;
 				height: 55px;
@@ -82,7 +82,7 @@ var (
 			<h1><div class="logo"></div><span class="logo-text">GEENPEIL</span></h1>
 			<h3>{{.Text}}</h3>
 			{{if .Verdrietig}}
-				<img src="/pechtold-static/verdrietig.jpg" />
+				<img src="/cupido-static/verdrietig.jpg" />
 			{{end}}
 			<br/>
 			<div class="geenpeil-share">

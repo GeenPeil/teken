@@ -1,4 +1,4 @@
-package server
+package cupido
 
 import (
 	"crypto/rand"
@@ -48,17 +48,17 @@ func New(o *Options) *Server {
 	return s
 }
 
-// Run is a forever blocking call that starts the pechtold server.
+// Run is a forever blocking call that starts the cupido server.
 // When setupDoneCh is not nil, it is closed by Run when most of the setup is done and the http server is started (blocking).
 func (s *Server) Run(setupDoneCh chan struct{}) {
 	s.setupDB()
 
 	s.setupCaptcha()
 
-	http.HandleFunc("/pechtold/submit", s.newSubmitHandlerFunc())
-	http.HandleFunc("/pechtold/verify", s.newVerifyHandlerFunc())
-	http.HandleFunc("/pechtold/health-check", s.newHealthCheckHandlerFunc())
-	http.HandleFunc("/pechtold/api/stats", s.newAPIStatsHandlerFunc())
+	http.HandleFunc("/cupido/submit", s.newSubmitHandlerFunc())
+	http.HandleFunc("/cupido/verify", s.newVerifyHandlerFunc())
+	http.HandleFunc("/cupido/health-check", s.newHealthCheckHandlerFunc())
+	http.HandleFunc("/cupido/api/stats", s.newAPIStatsHandlerFunc())
 
 	if setupDoneCh != nil {
 		close(setupDoneCh)
@@ -72,7 +72,7 @@ func (s *Server) Run(setupDoneCh chan struct{}) {
 
 func (s *Server) setupDB() {
 	var err error
-	s.db, err = sql.Open("postgres", fmt.Sprintf("host=%s sslmode=disable user=pechtold password=pechtold dbname=geenpeil", s.options.PostgresSocketLocation))
+	s.db, err = sql.Open("postgres", fmt.Sprintf("host=%s sslmode=disable user=cupido password=cupido dbname=geenpeil", s.options.PostgresSocketLocation))
 	if err != nil {
 		log.Fatalf("error setting up db conn (open): %v", err)
 	}

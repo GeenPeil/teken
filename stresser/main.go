@@ -10,8 +10,8 @@ import (
 	"sync"
 	"time"
 
+	"github.com/GeenPeil/teken/cupido/server"
 	"github.com/GeenPeil/teken/data"
-	"github.com/GeenPeil/teken/pechtold/server"
 )
 
 const workers = 800
@@ -56,7 +56,7 @@ func main() {
 					log.Fatalf("error creating test JSON data: %v", err)
 				}
 
-				resp, err := http.Post("http://localhost:8080/pechtold/submit", "application/json", bytes.NewBuffer(handtekeningJSON))
+				resp, err := http.Post("http://localhost:8080/cupido/submit", "application/json", bytes.NewBuffer(handtekeningJSON))
 				if err != nil {
 					log.Fatalf("error making upload request: %v", err)
 				}
