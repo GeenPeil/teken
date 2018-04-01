@@ -31,7 +31,7 @@ var (
 var (
 	mailFrom = (&mail.Address{
 		Name:    "GeenPeil verificatie",
-		Address: "no-reply@teken.geenpeil.nl",
+		Address: "no-reply@teken.hartvoordemocratie.nl",
 	}).String()
 	mailSubject = "GeenPeil verificatie mail"
 )
@@ -276,7 +276,7 @@ func (s *Server) newSubmitHandlerFunc() http.HandlerFunc {
 			// send mail
 			md := &mailData{
 				Naam:            toNaam,
-				VerificatieLink: fmt.Sprintf("https://teken.geenpeil.nl/cupido/verify?mailhash=%s&check=%s", base64.URLEncoding.EncodeToString(mailHashBytes), mailCheck),
+				VerificatieLink: fmt.Sprintf("https://teken.hartvoordemocratie.nl/cupido/verify?mailhash=%s&check=%s", base64.URLEncoding.EncodeToString(mailHashBytes), mailCheck),
 			}
 			var bodyBuf = &bytes.Buffer{}
 			err = tmplVerificationMailPlainText.Execute(bodyBuf, md)

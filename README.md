@@ -1,5 +1,5 @@
 
-## teken.geenpeil.nl
+## teken.hartvoordemocratie.nl
 
 [![Project structuur](docs/structuur.png)](https://raw.githubusercontent.com/GeenPeil/teken/master/docs/structuur.png)
 

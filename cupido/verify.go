@@ -88,9 +88,9 @@ var (
 			<div class="geenpeil-share">
 				<span class="share-title">Help en <b>DEEL GEENPEIL</b> met iedereen!</span>
 				<br/>
-				<a title="Deel op Facebook" class="share-button facebook fa fa-facebook-official" href="https://www.facebook.com/sharer/sharer.php?u=teken.geenpeil.nl" onclick="return shareLink(this);"></a>
-				<a title="Deel op Twitter" class="share-button twitter fa fa-twitter-square" href="https://twitter.com/home?status=Ik heb getekend! Red de democratie en teken ook op https%3A%2F%2Fteken.geenpeil.nl %23geenpeil" onclick="return shareLink(this);"></a>
-				<a title="Deel op Google+" class="share-button googleplus fa fa-google-plus-square" href="https://plus.google.com/share?url=www.geenpeil.nl" onclick="return shareLink(this);"></a>
+				<a title="Deel op Facebook" class="share-button facebook fa fa-facebook-official" href="https://www.facebook.com/sharer/sharer.php?u=teken.hartvoordemocratie.nl" onclick="return shareLink(this);"></a>
+				<a title="Deel op Twitter" class="share-button twitter fa fa-twitter-square" href="https://twitter.com/home?status=Ik heb getekend! Red de democratie en teken ook op https%3A%2F%2Fteken.hartvoordemocratie.nl %23geenpeil" onclick="return shareLink(this);"></a>
+				<a title="Deel op Google+" class="share-button googleplus fa fa-google-plus-square" href="https://plus.google.com/share?url=www.hartvoordemocratie.nl" onclick="return shareLink(this);"></a>
 				</div>
 		</center>
 	</body>
