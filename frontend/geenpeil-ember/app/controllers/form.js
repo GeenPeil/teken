@@ -1,37 +1,39 @@
-import Ember from 'ember';
+import Controller from '@ember/controller';
+import { inject } from '@ember/controller';
+import { computed } from '@ember/object';
 
-export default Ember.Controller.extend({
+export default Controller.extend({
 
-  applicationController: Ember.inject.controller('application'),
+  applicationController: inject('application'),
 
   /*
   * Section handling
   */
 
-  section : Ember.computed('sectionNumber', function() {
+  section : computed('sectionNumber', function() {
     var sectionNumber = this.get('sectionNumber');
     return this.get('applicationController').getSection(sectionNumber-1);
   }),
 
-  totalSections : Ember.computed('', function() {
+  totalSections : computed('', function() {
     return this.get('applicationController.model.form.sections.length');
   }),
 
-  preferences : Ember.computed('model.form', function() {
+  preferences : computed('model.form', function() {
     return this.get('applicationController.model.form.preferences');
   }),
 
-  formItems : Ember.computed('section', function() {
+  formItems : computed('section', function() {
     return this.get('section').map(function(id) {
       return this.get('applicationController').formItemForId(id);
     }.bind(this));
   }),
 
-  isFirstSection : Ember.computed('sectionNumber', function() {
+  isFirstSection : computed('sectionNumber', function() {
     return this.get('sectionNumber') === 1;
   }),
 
-  isLastSection : Ember.computed('sectionNumber', function() {
+  isLastSection : computed('sectionNumber', function() {
     return this.get('sectionNumber') === this.get('totalSections');
   }),
 
@@ -39,7 +41,7 @@ export default Ember.Controller.extend({
   * Input validation
   */
 
-  noErrors : Ember.computed('formItems.@each.isValid', function() {
+  noErrors : computed('formItems.@each.isValid', function() {
     var stopOnEmpty = this.get('applicationController.model.form.preferences.stopOnEmpty');
 
     if(stopOnEmpty) {

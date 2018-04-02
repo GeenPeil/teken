@@ -1,10 +1,14 @@
-import Ember from 'ember';
+import Component from '@ember/component';
+import { computed } from '@ember/object';
+import { htmlSafe } from '@ember/string';
 
-export default Ember.Component.extend({
+export default Component.extend({
+
+  attributeBindings: ['style'],
 
   classNames : ['generic-display'],
 
-  isStringField : Ember.computed('formItem.type',function() {
+  isStringField : computed('formItem.type',function() {
     var type = this.get('formItem.type');
 
     switch(type) {
@@ -18,13 +22,14 @@ export default Ember.Component.extend({
     }
   }),
 
-  isSignatureField : Ember.computed('formItem.type',function() {
+  isSignatureField : computed('formItem.type',function() {
     return this.get('formItem.type') === 'signature';
   }),
 
-  onDidInsertElement : Ember.on('didInsertElement', function() {
-    this.$().css({ top: this.get('formItem.y') });
-    this.$().css({ left: this.get('formItem.x') });
+  style : computed('formItem', function() {
+    let x = this.get('formItem.x');
+    let y = this.get('formItem.y');
+    return htmlSafe(`top: ${y}px; left: ${x}px;`)
   })
 
 });

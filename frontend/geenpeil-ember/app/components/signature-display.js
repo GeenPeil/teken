@@ -1,15 +1,20 @@
-import Ember from 'ember';
+import Component from '@ember/component';
+import { computed } from '@ember/object';
+import { htmlSafe } from '@ember/string';
 
-export default Ember.Component.extend({
+export default Component.extend({
 
   classNames : ['signature-display'],
 
   tagName : 'div',
 
-  onDidInsertElement : Ember.on('didInsertElement', function() {
-    this.$().css({ width: this.get('formItem.width') });
-    this.$().css({ height: this.get('formItem.height') });
-    this.$().css( 'background-image','url(' + this.get('formItem.value') + ')' );
+  attributeBindings: ['style'],
+
+  style : computed('formItem', function() {
+    let width = this.get('formItem.width');
+    let height = this.get('formItem.height');
+    let backgroundImage = this.get('formItem.value');
+    return htmlSafe(`width: ${width}px; height: ${height}px; background-image: url(${backgroundImage});`)
   })
 
 });

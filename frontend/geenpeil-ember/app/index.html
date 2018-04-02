@@ -18,16 +18,11 @@
     <meta name="twitter:title" content="GEENPEIL | Red de democratie!">
     <meta name="twitter:description" content="We hebben 300.000 handtekeningen nodig om een officieel referendum aan te vragen. Dus dat gaan we doen. Met jouw hulp. Zet je handtekening via deze app!">
 
-    <!--Cordova headers-->
-    <meta name="format-detection" content="telephone=no">
-    <meta name="msapplication-tap-highlight" content="no">
-    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
-
     {{content-for 'head'}}
 
     <!--CSS loading-->
-    <link rel="stylesheet" type="text/css" href="assets/vendor.css">
-    <link rel="stylesheet" type="text/css" href="assets/geenpeil.css">
+    <link rel="stylesheet" href="assets/vendor.css">
+    <link rel="stylesheet" href="assets/geenpeil.css">
 
     <!--Modernizr-->
     <script>
@@ -50,15 +45,12 @@
 
     {{content-for 'body'}}
 
-    <!--Cordova scripts-->
-    <!--<script type="text/javascript" src="cordova.js"></script>-->
-
-    <!--Ember scripts-->
-    <script type="text/javascript" src="assets/vendor.js"></script>
-    <script type="text/javascript" src="assets/geenpeil.js"></script>
-
     <!-- Google reCAPTCHA -->
     <script src='https://www.google.com/recaptcha/api.js?render=explicit&hl=nl'></script>
+
+    <!--Ember scripts-->
+    <script src="assets/vendor.js"></script>
+    <script src="assets/geenpeil.js"></script>
 
     <!-- Google Analytics -->
     <script>

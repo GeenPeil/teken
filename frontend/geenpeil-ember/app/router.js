@@ -1,27 +1,26 @@
-import Ember from 'ember';
+import EmberRouter from '@ember/routing/router';
 import config from './config/environment';
 
-var Router = Ember.Router.extend({
+const Router = EmberRouter.extend({
   location: config.locationType
 });
 
 Router.map(function() {
-  this.resource('home', { path: '/' });
+  this.route('home', { path: '/' });
 
-  this.resource('share', { path: '/delen' });
+  this.route('share', { path: '/delen' });
 
-  this.resource('disclaimer', { path: '/voorwaarden' });
+  this.route('disclaimer', { path: '/voorwaarden' });
 
-  this.resource('form', { path: '/formulier/:section' });
+  this.route('form', { path: '/formulier/:section' });
 
-  this.resource('check', { path: '/controleren' });
+  this.route('check', { path: '/controleren' });
 
-  this.resource('preview', { path: '/voorbeeld' });
+  this.route('preview', { path: '/voorbeeld' });
 
-  this.resource('complete', { path: '/klaar' });
+  this.route('complete', { path: '/klaar' });
 
-  this.resource('down', { path: '/kapot' });
+  this.route('down', { path: '/kapot' });
 });
-
 
 export default Router;

@@ -1,10 +1,11 @@
-import Ember from 'ember';
+import Component from '@ember/component';
+import { computed } from '@ember/object';
 
-export default Ember.Component.extend({
+export default Component.extend({
 
   classNames : ['generic-field'],
 
-  isStringField : Ember.computed('formItem.type',function() {
+  isStringField : computed('formItem.type',function() {
     var type = this.get('formItem.type');
 
     switch(type) {
@@ -19,7 +20,7 @@ export default Ember.Component.extend({
     }
   }),
 
-  isSignatureField : Ember.computed('formItem.type',function() {
+  isSignatureField : computed('formItem.type',function() {
     return this.get('formItem.type') === 'signature';
   })
 
