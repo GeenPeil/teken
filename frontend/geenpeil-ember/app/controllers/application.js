@@ -1,20 +1,22 @@
-import Ember from 'ember';
+import Controller from '@ember/controller';
+import Object from '@ember/object';
+import { observer } from '@ember/object';
 
-export default Ember.Controller.extend({
+export default Controller.extend({
 
   model : null,
 
-  onInit : Ember.on('init', function() {
-    this.set('formData',Ember.Object.create());
+  onInit : function() {
+    this.set('formData',Object.create());
 
     window.onbeforeunload = function() {
       if(!this.get('model.form.sent')) {
           return "Als u de pagina verlaat of herlaad worden de door u tot nu toe ingevulde gegevens gewist. Bevestig om nu te wissen.";
       }
     }.bind(this);
-  }),
+  },
 
-  onModelChanged : Ember.observer('model', function() {
+  onModelChanged : observer('model', function() {
     var formMap = {};
     this.get('model.form.fields').forEach(function(field) {
       formMap[field._id] = field;
