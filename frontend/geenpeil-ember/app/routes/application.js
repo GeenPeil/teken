@@ -1,20 +1,19 @@
-import Ember from 'ember';
+import Route from '@ember/routing/route';
+import Object from '@ember/object';
+import $ from 'jquery';
 
-export default Ember.Route.extend({
+export default Route.extend({
 
     healthy : true,
 
     beforeModel : function(transition) {
-      // console.log('Application beforeModel',transition);
       if(transition.targetName !== 'down') {
-        return Ember.$.ajax({
+        return $.ajax({
           type : 'GET',
           url: 'https://teken.geenpeil.nl/pechtold/health-check',
-          success : function(d) {
-            console.log('health check success:',d);
+          success : function() {
           }.bind(this),
-          error : function(e) {
-            console.log('health check error:',e);
+          error : function() {
             this.set('healthy',false);
             this.transitionTo('down');
           }.bind(this)
@@ -23,11 +22,11 @@ export default Ember.Route.extend({
     },
 
     model : function() {
-      return Ember.$.ajax({
+      return $.ajax({
         type : 'GET',
         url: 'form.json',
-        error : function(e) {
-          console.error('no form data:',e);
+        error : function() {
+          // TODO - unhandled
         }
       });
     },
@@ -46,7 +45,7 @@ export default Ember.Route.extend({
         model = JSON.parse(model);
       }
 
-      controller.set('model',Ember.Object.create(model));
+      controller.set('model',Object.create(model));
     }
 
 });

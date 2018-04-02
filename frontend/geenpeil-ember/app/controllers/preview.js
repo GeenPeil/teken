@@ -1,8 +1,10 @@
-import Ember from 'ember';
+import Controller from '@ember/controller';
+import { inject } from '@ember/controller';
+import { computed } from '@ember/object';
 
-export default Ember.Controller.extend({
+export default Controller.extend({
 
-  applicationController: Ember.inject.controller('application'),
+  applicationController: inject('application'),
 
   model : null,
 
@@ -14,19 +16,19 @@ export default Ember.Controller.extend({
 
   },
 
-  properties : Ember.computed('model.form', function() {
+  properties : computed('model.form', function() {
     return this.get('model.form.properties');
   }),
 
-  containerWidth : Ember.computed('model.form.properties.width', function() {
+  containerWidth : computed('model.form.properties.width', function() {
     return 'width: '+this.get('properties.width')+'px;';
   }),
 
-  formImage : Ember.computed('',function() {
+  formImage : computed('',function() {
     return 'ext/'+this.get('applicationController').get('model.form.properties.filename');
   }),
 
-  completedFormItems : Ember.computed('',function() {
+  completedFormItems : computed('',function() {
     return this.get('applicationController').get('model.form.fields');
   })
 });

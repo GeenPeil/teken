@@ -1,6 +1,10 @@
-import Ember from 'ember';
+import Component from '@ember/component';
+import { computed } from '@ember/object';
+import { observer } from '@ember/object';
+import { run } from '@ember/runloop';
+import $ from 'jquery';
 
-export default Ember.Component.extend({
+export default Component.extend({
 
   classNames : ['signature-field'],
 
@@ -10,11 +14,11 @@ export default Ember.Component.extend({
 
   scale : 1.0,
 
-  canvas : Ember.computed('showEditor', function() {
+  canvas : computed('showEditor', function() {
     return document.getElementById('can'); //FIXME - ugly
   }),
 
-  ctx : Ember.computed('canvas', function() {
+  ctx : computed('canvas', function() {
     return this.get('canvas').getContext("2d");
   }),
 
@@ -58,7 +62,7 @@ export default Ember.Component.extend({
     return m;
   },
 
-  onValueChanged : Ember.observer('formItem.value', function() {
+  onValueChanged : observer('formItem.value', function() {
     var value = this.get('formItem.value');
     if(value) {
       var imageElement = this.$('.image-preview');
@@ -68,18 +72,18 @@ export default Ember.Component.extend({
     }
   }),
 
-  onShowEditor : Ember.observer('showEditor', function() {
+  onShowEditor : observer('showEditor', function() {
     if(this.get('showEditor')) {
-      Ember.run.next(this,function() {
+      run.next(this,function() {
         window.scrollTo(0,0);
         this.setupCanvas();
-        Ember.$('body').addClass('noScroll');
-        Ember.$('body').bind('touchmove', function(e){e.preventDefault()});
+        $('body').addClass('noScroll');
+        $('body').bind('touchmove', function(e){e.preventDefault()});
       }.bind(this),1);
     }
     else {
-      Ember.$('body').removeClass('noScroll');
-      Ember.$('body').unbind('touchmove');
+      $('body').removeClass('noScroll');
+      $('body').unbind('touchmove');
     }
   }),
 
@@ -90,12 +94,12 @@ export default Ember.Component.extend({
     // Measure the width of the screen
     var baseWidth = this.get('width');
     var maxScale  = 2.0;
-    var actualWidth = Ember.$(window).width();
+    var actualWidth = $(window).width();
 
     var scale = (actualWidth / baseWidth) * 0.90;
     scale = scale > maxScale ? maxScale : scale;
     this.set('scale');
-    Ember.$(canvas).css('transform', 'scale(' + scale + ')');
+    $(canvas).css('transform', 'scale(' + scale + ')');
 
     // Apply existing image if found
     var imageUrl = this.get('formItem.value');

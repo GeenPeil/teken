@@ -1,10 +1,12 @@
-import Ember from 'ember';
+import Component from '@ember/component';
+import { computed } from '@ember/object';
+import { htmlSafe } from '@ember/string';
 
-export default Ember.Component.extend({
+export default Component.extend({
 
   classNames : ['string-display'],
 
-  parts : Ember.computed('forItem',function() {
+  parts : computed('forItem',function() {
     var value = this.get('formItem.value'),
         display = this.get('formItem.display'),
         properties = this.get('properties');
@@ -23,7 +25,7 @@ export default Ember.Component.extend({
 
         valueParts.push({
           value : s,
-          style : "position:absolute; left:"+xOffset+"px;"
+          style : htmlSafe(`position:absolute; left:${xOffset}px;`)
         });
 
         endIndex += 1;

@@ -1,10 +1,12 @@
-import Ember from 'ember';
+import Controller from '@ember/controller';
+import { inject } from '@ember/controller';
+import { computed } from '@ember/object';
 
-export default Ember.Controller.extend({
+export default Controller.extend({
 
-  applicationController: Ember.inject.controller('application'),
+  applicationController: inject('application'),
 
-  form : Ember.computed('', function() {
+  form : computed('', function() {
     return this.get('applicationController').get('model.form');
   })
 

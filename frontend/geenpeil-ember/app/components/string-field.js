@@ -1,19 +1,20 @@
-import Ember from 'ember';
+import Component from '@ember/component';
+import { computed } from '@ember/object';
+import { observer } from '@ember/object';
 
-export default Ember.Component.extend({
+export default Component.extend({
 
   classNames : ['string-field'],
 
   classNameBindings: ['showError:error','formItem.case-sensitive:case-sensitive'],
 
-  inputType : Ember.computed('formItem.type', function() {
+  inputType : computed('formItem.type', function() {
     var type = this.get('formItem.type');
 
     switch(type) {
 
       case('email') :
         return 'email';
-        break;
       case('string') :
       case('date') :
       default :
@@ -23,25 +24,26 @@ export default Ember.Component.extend({
 
   showLengthWarning : false,
 
-  showError : Ember.computed('formItem.isValid','formItem.value.length', function() {
-    var isValid = this.get('formItem.isValid'),
-        value = this.get('formItem.value');
+  showError : computed('formItem.{isValid,value.length}', function() {
+    var isValid = this.get('formItem.isValid')
 
     return isValid === undefined ? false : !isValid;
   }),
 
-  formItemChanged : Ember.observer('formItem', function() {
-    this.set('value',this.get('formItem.value') || "");
+  didInsertElement: function() {
+    this.recalculateValues();
+  },
+
+  valueChanged : observer('formItem.value', function() {
+    this.recalculateValues();
   }),
 
-  valueChanged : Ember.observer('value', function() {
-    var value = this.get('value'),
+  recalculateValues: function() {
+    var value = this.get('formItem.value') || "",
         maxLength = this.get('formItem.length'),
         caseSensitive = this.get('formItem.case-sensitive'),
         regex = new RegExp(this.get('formItem.regex'), "i"),
         isValid = false;
-
-    //console.log('matched ',this.get('formItem._id'),value.match(regex));
 
     // check the value against the regex
     var match = !!value.match(regex);
@@ -67,9 +69,8 @@ export default Ember.Component.extend({
       this.set('showLengthWarning',false);
     }
 
-
     // fetch value
-    var tmp = this.get('value');
+    var tmp = value;
 
     // auto replace separators
     // tmp = this.separateValue(this.get('value'));
@@ -96,13 +97,10 @@ export default Ember.Component.extend({
       }
     }
 
-    console.log('isValid',isValid);
-
     //set all values
     this.set('formItem.isValid',isValid);
-    this.set('value',tmp);
     this.set('formItem.value',tmp);
-  }),
+  },
 
   separateValue : function(s) {
     var display = this.get('formItem.display');
