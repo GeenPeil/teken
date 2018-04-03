@@ -25,6 +25,7 @@
 }
 
 .logo-text {
+  margin-left: 0.5em;
 }
 
 .fixed-header {
@@ -33,10 +34,15 @@
   background-color: $backgroundColor;
   box-shadow: 0px 1px 5px 3px rgba(0,0,0,0.3);
 
-  .close {
-    position:absolute;
-    top:35px;
-    right:30px;
+  .cupido-heading {
+    margin-bottom: 0;
+  }
+
+  .close-preview {
+    margin: 0;
+    position: absolute;
+    top: 18px;
+    right: 10px;
   }
 
 }
@@ -50,4 +56,14 @@
   top: 150px;
   box-shadow: 0px 0px 13px 6px rgba(0,0,0,0.3);
 
+}
+
+.row {
+  padding: 20px;
+}
+
+.consent {
+  margin: 1em;
+  padding: 0.5em;
+  border: 1px solid black;
 }

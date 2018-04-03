@@ -8,6 +8,8 @@ export default Controller.extend({
 
   form : computed('', function() {
     return this.get('applicationController').get('model.form');
-  })
+  }),
+
+  consent : false
 
 });

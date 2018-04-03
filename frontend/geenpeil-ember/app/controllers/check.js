@@ -43,9 +43,10 @@ export default Controller.extend({
       message['handtekening'] = message['handtekening'].replace(/^data:image\/(png|jpg);base64,/, "");
 
       // Send the data
+      var submitUrl = this.get('applicationController').get('model.form.properties.submitUrl')
       $.ajax({
         type : 'POST',
-        url: 'https://teken.hartvoordemocratie.nl/cupido/submit',
+        url: submitUrl,
         data : JSON.stringify(message),
         contentType : 'application/json',
         error : function() {

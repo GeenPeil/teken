@@ -1,11 +1,13 @@
 <div class="fixed-header">
-  <h1>Voorbeeld</h1>
-  <button class="close float-right" {{action 'close'}}>Sluiten</button>
+  <h1 class="cupido-heading">
+    Voorbeeld
+  </h1>
+  <button class="close-preview float-right" {{action 'close'}}>Sluiten</button>
 </div>
 
 <div style={{containerWidth}} class="preview-container fixed-header-content">
 
-  <img class="preview-form-image" src={{formImage}}>
+  <img class="preview-form-image" src="ext/33506-inleidend.png">
 
   {{#each completedFormItems as |formItem|}}
 
