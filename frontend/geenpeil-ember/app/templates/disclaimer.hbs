@@ -21,7 +21,16 @@
   <span>{{form.text.disclaimer_6}}</span>
 </div>
 
+<div class="content-block consent">
+  <div>
+    Door het aanvinken van het onderstaande veld gaat u akkoord met deze voorwaarden en de <a href="https://hartvoordemocratie.nl/privacy.html">Privacyverklaring</a>.
+  </div>
+  <label>{{input type="checkbox" checked=consent}}Ik ga akkoord</label>
+</div>
+
 <div class="content-block button-nav">
   <button class="decline" {{action 'decline'}}>Terug</button>
-  <button class="accept float-right" {{action 'accept'}}>Akkoord</button>
+  {{#if consent}}
+    <button class="accept float-right" {{action 'accept'}}>Verder</button>
+  {{/if}}
 </div>
