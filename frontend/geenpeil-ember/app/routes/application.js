@@ -7,19 +7,19 @@ export default Route.extend({
     healthy : true,
 
     beforeModel : function(transition) {
-      if(transition.targetName !== 'down') {
-        return $.ajax({
-          type : 'GET',
-          url: 'https://teken.geenpeil.nl/cupido/health-check',
-          success : function(d) {
-            console.log('health check success:',d);
-          }.bind(this),
-          error : function() {
-            this.set('healthy',false);
-            this.transitionTo('down');
-          }.bind(this)
-        });
-      }
+      // if(transition.targetName !== 'down') {
+      //   return $.ajax({
+      //     type : 'GET',
+      //     url: 'https://teken.geenpeil.nl/cupido/health-check',
+      //     success : function(d) {
+      //       console.log('health check success:',d);
+      //     }.bind(this),
+      //     error : function() {
+      //       // this.set('healthy',false);
+      //       // this.transitionTo('down');
+      //     }.bind(this)
+      //   });
+      // }
     },
 
     model : function() {
