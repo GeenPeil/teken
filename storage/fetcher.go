@@ -38,7 +38,6 @@ func NewFetcher(privkeyFilename string, datapath string) (*Fetcher, error) {
 	if err != nil {
 		return nil, err
 	}
-
 	block, _ := pem.Decode([]byte(privkeyPem))
 	rsaPriv, err := x509.ParsePKCS1PrivateKey(block.Bytes)
 	if err != nil {
