@@ -56,7 +56,9 @@ func (s *Server) Run(setupDoneCh chan struct{}) {
 	s.setupCaptcha()
 
 	http.HandleFunc("/cupido/submit", s.newSubmitHandlerFunc())
-	http.HandleFunc("/cupido/verify", s.newVerifyHandlerFunc())
+	if !s.options.DisableMailVerification {
+		http.HandleFunc("/cupido/verify", s.newVerifyHandlerFunc())
+	}
 	http.HandleFunc("/cupido/health-check", s.newHealthCheckHandlerFunc())
 	http.HandleFunc("/cupido/api/stats", s.newAPIStatsHandlerFunc())
 
@@ -72,7 +74,7 @@ func (s *Server) Run(setupDoneCh chan struct{}) {
 
 func (s *Server) setupDB() {
 	var err error
-	s.db, err = sql.Open("postgres", fmt.Sprintf("host=%s sslmode=disable user=cupido password=cupido dbname=geenpeil", s.options.PostgresSocketLocation))
+	s.db, err = sql.Open("postgres", fmt.Sprintf("host=%s sslmode=disable dbname=teken", s.options.PostgresSocketLocation))
 	if err != nil {
 		log.Fatalf("error setting up db conn (open): %v", err)
 	}

@@ -14,7 +14,7 @@ var (
 	tmplResultaat = template.Must(template.New("plain").Parse(`<!DOCTYPE html>
 <html>
 	<head>
-		<title>GeenPeil verificatie</title>
+		<title>Referendum verificatie</title>
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 		<link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
 		<script>
@@ -32,7 +32,7 @@ var (
 			}
 			.logo{
 				display: inline-block;
-				background-image: url(/cupido-static/geenpeillogo.png);
+				background-image: url(/cupido-static/hvdlogo.png);
 				background-size: cover;
 				width: 55px;
 				height: 55px;
@@ -42,7 +42,7 @@ var (
 				margin-bottom: 35px;
 				vertical-align: middle;
 			}
-			.geenpeil-share {
+			.hvd-share {
 				background-color: white;
 				display: inline-block;
 				padding: 7px;
@@ -51,46 +51,46 @@ var (
 				border-radius: 4px;
 				text-align: center;
 			}
-			.geenpeil-share .share-button {
+			.hvd-share .share-button {
 				transition: all 0.3s ease;
 				font-size: 40px;
 				margin: 4px;
 				text-decoration: none;
 				text-shadow: 2px 2px 2px #ccc;
 			}
-			.geenpeil-share .share-title {
+			.hvd-share .share-title {
 				color: black;
 				display: inline-block;
 				margin: 5px;
 			}
-			.geenpeil-share .share-button:hover {
+			.hvd-share .share-button:hover {
 				text-shadow: 3px 3px 5px #bbb;
 			}
-			.geenpeil-share .share-button.facebook {
+			.hvd-share .share-button.facebook {
 				color: #395693;
 			}
-			.geenpeil-share .share-button.twitter {
+			.hvd-share .share-button.twitter {
 				color: #39a9e0;
 			}
-			.geenpeil-share .share-button.googleplus {
+			.hvd-share .share-button.googleplus {
 				color: #d14836;
 			}
 		</style>
 	</head>
 	<body>
 		<center>
-			<h1><div class="logo"></div><span class="logo-text">GEENPEIL</span></h1>
+			<h1><div class="logo"></div><span class="logo-text">Hart voor Democratie</span></h1>
 			<h3>{{.Text}}</h3>
 			{{if .Verdrietig}}
 				<img src="/cupido-static/verdrietig.jpg" />
 			{{end}}
 			<br/>
-			<div class="geenpeil-share">
-				<span class="share-title">Help en <b>DEEL GEENPEIL</b> met iedereen!</span>
+			<div class="hvd-share">
+				<span class="share-title">Help en <b>deel Hart voor Democratie</b> met iedereen!</span>
 				<br/>
-				<a title="Deel op Facebook" class="share-button facebook fa fa-facebook-official" href="https://www.facebook.com/sharer/sharer.php?u=teken.hartvoordemocratie.nl" onclick="return shareLink(this);"></a>
-				<a title="Deel op Twitter" class="share-button twitter fa fa-twitter-square" href="https://twitter.com/home?status=Ik heb getekend! Red de democratie en teken ook op https%3A%2F%2Fteken.hartvoordemocratie.nl %23geenpeil" onclick="return shareLink(this);"></a>
-				<a title="Deel op Google+" class="share-button googleplus fa fa-google-plus-square" href="https://plus.google.com/share?url=www.hartvoordemocratie.nl" onclick="return shareLink(this);"></a>
+				<a title="Deel op Facebook" class="share-button facebook fa fa-facebook-official" href="https://www.facebook.com/sharer/sharer.php?u=referendum.nl" onclick="return shareLink(this);"></a>
+				<a title="Deel op Twitter" class="share-button twitter fa fa-twitter-square" href="https://twitter.com/home?status=Ik heb getekend! Red de democratie en teken ook op https%3A%2F%.nl %23referendum" onclick="return shareLink(this);"></a>
+				<a title="Deel op Google+" class="share-button googleplus fa fa-google-plus-square" href="https://plus.google.com/share?url=referendum.nl" onclick="return shareLink(this);"></a>
 				</div>
 		</center>
 	</body>

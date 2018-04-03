@@ -30,10 +30,10 @@ var (
 )
 var (
 	mailFrom = (&mail.Address{
-		Name:    "GeenPeil verificatie",
-		Address: "no-reply@teken.hartvoordemocratie.nl",
+		Name:    "Referendum verificatie",
+		Address: "no-reply@referendum.nl",
 	}).String()
-	mailSubject = "GeenPeil verificatie mail"
+	mailSubject = "Referendum verificatie mail"
 )
 
 var (
@@ -272,36 +272,40 @@ func (s *Server) newSubmitHandlerFunc() http.HandlerFunc {
 				return
 			}
 
-			toNaam := fmt.Sprintf("%s %s %s", strings.Title(strings.ToLower(h.Voornaam)), strings.ToLower(h.Tussenvoegsel), strings.Title(strings.ToLower(h.Achternaam)))
-			// send mail
-			md := &mailData{
-				Naam:            toNaam,
-				VerificatieLink: fmt.Sprintf("https://teken.hartvoordemocratie.nl/cupido/verify?mailhash=%s&check=%s", base64.URLEncoding.EncodeToString(mailHashBytes), mailCheck),
-			}
-			var bodyBuf = &bytes.Buffer{}
-			err = tmplVerificationMailPlainText.Execute(bodyBuf, md)
-			if err != nil {
-				log.Printf("error executing tmplVerificationMailPlainText: %v", err)
-				http.Error(w, "server error", http.StatusInternalServerError)
-				return
-			}
+			if s.options.DisableMailVerification {
+				goto Response
+			} else {
+				toNaam := fmt.Sprintf("%s %s %s", strings.Title(strings.ToLower(h.Voornaam)), strings.ToLower(h.Tussenvoegsel), strings.Title(strings.ToLower(h.Achternaam)))
+				// send mail
+				md := &mailData{
+					Naam:            toNaam,
+					VerificatieLink: fmt.Sprintf("https://referendum.nl/cupido/verify?mailhash=%s&check=%s", base64.URLEncoding.EncodeToString(mailHashBytes), mailCheck),
+				}
+				var bodyBuf = &bytes.Buffer{}
+				err = tmplVerificationMailPlainText.Execute(bodyBuf, md)
+				if err != nil {
+					log.Printf("error executing tmplVerificationMailPlainText: %v", err)
+					http.Error(w, "server error", http.StatusInternalServerError)
+					return
+				}
 
-			mailTo := (&mail.Address{
-				Name:    toNaam,
-				Address: h.Email,
-			}).String()
+				mailTo := (&mail.Address{
+					Name:    toNaam,
+					Address: h.Email,
+				}).String()
 
-			mailMessage := gomail.NewMessage()
-			mailMessage.SetHeader("From", mailFrom)
-			mailMessage.SetHeader("To", mailTo)
-			mailMessage.SetHeader("Subject", mailSubject)
-			mailMessage.SetBody("text/plain", bodyBuf.String())
-			// m.SetBody("html", htmlBuf.String())
-			err = mailDialer.DialAndSend(mailMessage)
-			if err != nil {
-				log.Printf("error sending verification mail: %v", err)
-				http.Error(w, "server error", http.StatusInternalServerError)
-				return
+				mailMessage := gomail.NewMessage()
+				mailMessage.SetHeader("From", mailFrom)
+				mailMessage.SetHeader("To", mailTo)
+				mailMessage.SetHeader("Subject", mailSubject)
+				mailMessage.SetBody("text/plain", bodyBuf.String())
+				// m.SetBody("html", htmlBuf.String())
+				err = mailDialer.DialAndSend(mailMessage)
+				if err != nil {
+					log.Printf("error sending verification mail: %v", err)
+					http.Error(w, "server error", http.StatusInternalServerError)
+					return
+				}
 			}
 		}
 

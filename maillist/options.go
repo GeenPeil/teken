@@ -15,8 +15,8 @@ var flags struct {
 	All       bool    `short:"a" long:"all" description:"Get all mail addresses"`
 	StartID   *uint64 `long:"start-id" description:"Starting id for the scanning"`
 
-	StoragePrivkeyFile string `long:"storage-privkey-file" description:"storage private key" default:"../storage/testpriv.pem"` // TODO: remove default, make mandatory
-	StorageLocation    string `long:"storage-location" desciption:"storage location" default:"../storage/testdata"`             // TODO: remove default, make mandatory
+	StoragePrivkeyFile string `long:"storage-privkey-file" description:"storage private key" default:"./storage/testkey.pem"` // TODO: remove default, make mandatory
+	StorageLocation    string `long:"storage-location" desciption:"storage location" default:"./storage/testdata"`            // TODO: remove default, make mandatory
 
 	CSVFile string `long:"csv-file" description:"csv file location" default:"output.csv"` // TODO: remove default, make mandatory
 }
