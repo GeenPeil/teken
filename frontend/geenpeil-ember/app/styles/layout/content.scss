@@ -10,7 +10,7 @@
 
   line-height: 1.6em;
 
-  color: white;
+  color: $fontColor;
 
 }
 
@@ -25,11 +25,6 @@
 }
 
 .logo-text {
-  display: inline-block;
-
-  margin-bottom: 35px;
-
-  vertical-align: middle;
 }
 
 .fixed-header {
