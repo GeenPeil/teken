@@ -8,7 +8,8 @@
             "characterWidth" : 18,
             "characterHeight" : 27,
             "characterMargin" : 4,
-            "spaceWidth" : 15
+            "spaceWidth" : 15,
+            "submitUrl": "https://teken.hartvoordemocratie.nl/cupido/submit"
         },
 
         "preferences" : {
