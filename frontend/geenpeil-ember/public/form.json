@@ -161,7 +161,7 @@
                 "autocomplete" : "on",
                 "case-sensitive" : true,
                 "length" : 128,
-                "regex" : "^[\\S+@\\S+]*$"
+                "regex" : "\\S+@\\S+"
             },
             {
                 "_id" : "handtekening",
