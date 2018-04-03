@@ -3,9 +3,9 @@
 CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.8.1-alpha1" last-position="0,0" last-zoom="1"
+<dbmodel pgmodeler-ver="0.9.0" last-position="0,0" last-zoom="1"
 	 default-schema="public" default-owner="postgres">
-<database name="geenpeil">
+<database name="teken">
 </database>
 
 <schema name="public" protected="true" fill-color="#e1e1e1" sql-disabled="true">
@@ -14,24 +14,24 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="handtekeningen">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<position x="29" y="19"/>
+	<position x="20" y="20"/>
 	<column name="id" not-null="true">
-		<type name="serial"/>
+		<type name="serial" length="1"/>
 	</column>
 	<column name="insert_time" not-null="true">
-		<type name="timestamp"/>
+		<type name="timestamp" length="1"/>
 	</column>
 	<column name="iphash" not-null="true">
 		<type name="bytea" length="32"/>
 	</column>
 	<column name="mailhash" not-null="true">
-		<type name="bytea"/>
+		<type name="bytea" length="1"/>
 	</column>
 	<column name="mailcheckhash" not-null="true">
-		<type name="bytea"/>
+		<type name="bytea" length="1"/>
 	</column>
 	<column name="mailcheckdone" not-null="true" default-value="false">
-		<type name="bool"/>
+		<type name="bool" length="1"/>
 	</column>
 	<constraint name="handtekeningen_id_primary" type="pk-constr" table="public.handtekeningen">
 		<columns names="id" ref-type="src-columns"/>
@@ -41,7 +41,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="nawhashes">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<position x="309" y="40"/>
+	<position x="460" y="80"/>
 	<column name="hash" not-null="true">
 		<type name="bytea" length="32"/>
 	</column>
