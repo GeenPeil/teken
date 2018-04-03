@@ -19,9 +19,9 @@
 
         "text" : {
           "home1" : "10.000 papieren handtekeningen voor een inleidend verzoek voor een referendum over de donorwet? Dat kan slimmer! Vul in deze app je gegevens in en onderteken digitaal. Wij zorgen dat je verzoek bijtijds bij de Kiesraad komt.",
-          "home2" : "Meer info over Hart voor Democratie? <a target=\"blank\" href=\"http://www.hartvoordemocratie.nl\">hartvoordemocratie.nl</a>",
+          "home2" : "Meer info over Hart voor Democratie? <a target=\"blank\" href=\"https://hartvoordemocratie.nl/faq.html\">hartvoordemocratie.nl</a>",
           "disclaimer_intro1" : "Omdat dit serieuze zaken zijn, volgt nu een serieus stukje tekst. De disclaimer. Gaarne goed lezen als u wilt weten waar u aan moet voldoen en wat wij met uw gegevens doen (namelijk: zwaar beveiligen en alleen gebruiken voor dit referendum-initiatief).",
-          "disclaimer_intro2" : "LET OP: Bent u emigrant of Nederlander in den vreemde? Dan kun je dit online formulier niet gebruiken. Kijk op hartvoordemocratie.nl/FAQ wat u kunt doen om te tekenen.",
+          "disclaimer_intro2" : "LET OP: Bent u emigrant of Nederlander in den vreemde? Dan kun je dit online formulier niet gebruiken. Kijk op hartvoordemocratie.nl/faq.html wat u kunt doen om te tekenen.",
           "disclaimer_1" : "Door uw gegevens in te vullen, steunt u het inleidende verzoek tot het houden van een referendum over de volgende wet:",
 
           "disclaimer_2" : "33506 - Wet tot wijziging van de Wet op de orgaandonatie in verband met het opnemen van een actief donorregistratiesysteem.",
@@ -98,7 +98,7 @@
                 "length" : 9,
                 "x" : 587,
                 "y" : 650,
-                "regex" : "^[0-9][0-9a-zA-Z -/]+$"
+                "regex" : "^[0-9][0-9a-zA-Z -/]*$"
             },
             {
                 "_id" : "postcode",
