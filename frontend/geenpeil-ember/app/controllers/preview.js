@@ -24,10 +24,6 @@ export default Controller.extend({
     return 'width: '+this.get('properties.width')+'px;';
   }),
 
-  formImage : computed('',function() {
-    return 'ext/'+this.get('applicationController').get('model.form.properties.filename');
-  }),
-
   completedFormItems : computed('',function() {
     return this.get('applicationController').get('model.form.fields');
   })
