@@ -45,7 +45,7 @@ export default Controller.extend({
       // Send the data
       $.ajax({
         type : 'POST',
-        url: 'https://teken.geenpeil.nl/cupido/submit',
+        url: 'https://teken.hartvoordemocratie.nl/cupido/submit',
         data : JSON.stringify(message),
         contentType : 'application/json',
         error : function() {

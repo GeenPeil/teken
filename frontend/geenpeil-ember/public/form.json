@@ -17,16 +17,18 @@
         },
 
         "text" : {
-          "home1" : "300.000 handtekeningen op papier? Dat kan slimmer! Vul in de volgende vier schermen je gegevens in en teken digitaal. Wij verzorgen de verscheping naar de Kiesraad.",
-          "home2" : "Meer info over GEENPEIL? <a target=\"blank\" href=\"http://www.geenpeil.nl\">www.geenpeil.nl</a>",
-          "disclaimer_intro1" : "Omdat dit serieuze zaken zijn, volgt nu een serieus stukje tekst. De disclaimer. Gaarne goed lezen als u wilt weten waar u aan moet voldoen en wat wij met uw gegevens doen [SPOILERALERT: zwaar beveiligen en alleen gebruiken om uw handtekening bij de Kiesraad te krijgen].",
-          "disclaimer_intro2" : "PS bent u emigrant? Nederland in den vreemde? Dit online-formulier geldt niet voor u. Kijk in de FAQ op GeenPeil.nl wat u kunt doen om te tekenen.",
-          "disclaimer_1" : "Door uw gegevens in te vullen steunt u het definitief verzoek tot het houden van een referendum over de volgende wet / het volgende verdrag:",
-          "disclaimer_2" : "34116 - Wet Goedkeuring van de op 27 juni 2014 te Brussel tot stand gekomen Associatieovereenkomst tussen de Europese Unie en de Europese Gemeenschap voor Atoomenergie en haar lidstaten, enerzijds, en Oekraïne, anderzijds (Trb. 2014, 160)",
-          "disclaimer_3" : "U kunt een ondersteuningsverklaring afleggen indien u Nederlander bent, 18 jaar of ouder bent op 28-09-2015 en niet uitgesloten bent van het kiesrecht.",
-          "disclaimer_4" : "Indien u buiten Nederland woont kunt u geen gebruik maken van dit online-formulier.",
-          "disclaimer_5" : "De gegevens worden niet met derden gedeeld en niet gebruikt voor andere doeleinden dan het printen van het formulier. Terwijl de informatie wordt verwerkt zal deze wanneer mogelijk altijd versleuteld zijn.",
-          "disclaimer_6" : "U verklaart dat u slechts eenmaal een verzoek indient ten behoeve van dit definitief verzoek en de gegevens naar waarheid invult. Door op \"Akkoord\" te drukken gaat u akkoord met deze voorwaarden en verklaart u daaraan te voldoen.",
+          "home1" : "10.000 papieren handtekeningen voor een inleidend verzoek voor een referendum over de donorwet? Dat kan slimmer! Vul in deze app je gegevens in en onderteken digitaal. Wij zorgen dat je verzoek bijtijds bij de Kiesraad komt.",
+          "home2" : "Meer info over Hart voor Democratie? <a target=\"blank\" href=\"http://www.hartvoordemocratie.nl\">hartvoordemocratie.nl</a>",
+          "disclaimer_intro1" : "Omdat dit serieuze zaken zijn, volgt nu een serieus stukje tekst. De disclaimer. Gaarne goed lezen als u wilt weten waar u aan moet voldoen en wat wij met uw gegevens doen (namelijk: zwaar beveiligen en alleen gebruiken voor dit referendum-initiatief).",
+          "disclaimer_intro2" : "LET OP: Bent u emigrant of Nederlander in den vreemde? Dan kun je dit online formulier niet gebruiken. Kijk op hartvoordemocratie.nl/FAQ wat u kunt doen om te tekenen.",
+          "disclaimer_1" : "Door uw gegevens in te vullen, steunt u het inleidende verzoek tot het houden van een referendum over de volgende wet:",
+
+          "disclaimer_2" : "33506 - Wet tot wijziging van de Wet op de orgaandonatie in verband met het opnemen van een actief donorregistratiesysteem.",
+          "disclaimer_3" : "U kunt een verzoek indienen indien u Nederlander bent, 18 jaar of ouder bent op 26-04-2018 en niet uitgesloten bent van het kiesrecht.",
+          "disclaimer_4" : "Indien u buiten Nederland woont, kunt u geen gebruik maken van dit online formulier.",
+          "disclaimer_5" : "Uw gegevens worden niet met derden gedeeld en niet gebruikt voor andere doeleinden dan het printen van het formulier. Uw informatie wordt versleuteld verwerkt en versleuteld opgeslagen.",
+          "disclaimer_6" : "U verklaart dat u slechts eenmaal een formulier indient ten behoeve van dit inleidende verzoek, en de gegevens naar waarheid invult. Door op ‘Akkoord’ te drukken, gaat u akkoord met deze voorwaarden en verklaart u daaraan te voldoen.",
+
           "check" : "Kijk uw gegevens goed na. U kunt een voorbeeld van het ingevulde formulier bekijken. Het formulier kan pas verzonden worden als u de beveiligingsvraag heeft beantwoord.",
           "complete1" : "U ontvangt van ons per mail een unieke link. Na het klikken op die link wordt de ondersteuning pas definitief. Check uw mail dus! Een e-mailadres kan slechts eenmaal worden gebruikt.",
           "complete2" : "LET OP!  Door de drukte kan de e-mail er langer over doen om aan te komen. Ook kan de e-mail soms in de spambox terecht komen."
@@ -127,9 +129,9 @@
                 "type" : "date",
                 "name" : "Geboortedatum",
                 "placeholder" : "vul in bijv. 01-01-1970",
-                "explanation" : "Vul de geboortedatum in als 'dd-mm-jjjj'.<br>U moet geboren zijn vóór 29-09-1997.",
+                "explanation" : "Vul de geboortedatum in als 'dd-mm-jjjj'.<br>U moet geboren zijn vóór 27-04-2000.",
                 "instruction" : "Het veld bevat een ongeldige invoer.",
-                "beforeDate" : "29-09-1997",
+                "beforeDate" : "27-04-2000",
                 "length" : 10,
                 "x" : 52,
                 "y" : 745,
@@ -152,13 +154,13 @@
                 "_id" : "email",
                 "type" : "email",
                 "name" : "E-mailadres",
-                "explanation" : "Uw e-mailadres hebben wij nodig ter authenticatie.",
+                "explanation" : "",
                 "placeholder" : "vul in",
                 "instruction" : "Voer een geldig e-mailadres in.",
                 "autocomplete" : "on",
                 "case-sensitive" : true,
                 "length" : 128,
-                "regex" : "\\S+@\\S+"
+                "regex" : "^[\\S+@\\S+]*$"
             },
             {
                 "_id" : "handtekening",
