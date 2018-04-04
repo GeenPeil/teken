@@ -18,14 +18,12 @@
   display : inline-block;
 
   background-image: url('logo.png');
-  background-size: cover;
-
-  width: 70px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position-y: center;
+  background-position-x: left;
   height: 70px;
-}
-
-.logo-text {
-  margin-left: 0.5em;
+  width: 100%;
 }
 
 .fixed-header {

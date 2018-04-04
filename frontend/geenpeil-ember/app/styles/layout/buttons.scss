@@ -30,29 +30,22 @@
 }
 
 button {
-  transition: all 0.6s ease;
+  transition: background-color 0.25s ease;
   background-color:$headerColor;
+  border-radius: 2px;
 
   &:hover {
     background-color:$headerColorLight;
-    box-shadow: 3px 2px 3px 2px rgba(0,0,0,0.25);
-    cursor: pointer;
-  }
-
-  &:active {
-    transition: all 0.2s ease;
-    background-color:#headerColor;
-    box-shadow: 0px 2px 0px 2px rgba(0,0,0,0.25);
+    box-shadow: 0px 1px 1px 1px rgba(0,0,0,0.1);
     cursor: pointer;
   }
 
   color: white;
 
-  font-size: 2em;
+  font-size: 1.5em;
 
-  padding: 0.25em;
-  margin-right: 0.5em;
-  margin-bottom: 0.5em;
+  padding: 0.4em 0.8em;
+  margin: 0.5em;
 
   border: none;
 
