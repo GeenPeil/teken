@@ -78,12 +78,12 @@ export default Component.extend({
         window.scrollTo(0,0);
         this.setupCanvas();
         $('body').addClass('noScroll');
-        $('body').bind('touchmove', function(e){e.preventDefault()});
+        $('.signature-editor').bind('touchmove', function(e){e.preventDefault()});
       }.bind(this),1);
     }
     else {
       $('body').removeClass('noScroll');
-      $('body').unbind('touchmove');
+      $('.signature-editor').unbind('touchmove');
     }
   }),
 
