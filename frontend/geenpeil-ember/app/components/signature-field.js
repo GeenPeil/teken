@@ -74,8 +74,8 @@ export default Component.extend({
 
   onShowEditor : observer('showEditor', function() {
     if(this.get('showEditor')) {
+      window.scrollTo(0,0);
       run.next(this,function() {
-        window.scrollTo(0,0);
         this.setupCanvas();
         $('body').addClass('noScroll');
         $('.signature-editor').bind('touchmove', function(e){e.preventDefault()});
