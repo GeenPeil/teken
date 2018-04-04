@@ -39,6 +39,9 @@
     </script>
     <script src="ext/modernizr.custom.20926.js"></script>
 
+    <!--Piwik-->
+    <script src="https://matomo.hartvoordemocratie.nl/piwik.js" async="" defer=""></script>
+
     {{content-for 'head-footer'}}
   </head>
   <body>
@@ -47,6 +50,18 @@
     onModernizrLoaded();
     </script>
 
+    <!--Piwik init-->
+    <script>
+      var idSite = 2;
+      var piwikTrackingApiUrl = 'https://matomo.hartvoordemocratie.nl/piwik.php';
+
+      var _paq = _paq || [];
+      _paq.push(['setTrackerUrl', piwikTrackingApiUrl]);
+      _paq.push(['setSiteId', idSite]);
+      _paq.push(['trackPageView']);
+      _paq.push(['enableLinkTracking']);
+    </script>
+    
     {{content-for 'body'}}
 
     <!-- Google reCAPTCHA -->
