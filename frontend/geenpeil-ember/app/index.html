@@ -60,6 +60,13 @@
       _paq.push(['setSiteId', idSite]);
       _paq.push(['trackPageView']);
       _paq.push(['enableLinkTracking']);
+
+      addEventListener('hashchange', function() {
+        var hash = window.location.hash.substr(1)
+        _paq.push(['setCustomUrl', '/' + hash]);
+        _paq.push(['setDocumentTitle', hash]);
+        _paq.push(['trackPageView']);
+      })
     </script>
 
     {{content-for 'body'}}
