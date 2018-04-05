@@ -53,6 +53,25 @@ export default Controller.extend({
 
   }),
 
+  errors : computed('formItems.@each.isValid', function() {
+
+    // Being careful with return types which are either Ember.Array or undefined
+
+    var errors = [];
+
+    var inValidItems = this.get('formItems').findBy('isValid',false);
+    var undefinedItems = this.get('formItems').findBy('isValid',undefined);
+
+    if(inValidItems) {
+      errors = errors.concat(inValidItems);
+    }
+    if(undefinedItems) {
+      errors = errors.concat(undefinedItems);
+    }
+
+    return errors
+  }),
+
   /*
   * Actions
   */
@@ -81,7 +100,19 @@ export default Controller.extend({
         }
       }
       else {
-        alert('U moet alle velden geldig ingevuld hebben om verder te kunnen gaan.');
+        var errorFieldNames = this.get('errors').map(function(error) { return error.name })
+
+        // Log error with Piwik
+        if(window._paq != undefined) {
+          window._paq.push(['trackEvent', 'Form', this.get('sectionNumber'), 'Error', 'Invalid ' + errorFieldNames.join(', ')]);
+        }
+
+        if(errorFieldNames.length < 2) {
+          alert('Kijk de invoer goed na. Er is een probleem in het veld ' + errorFieldNames);
+        }
+        else {
+          alert('Kijk de invoer goed na. Er zijn nog problemen met de velden: ' + errorFieldNames.join(', ') + '.');
+        }
       }
 
     }
