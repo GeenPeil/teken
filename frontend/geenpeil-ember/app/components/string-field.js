@@ -40,6 +40,7 @@ export default Component.extend({
 
   recalculateValues: function() {
     var value = this.get('formItem.value') || "",
+        minLength = this.get('formItem.minLength') || 0,
         maxLength = this.get('formItem.length'),
         caseSensitive = this.get('formItem.case-sensitive'),
         regex = new RegExp(this.get('formItem.regex'), "i"),
@@ -62,18 +63,15 @@ export default Component.extend({
     var maxLengthReached = value.length === maxLength;
     this.set('showLengthWarning',maxLengthReached);
 
-    // for fields that have 'display' (FIXME),
-    // check that input length matches to be valid
+    // for fields that have 'display' (FIXME) we want to postpone error messages
+    // until a certain number of characters are entered
     if(this.get('formItem.display')) {
-      isValid = maxLengthReached ? isValid : undefined;
+      isValid = maxLengthReached || value.length >= minLength ? isValid : undefined;
       this.set('showLengthWarning',false);
     }
 
     // fetch value
     var tmp = value;
-
-    // auto replace separators
-    // tmp = this.separateValue(this.get('value'));
 
     // only upper case the value if it is not case sensitive
     if(!caseSensitive) {
@@ -100,26 +98,6 @@ export default Component.extend({
     //set all values
     this.set('formItem.isValid',isValid);
     this.set('formItem.value',tmp);
-  },
-
-  separateValue : function(s) {
-    var display = this.get('formItem.display');
-
-    if(display) {
-      var separator = this.get('formItem.separator');
-      var parts = display.split(' ');
-      var index = 0;
-      for(var i=0;i<parts.length;i++) {
-        index += parts[i].length;
-
-        if(index < s.length) {
-          s = s.substr(0, index) + separator + s.substr(index+separator.length);
-        }
-
-        index += 1;
-      }
-    }
-    return s;
   }
 
 });

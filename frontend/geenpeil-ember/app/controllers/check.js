@@ -39,8 +39,14 @@ export default Controller.extend({
         message[item._id] = item.value;
       });
 
+      // FIXME - General solution for these fields
+
       // Strip the signature so only base64 is left
       message['handtekening'] = message['handtekening'].replace(/^data:image\/(png|jpg);base64,/, "");
+
+      // Check and fix spacing in postcode
+      message['postcode'] = message['postcode'].replace(/ /g,'') // remove spaces
+      message['postcode'] = message['postcode'].substring(0,4) + ' ' + message['postcode'].substring(4)
 
       // Send the data
       var submitUrl = this.get('applicationController').get('model.form.properties.submitUrl')

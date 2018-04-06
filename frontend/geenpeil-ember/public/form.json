@@ -106,12 +106,12 @@
                 "name" : "Postcode",
                 "placeholder" : "vul in bijv. 1234 AB",
                 "instruction" : "Het veld bevat een ongeldige invoer.",
-                "explanation" : "Vul de postcode in als '1234 AB'. Let op de spatie.",
                 "length" : 7,
+                "minLength" : 6,
                 "x" : 53,
                 "y" : 699,
-                "regex" : "^[0-9]{4}[ ]{1}[a-zA-Z]{2}$",
                 "separator" : " ",
+                "regex" : "^[0-9]{4}([ ]|)[a-zA-Z]{2}([ ]|)$",
                 "display" : ".... .."
             },
             {
@@ -134,6 +134,7 @@
                 "instruction" : "Het veld bevat een ongeldige invoer.",
                 "beforeDate" : "27-04-2000",
                 "length" : 10,
+                "minLength" : 10,
                 "x" : 52,
                 "y" : 745,
                 "regex" : "^[0-9]{2}-[0-9]{2}-[0-9]{4}$",
