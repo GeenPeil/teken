@@ -12,10 +12,6 @@ export default Controller.extend({
 
   actions : {
 
-    share : function() {
-      this.transitionToRoute('share');
-    },
-
     form : function() {
       this.transitionToRoute('disclaimer');
     }
