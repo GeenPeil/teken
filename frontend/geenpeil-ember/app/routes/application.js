@@ -40,6 +40,8 @@ export default Route.extend({
           }
         case('disclaimer') :
           return;
+        case('complete') :
+          return;
         default :
           this.transitionTo('home')
       }
