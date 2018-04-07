@@ -33,11 +33,15 @@ export default Route.extend({
     },
 
     afterModel : function(model,transition) {
-      if(!this.get('healthy') && transition.targetName === 'down') {
-        //let through
-      }
-      else if(transition.targetName !== 'home') {
-        this.transitionTo('home');
+      switch(transition.targetName) {
+        case('down') :
+          if(this.get('healthy')) {
+            this.transitionTo('home')
+          }
+        case('disclaimer') :
+          return;
+        default :
+          this.transitionTo('home')
       }
     },
 
