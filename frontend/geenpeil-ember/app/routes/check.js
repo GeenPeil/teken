@@ -12,6 +12,16 @@ export default Route.extend({
         this.transitionTo('preview');
       }
 
+  },
+
+  activate : function() {
+    window.onbeforeunload = function() { 
+      return "Door te refreshen verliest u ingevulde gegevens op het formulier en moet u opnieuw beginnen."; 
+    };
+  },
+
+  deactivate() {
+    window.onbeforeunload = undefined;
   }
 
 });
