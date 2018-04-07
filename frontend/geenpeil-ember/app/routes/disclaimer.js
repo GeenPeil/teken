@@ -8,6 +8,10 @@ export default Route.extend({
       this.transitionTo('form',1);
     },
 
+    acceptWithoutConsent : function() {
+      alert('U moet akkoord gaan met de voorwaarden om het formulier in te vullen.');
+    },
+
     decline : function() {
       this.transitionTo('home');
     }

@@ -82,6 +82,10 @@ export default Controller.extend({
       //DEBUG
       // var data = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(message));
       // window.open(data,null);
+    },
+
+    sendNotVerified: function() {
+      alert('U moet de beveilingsvraag beantwoorden voordat u het formulier kan versturen.');
     }
 
   }

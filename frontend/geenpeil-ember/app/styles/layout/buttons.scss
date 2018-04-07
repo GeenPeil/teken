@@ -25,6 +25,10 @@ button {
     cursor: pointer;
   }
 
+  &.disabled {
+    opacity: 0.5 !important;
+  }
+
   color: white;
 
   font-size: 1.5em;
