@@ -70,6 +70,8 @@
 
     {{#if recaptchaItem.isValid}}
       <button class="send float-right" {{action 'send'}}>Versturen</button>
+    {{else}}
+      <button class="send disabled float-right" {{action 'sendNotVerified'}}>Versturen</button>
     {{/if}}
 
   {{/if}}

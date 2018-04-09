@@ -3,8 +3,6 @@
 <div class="content-block text-block">
   <span>{{form.text.disclaimer_intro1}}</span>
   <br><br>
-  <span>{{form.text.disclaimer_intro2}}</span>
-  <br><br>
 </div>
 <div class="content-block text-block">
   <hr><br>
@@ -23,7 +21,7 @@
 
 <div class="content-block consent">
   <div>
-    Door het aanvinken van het onderstaande veld gaat u akkoord met deze voorwaarden en de <a href="https://hartvoordemocratie.nl/privacy.html">Privacyverklaring</a>.
+    Door het aanvinken van het onderstaande veld gaat u akkoord met deze voorwaarden en de <a target="_blank" href="https://hartvoordemocratie.nl/privacy.html">Privacyverklaring</a>.
   </div>
   <label>{{input type="checkbox" checked=consent}}Ik ga akkoord</label>
 </div>
@@ -32,5 +30,7 @@
   <button class="decline" {{action 'decline'}}>Terug</button>
   {{#if consent}}
     <button class="accept float-right" {{action 'accept'}}>Verder</button>
+  {{else}}
+    <button class="accept disabled float-right" {{action 'acceptWithoutConsent'}}>Verder</button>
   {{/if}}
 </div>

@@ -8,25 +8,10 @@
     margin-left: 0.5em;
   }
 
-  // .send {
-  //   background-color: #22aa22;
-  //
-  //   &:hover {
-  //     background-color:#25cc25;
-  //     box-shadow: 3px 2px 3px 2px rgba(0,0,0,0.25);
-  //     cursor: pointer;
-  //   }
-  // }
-
 }
 
-.button-share {
-
-  button {
-    display: block;
-    background-color: tomato;
-  }
-
+.home-button-nav {
+  margin: 1em;
 }
 
 button {
@@ -38,6 +23,10 @@ button {
     background-color:$headerColorLight;
     box-shadow: 0px 1px 1px 1px rgba(0,0,0,0.1);
     cursor: pointer;
+  }
+
+  &.disabled {
+    opacity: 0.5 !important;
   }
 
   color: white;

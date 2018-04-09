@@ -8,8 +8,6 @@ const Router = EmberRouter.extend({
 Router.map(function() {
   this.route('home', { path: '/' });
 
-  this.route('share', { path: '/delen' });
-
   this.route('disclaimer', { path: '/voorwaarden' });
 
   this.route('form', { path: '/formulier/:section' });

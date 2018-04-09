@@ -21,7 +21,6 @@
           "home1" : "10.000 papieren handtekeningen voor een inleidend verzoek voor een referendum over de donorwet? Dat kan slimmer! Vul in deze app je gegevens in en onderteken digitaal. Wij zorgen dat je verzoek bijtijds bij de Kiesraad komt.",
           "home2" : "Meer info over Hart voor Democratie? <a target=\"blank\" href=\"https://hartvoordemocratie.nl/faq.html\">hartvoordemocratie.nl</a>",
           "disclaimer_intro1" : "Omdat dit serieuze zaken zijn, volgt nu een serieus stukje tekst. De disclaimer. Gaarne goed lezen als u wilt weten waar u aan moet voldoen en wat wij met uw gegevens doen (namelijk: zwaar beveiligen en alleen gebruiken voor dit referendum-initiatief).",
-          "disclaimer_intro2" : "LET OP: Bent u emigrant of Nederlander in den vreemde? Dan kun je dit online formulier niet gebruiken. Kijk op hartvoordemocratie.nl/faq.html wat u kunt doen om te tekenen.",
           "disclaimer_1" : "Door uw gegevens in te vullen, steunt u het inleidende verzoek tot het houden van een referendum over de volgende wet:",
 
           "disclaimer_2" : "33506 - Wet tot wijziging van de Wet op de orgaandonatie in verband met het opnemen van een actief donorregistratiesysteem.",
@@ -106,12 +105,12 @@
                 "name" : "Postcode",
                 "placeholder" : "vul in bijv. 1234 AB",
                 "instruction" : "Het veld bevat een ongeldige invoer.",
-                "explanation" : "Vul de postcode in als '1234 AB'. Let op de spatie.",
                 "length" : 7,
+                "minLength" : 6,
                 "x" : 53,
                 "y" : 699,
-                "regex" : "^[0-9]{4}[ ]{1}[a-zA-Z]{2}$",
                 "separator" : " ",
+                "regex" : "^[0-9]{4}([ ]|)[a-zA-Z]{2}([ ]|)$",
                 "display" : ".... .."
             },
             {
@@ -134,6 +133,7 @@
                 "instruction" : "Het veld bevat een ongeldige invoer.",
                 "beforeDate" : "27-04-2000",
                 "length" : 10,
+                "minLength" : 10,
                 "x" : 52,
                 "y" : 745,
                 "regex" : "^[0-9]{2}-[0-9]{2}-[0-9]{4}$",
