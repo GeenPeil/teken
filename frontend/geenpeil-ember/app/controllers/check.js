@@ -35,9 +35,13 @@ export default Controller.extend({
     send : function() {
       var message = {};
 
+      // Set all form items
       this.get('applicationController').get('model.form.fields').forEach(function(item) {
         message[item._id] = item.value;
       });
+
+      // Set ref
+      message['ref'] = this.get('applicationController').get('ref');
 
       // FIXME - General solution for these fields
 

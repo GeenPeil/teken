@@ -6,15 +6,13 @@ export default Controller.extend({
 
   model : null,
 
-  onInit : function() {
-    this.set('formData',Object.create());
+  queryParams: ['ref'],
 
-    window.onbeforeunload = function() {
-      if(!this.get('model.form.sent')) {
-          return "Als u de pagina verlaat of herlaad worden de door u tot nu toe ingevulde gegevens gewist. Bevestig om nu te wissen.";
-      }
-    }.bind(this);
-  },
+  ref : '',
+
+  onRefChanged : observer('ref', function() {
+    // TODO - track ref
+  }),
 
   onModelChanged : observer('model', function() {
     var formMap = {};
