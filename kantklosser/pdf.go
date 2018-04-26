@@ -7,7 +7,7 @@ import (
 	"github.com/jung-kurt/gofpdf"
 
 	"github.com/GeenPeil/teken/data"
-	"github.com/GeertJohan/go.incremental"
+	incremental "github.com/GeertJohan/go.incremental"
 	"github.com/GeertJohan/go.rice"
 )
 
@@ -22,7 +22,8 @@ var (
 )
 
 const (
-	offsetY = -2
+	firstOffsetY  = -2
+	secondOffsetY = 217
 )
 
 func init() {
@@ -49,10 +50,14 @@ func NewPDF(name string) *pdf {
 }
 
 func (p *pdf) AddHandtekening(h *data.Handtekening) error {
-	p.fpdf.AddPage()
-	pageSizeX, pageSizeY := p.fpdf.GetPageSize()
-	p.fpdf.Image(formName, 0, 0, pageSizeX, pageSizeY, false, jpgtp, 0, "")
-	p.fpdf.SetFont("Arial", "", 14)
+	pagePos := p.inc.Last() % 2
+	if pagePos == 0 {
+		p.fpdf.AddPage()
+		pageSizeX, pageSizeY := p.fpdf.GetPageSize()
+		p.fpdf.Image(formName, 0, 0, pageSizeX, pageSizeY, false, jpgtp, 0, "")
+		p.fpdf.SetFont("Arial", "", 14)
+	}
+	offsetY := float64(firstOffsetY + (secondOffsetY * int(pagePos)))
 	// p.fpdf.Image(imageFile("logo.png"), 10, 10, 30, 0, false, "", 0, "")
 	p.FormText(37, offsetY+393, h.Voornaam)
 	p.FormText(305, offsetY+393, h.Tussenvoegsel)
@@ -78,7 +83,7 @@ func (p *pdf) AddHandtekening(h *data.Handtekening) error {
 	imgName := fmt.Sprintf("h-%d", p.inc.Next())
 	p.fpdf.RegisterImageReader(imgName, pngtp, bytes.NewBuffer(h.Handtekening))
 	sx := 426.0
-	sy := 399.0
+	sy := 400.0 + offsetY
 	ex := 550.0 - sx
 	ey := ex / 2.25
 	p.fpdf.Image(imgName, sx, sy, ex, ey, false, pngtp, 0, "")

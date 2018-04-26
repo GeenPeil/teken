@@ -11,7 +11,7 @@ var flags struct {
 	Verbose bool `long:"verbose" short:"v" description:"Show verbose debug information"`
 
 	Single    *uint64 `short:"s" long:"single" description:"Single handtekening to render"`
-	Partition *uint64 `short:"p" long:"partitie" description:"Partition of handtekeningen to render"`
+	Partition *uint64 `short:"p" long:"partition" description:"Partition of handtekeningen to render"`
 
 	StoragePrivkeyFile string `long:"storage-privkey-file" description:"storage private key" default:"./storage/testkey.pem"` // TODO: remove default, make mandatory
 	StorageLocation    string `long:"storage-location" desciption:"storage location" default:"./storage/testdata"`            // TODO: remove default, make mandatory
