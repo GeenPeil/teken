@@ -35,9 +35,11 @@ func init() {
 }
 
 type pdf struct {
-	name string
-	fpdf *gofpdf.Fpdf
-	inc  incremental.Uint64
+	name      string
+	fpdf      *gofpdf.Fpdf
+	translate func(in string) string
+
+	inc incremental.Uint64
 }
 
 func NewPDF(name string) *pdf {
@@ -45,6 +47,7 @@ func NewPDF(name string) *pdf {
 		name: name,
 		fpdf: gofpdf.New("P", "pt", "A4", ""),
 	}
+	p.translate = p.fpdf.UnicodeTranslatorFromDescriptor("")
 	p.fpdf.RegisterImageReader(formName, jpgtp, bytes.NewBuffer(formBytes))
 	return p
 }
@@ -95,7 +98,7 @@ func (p *pdf) FormText(x, y float64, text string) {
 	for _, c := range text {
 		// p.fpdf.Text(x, y, string(c))
 		p.fpdf.MoveTo(x, y)
-		p.fpdf.CellFormat(12, 20, string(c), "", 0, "CA", false, 0, "")
+		p.fpdf.CellFormat(12, 20, p.translate(string(c)), "", 0, "CA", false, 0, "")
 		x += 14.8
 	}
 }
