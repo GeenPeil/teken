@@ -49,8 +49,13 @@ export default Component.extend({
 
   save : function() {
     var dataURL = this.get('canvas').toDataURL();
-    this.set('formItem.isValid',true);
-    this.set('formItem.value',dataURL);
+
+    // TODO - more better validation of image content
+    // Checking for non falsey strings in response to some browser privacy features blocking toDataURL by returning a function
+    if(typeof dataURL === 'string' && dataURL) {
+      this.set('formItem.isValid',true);
+      this.set('formItem.value',dataURL);
+    }
   },
 
   erase : function() {
