@@ -10,6 +10,16 @@ export default Controller.extend({
     return this.get('applicationController').get('model.form');
   }),
 
+  refString : computed('', function() {
+    var ref = this.get('applicationController').get('ref');
+    if(ref) {
+      return encodeURIComponent('/#/?ref=' + ref);
+    }
+    else {
+      return ''
+    }
+  }),
+
   actions : {
 
     clickLink: function(e) {
