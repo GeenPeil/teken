@@ -31,7 +31,7 @@ func init() {
 	pngtp = p.ImageTypeFromMime("image/png")
 	jpgtp = p.ImageTypeFromMime("image/jpeg")
 
-	formBytes = rice.MustFindBox("forms").MustBytes("33506-inleidend-vl-nl-1.jpg")
+	formBytes = rice.MustFindBox("forms").MustBytes("33506-definitief-vl-nl-1.jpg")
 }
 
 type pdf struct {
