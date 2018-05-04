@@ -11,6 +11,12 @@ export default Component.extend({
         display = this.get('formItem.display'),
         properties = this.get('properties');
 
+    // FIXME - postcode display problem
+    if(this.get('formItem._id') === 'postcode') {
+      value = value.replace(/ /g,'') // remove spaces
+      value = value.substring(0,4) + ' ' + value.substring(4)
+    }
+
     if(display) {
       var valueParts = [];
       var parts = display.split(' ');
