@@ -129,7 +129,7 @@
                 "type" : "date",
                 "name" : "Geboortedatum",
                 "placeholder" : "vul in bijv. 01-01-1970",
-                "explanation" : "Vul de geboortedatum in als 'dd-mm-jjjj'.<br>U moet geboren zijn vóór 16-06-2000.",
+                "explanation" : "Vul de geboortedatum in als 'dd-mm-jjjj'.<br>U moet geboren zijn vóór 14-06-2000.",
                 "instruction" : "Het veld bevat een ongeldige invoer.",
                 "beforeDate" : "14-06-2000",
                 "length" : 10,
