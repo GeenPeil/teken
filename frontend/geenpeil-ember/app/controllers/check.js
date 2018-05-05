@@ -33,6 +33,8 @@ export default Controller.extend({
   actions : {
 
     send : function() {
+      this.set('isSending', true)
+
       var message = {};
 
       // Set all form items
@@ -61,7 +63,8 @@ export default Controller.extend({
         contentType : 'application/json',
         error : function() {
           alert('Er is een probleem opgetreden bij het versturen.');
-        },
+          this.set('isSending', false);
+        }.bind(this),
         success : function(r) {
           var response = JSON.parse(r);
 
@@ -92,6 +95,12 @@ export default Controller.extend({
       alert('U moet de beveilingsvraag beantwoorden voordat u het formulier kan versturen.');
     }
 
-  }
+  },
+
+  isSending: false,
+
+  readyToSend: computed('isSending', function() {
+    return !this.get('isSending');
+  })
 
 });
