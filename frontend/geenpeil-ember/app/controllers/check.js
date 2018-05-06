@@ -62,7 +62,7 @@ export default Controller.extend({
         data : JSON.stringify(message),
         contentType : 'application/json',
         error : function() {
-          alert('Er is een probleem opgetreden bij het versturen.');
+          swal('Probleem', 'Er is een probleem opgetreden bij het versturen.', 'warning');
           this.set('isSending', false);
         }.bind(this),
         success : function(r) {
@@ -75,11 +75,12 @@ export default Controller.extend({
           else {
 
             if(response.error === 'mail has been used') {
-              alert('Dit e-mailadres is al gebruikt.');
+              swal('Probleem', 'Dit e-mailadres is al gebruikt.', 'warning');
             }
             else {
-              alert('Er is een probleem opgetreden bij het versturen.');
+              swal('Probleem', 'Er is een probleem opgetreden bij het versturen.', 'warning');
             }
+            this.set('isSending', false);
 
           }
 
@@ -92,7 +93,7 @@ export default Controller.extend({
     },
 
     sendNotVerified: function() {
-      alert('U moet de beveilingsvraag beantwoorden voordat u het formulier kan versturen.');
+      swal('Let op', 'U moet de beveilingsvraag beantwoorden voordat u het formulier kan versturen.', 'warning');
     }
 
   },

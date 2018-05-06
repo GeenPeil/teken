@@ -59,8 +59,8 @@ export default Controller.extend({
 
     var errors = [];
 
-    var inValidItems = this.get('formItems').findBy('isValid',false);
-    var undefinedItems = this.get('formItems').findBy('isValid',undefined);
+    var inValidItems = this.get('formItems').filterBy('isValid',false);
+    var undefinedItems = this.get('formItems').filterBy('isValid',undefined);
 
     if(inValidItems) {
       errors = errors.concat(inValidItems);
@@ -108,10 +108,10 @@ export default Controller.extend({
         }
 
         if(errorFieldNames.length < 2) {
-          alert('Kijk de invoer goed na. Er is een probleem in het veld ' + errorFieldNames);
+          swal('Let op', 'Kijk de invoer goed na. Er is een probleem in het veld: ' + errorFieldNames, 'warning');
         }
         else {
-          alert('Kijk de invoer goed na. Er zijn nog problemen met de velden: ' + errorFieldNames.join(', ') + '.');
+          swal('Let op', 'Kijk de invoer goed na. Er zijn nog problemen met de velden: ' + errorFieldNames.join(', ') + '.', 'warning');
         }
       }
 

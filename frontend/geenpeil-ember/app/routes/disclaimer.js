@@ -9,7 +9,7 @@ export default Route.extend({
     },
 
     acceptWithoutConsent : function() {
-      alert('U moet akkoord gaan met de voorwaarden om het formulier in te vullen.');
+      swal ('Let op', 'U moet akkoord gaan met de voorwaarden om het formulier in te vullen.', 'error');
     },
 
     decline : function() {
