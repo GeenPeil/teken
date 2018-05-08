@@ -7,6 +7,7 @@ export default Route.extend({
   },
 
   activate : function() {
+    window.scrollTo(0,0);
     window.onbeforeunload = function() { 
       return "Door te refreshen verliest u ingevulde gegevens op het formulier en moet u opnieuw beginnen."; 
     };

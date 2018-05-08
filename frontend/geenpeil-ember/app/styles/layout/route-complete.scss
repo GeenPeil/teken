@@ -1,0 +1,56 @@
+.route-complete {
+
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+
+    .success-message {
+        background-color: #53c32d;
+        padding: 5px;
+
+        h1 {
+            color: white;
+            font-size: 22px;
+            font-weight: bold;
+            text-shadow: 1px 0px #aaa;
+            margin: 1em 0;
+        }
+    }
+
+    .social-message {
+        background-color: white;
+        box-shadow: inset 0px 11px 8px -10px #aaa, inset 0px -9px 8px -10px #aaa;
+
+        .share-buttons {
+            font-size: 1.2em;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+
+            @media only screen and (max-width : 400px) {
+                flex-direction: column;
+                font-size: 1em;
+            }
+
+            .facebook {
+                color: #3b5998;
+            }
+            .twitter {
+                color: #1da1f2;
+            }
+            .whatsapp {
+                color: #075e54;
+            }
+            .email {
+                color: #ea4335;
+            }
+
+        }
+    }
+
+    .donorregister-message {
+        flex: 1;
+        align-items: center;
+    }
+
+}

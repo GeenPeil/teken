@@ -41,4 +41,10 @@ button {
   @media only screen and (max-device-width : 569px) {
     font-size: 1.4em;
   }
+
+  &.swal-button {
+    background-color:$headerColorLight;
+  }
 }
+
+
