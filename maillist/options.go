@@ -19,6 +19,8 @@ var flags struct {
 	StorageLocation    string `long:"storage-location" desciption:"storage location" default:"./storage/testdata"`            // TODO: remove default, make mandatory
 
 	CSVFile string `long:"csv-file" description:"csv file location" default:"output.csv"` // TODO: remove default, make mandatory
+
+	FixMail string `long:"fixmail" description:"Fix mail csv file, containing faulty to correct mail address translation"`
 }
 
 func parseFlags() {
