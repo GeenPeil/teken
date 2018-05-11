@@ -4,9 +4,7 @@ import (
 	"bytes"
 	"crypto/sha256"
 	"crypto/tls"
-	"encoding/base64"
 	"encoding/json"
-	"fmt"
 	"image/png"
 	"log"
 	"net/http"
@@ -30,25 +28,27 @@ var (
 )
 var (
 	mailFrom = (&mail.Address{
-		Name:    "Referendum verificatie",
-		Address: "no-reply@referendum.nl",
+		Name:    "Referendum.nl - Hart voor Democratie",
+		Address: "bart@hartvoordemocratie.nl",
 	}).String()
-	mailSubject = "Referendum verificatie mail"
+	mailSubject = "Je hebt getekend - zegt het voort!"
 )
 
 var (
-	tmplVerificationMailPlainText = template.Must(template.New("plain").Parse(`Beste {{.Naam}},
+	tmplVerificationMailPlainText = template.Must(template.New("plain").Parse(`Geachte heer/mevrouw {{.Naam}},
 
-Dank voor uw ondersteuningsverklaring!
+Bedankt voor uw handtekening! Help ons nu om nog veel meer mensen te bereiken, en doe een oproep aan uw familie, vrienden, buren en collega’s om óók te tekenen voor een referendum. U bent de sleutel tot het succes, en het is onze laatste kans!
 
-Er is zojuist een ondersteuningsverklaring aangevraagd met gebruik van dit e-mailadres. 
+Dit referendum is een race tegen de klok. De Eerste Kamer stemt begin juni over intrekking van de referendumwet, en daarmee kunnen ze dit initiatief de pas afsnijden, tenzij wij eerder zijn met het ophalen van de benodigde 300.000 handtekeningen.
 
-Als u dit niet was dan kunt u deze e-mail verwijderen. 
+We hebben dus haast, maar u kunt ons helpen. U bent oplettend en u was er vroeg bij, maar de meeste mensen weten nog helemaal niet dat zij óók kunnen tekenen voor een referendum over de ingrijpende nieuwe donorwet.
 
-Als u dit wel was moet u op de onderstaande link klikken om deze aanvraag definitief in te dienen. Gelieve deze e-mail te bewaren zo lang het process loopt.
+Daar kunt u verandering in brengen! Vertel zo veel mogelijk mensen over de Hart voor Democratie-campagne en spoor ze allemaal aan om te tekenen op referendum.nl! Wacht niet, want we hebben geen tijd te verliezen!
 
-Klik op deze link om uw aanvraag definitief te maken:
-{{.VerificatieLink}}
+Bedankt en met grote groet,
+
+Bart Nijman
+Hart voor Democratie
 `))
 )
 
@@ -75,11 +75,11 @@ func (s *Server) newSubmitHandlerFunc() http.HandlerFunc {
 	}
 
 	type mailData struct {
-		Naam            string
-		VerificatieLink string
+		Naam string
+		// VerificatieLink string
 	}
 
-	mailDialer := gomail.NewPlainDialer("localhost", "", "", 25)
+	mailDialer := gomail.NewPlainDialer(s.options.SMTPHost, s.options.SMTPUsername, s.options.SMTPPassword, 25)
 	mailDialer.TLSConfig = &tls.Config{InsecureSkipVerify: true}
 
 	return func(w http.ResponseWriter, r *http.Request) {
@@ -272,40 +272,37 @@ func (s *Server) newSubmitHandlerFunc() http.HandlerFunc {
 				return
 			}
 
-			if s.options.DisableMailVerification {
-				goto Response
-			} else {
-				toNaam := fmt.Sprintf("%s %s %s", strings.Title(strings.ToLower(h.Voornaam)), strings.ToLower(h.Tussenvoegsel), strings.Title(strings.ToLower(h.Achternaam)))
-				// send mail
-				md := &mailData{
-					Naam:            toNaam,
-					VerificatieLink: fmt.Sprintf("https://referendum.nl/cupido/verify?mailhash=%s&check=%s", base64.URLEncoding.EncodeToString(mailHashBytes), mailCheck),
-				}
-				var bodyBuf = &bytes.Buffer{}
-				err = tmplVerificationMailPlainText.Execute(bodyBuf, md)
-				if err != nil {
-					log.Printf("error executing tmplVerificationMailPlainText: %v", err)
-					http.Error(w, "server error", http.StatusInternalServerError)
-					return
-				}
+			// Send mail
+			toNaam := strings.Title(strings.ToLower(h.Achternaam))
+			// send mail
+			md := &mailData{
+				Naam: toNaam,
+				// VerificatieLink: fmt.Sprintf("https://referendum.nl/cupido/verify?mailhash=%s&check=%s", base64.URLEncoding.EncodeToString(mailHashBytes), mailCheck),
+			}
+			var bodyBuf = &bytes.Buffer{}
+			err = tmplVerificationMailPlainText.Execute(bodyBuf, md)
+			if err != nil {
+				log.Printf("error executing tmplVerificationMailPlainText: %v", err)
+				http.Error(w, "server error", http.StatusInternalServerError)
+				return
+			}
 
-				mailTo := (&mail.Address{
-					Name:    toNaam,
-					Address: h.Email,
-				}).String()
+			mailTo := (&mail.Address{
+				Name:    toNaam,
+				Address: h.Email,
+			}).String()
 
-				mailMessage := gomail.NewMessage()
-				mailMessage.SetHeader("From", mailFrom)
-				mailMessage.SetHeader("To", mailTo)
-				mailMessage.SetHeader("Subject", mailSubject)
-				mailMessage.SetBody("text/plain", bodyBuf.String())
-				// m.SetBody("html", htmlBuf.String())
-				err = mailDialer.DialAndSend(mailMessage)
-				if err != nil {
-					log.Printf("error sending verification mail: %v", err)
-					http.Error(w, "server error", http.StatusInternalServerError)
-					return
-				}
+			mailMessage := gomail.NewMessage()
+			mailMessage.SetHeader("From", mailFrom)
+			mailMessage.SetHeader("To", mailTo)
+			mailMessage.SetHeader("Subject", mailSubject)
+			mailMessage.SetBody("text/plain", bodyBuf.String())
+			// m.SetBody("html", htmlBuf.String())
+			err = mailDialer.DialAndSend(mailMessage)
+			if err != nil {
+				log.Printf("error sending verification mail: %v", err)
+				// http.Error(w, "server error", http.StatusInternalServerError)
+				// return
 			}
 		}
 

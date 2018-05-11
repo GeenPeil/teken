@@ -56,9 +56,7 @@ func (s *Server) Run(setupDoneCh chan struct{}) {
 	s.setupCaptcha()
 
 	http.HandleFunc("/cupido/submit", s.newSubmitHandlerFunc())
-	if !s.options.DisableMailVerification {
-		http.HandleFunc("/cupido/verify", s.newVerifyHandlerFunc())
-	}
+	// http.HandleFunc("/cupido/verify", s.newVerifyHandlerFunc())
 	http.HandleFunc("/cupido/health-check", s.newHealthCheckHandlerFunc())
 	http.HandleFunc("/cupido/api/stats", s.newAPIStatsHandlerFunc())
 

@@ -17,8 +17,9 @@ type Options struct {
 
 	HashingSalt string `long:"hashing-salt" env:"HASHING_SALT" description:"base-64 encoded hashing salt"`
 
-	SMTPServer              string `long:"smtp-server" env:"SMTP_SERVER" description:"smtp server to use" default:"localhost:25"`
-	DisableMailVerification bool   `long:"disable-mail-verification" env:"DISABLE_MAIL_VERIFICATION" description:"Disable mail verification"`
+	SMTPHost     string `long:"smtp-host" env:"SMTP_HOST" description:"smtp server to use" default:"localhost:25"`
+	SMTPUsername string `long:"smtp-username" env:"SMTP_USERNAME" description:"Username for SMTP auth"`
+	SMTPPassword string `long:"smtp-password" env:"SMTP_PASSWORD" description:"Password for SMTP auth"`
 
 	APIKey string `long:"api-key" env:"API_KEY" description:"api authentication key"`
 }
