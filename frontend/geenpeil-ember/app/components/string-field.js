@@ -26,28 +26,26 @@ export default Component.extend({
 
   showError : computed('formItem.{isValid,value.length}', function() {
     var isValid = this.get('formItem.isValid')
-
     return isValid === undefined ? false : !isValid;
   }),
 
   didInsertElement: function() {
-    this.recalculateValues();
+    this.validate();
   },
 
   valueChanged : observer('formItem.value', function() {
-    this.recalculateValues();
+    this.validate();
   }),
 
-  recalculateValues: function() {
+  validate: function() {
     var value = this.get('formItem.value') || "",
         minLength = this.get('formItem.minLength') || 0,
         maxLength = this.get('formItem.length'),
         caseSensitive = this.get('formItem.case-sensitive'),
-        regex = new RegExp(this.get('formItem.regex'), "i"),
         isValid = false;
 
     // check the value against the regex
-    var match = !!value.match(regex);
+    var match = this.matchExpressions();
 
     // if the regex does not match because there was no input
     if(!match && value.length === 0) {
@@ -63,11 +61,15 @@ export default Component.extend({
     var maxLengthReached = value.length === maxLength;
     this.set('showLengthWarning',maxLengthReached);
 
-    // for fields that have 'display' (FIXME) we want to postpone error messages
+    // for fields that have 'minLength' we want to postpone error messages
     // until a certain number of characters are entered
     if(this.get('formItem.minLength')) {
       isValid = maxLengthReached || value.length >= minLength ? isValid : undefined;
-      this.set('showLengthWarning',false);
+    }
+
+    // for fields that have a 'display' we disable the 'max length reached' warning
+    if(this.get('formItem.display')) {
+      this.set('showLengthWarning',false);      
     }
 
     // fetch value
@@ -98,6 +100,29 @@ export default Component.extend({
     //set all values
     this.set('formItem.isValid',isValid);
     this.set('formItem.value',tmp);
+  },
+
+  matchExpressions : function() {
+    var regexes = this.get('formItem.regex');
+    var value = this.get('formItem.value');
+
+    // Convert old single string regexes
+    if(typeof regexes === 'string') {
+      regexes = [{
+        expression  : regexes,
+        error : this.get('formItem.instruction')
+      }]
+    }
+
+    return regexes.every(function(obj) {
+      var regex = new RegExp(obj.expression, 'i');
+      var match = !!value.match(regex);
+      if(!match) {
+        this.set('formItem.instruction', obj.error);
+      }
+      return match;
+    }.bind(this))
+    
   }
 
 });

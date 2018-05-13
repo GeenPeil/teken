@@ -158,11 +158,24 @@
                 "name" : "E-mailadres",
                 "explanation" : "",
                 "placeholder" : "vul in",
-                "instruction" : "Voer een geldig e-mailadres in.",
+                "instruction" : "",
                 "autocomplete" : "on",
                 "case-sensitive" : true,
                 "length" : 128,
-                "regex" : "\\S+@\\S+"
+                "regex" : [
+                    {
+                        "expression": "\\S+@\\S+",
+                        "error": "Je e-mailadres is nog niet geldig"
+                    },
+                    {
+                        "expression": "(?=.*[.]\\w{2,3}$).*",
+                        "error": "Vul je e-mailadres verder aan"
+                    },
+                    {
+                        "expression": "^(?!.*[.]con$).*$",
+                        "error": ".con is geen geldig domein"
+                    }
+                ]
             },
             {
                 "_id" : "handtekening",
