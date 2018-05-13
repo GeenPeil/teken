@@ -50,9 +50,10 @@
                 "instruction" : "Het veld bevat ongeldige tekens.",
                 "explanation" : "Kijk hiervoor op uw paspoort of identiteitskaart.",
                 "length" : 17,
+                "minLength" : 2,
                 "x" : 51,
                 "y" : 548,
-                "regex" : "^[- 'a-zA-Zşșţțáàâäăāãåǻąćċĉčçďḍđðéèėêëěĕēęẹġĝğģíìiîïĭīĩįịĳĵķĸĺŉńňñņŋóòôöŏōõőọơŕřŗſśŝšşșṣßťţṭúùûüŭūũűůųụưẃẁŵẅýỳŷÿỹźżžẓ]+$"
+                "regex" : "^[- 'a-zA-Zşșţțáàâäăāãåǻąćċĉčçďḍđðéèėêëěĕēęẹġĝğģíìiîïĭīĩįịĳĵķĸĺŉńňñņŋóòôöŏōõőọơŕřŗſśŝšşșṣßťţṭúùûüŭūũűůųụưẃẁŵẅýỳŷÿỹźżžẓ]{2,}$"
             },
             {
                 "_id" : "tussenvoegsel",

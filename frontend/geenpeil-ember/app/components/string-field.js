@@ -65,7 +65,7 @@ export default Component.extend({
 
     // for fields that have 'display' (FIXME) we want to postpone error messages
     // until a certain number of characters are entered
-    if(this.get('formItem.display')) {
+    if(this.get('formItem.minLength')) {
       isValid = maxLengthReached || value.length >= minLength ? isValid : undefined;
       this.set('showLengthWarning',false);
     }
