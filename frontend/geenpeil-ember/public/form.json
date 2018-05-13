@@ -133,10 +133,10 @@
                 "instruction" : "Het veld bevat een ongeldige invoer.",
                 "beforeDate" : "14-06-2000",
                 "length" : 10,
-                "minLength" : 10,
+                "minLength" : 8,
                 "x" : 52,
                 "y" : 745,
-                "regex" : "^[0-9]{2}-[0-9]{2}-[0-9]{4}$",
+                "regex" : "^[0-9]{1,2}-[0-9]{1,2}-[0-9]{4}$",
                 "separator" : "-",
                 "display" : ".. .. ...."
             },

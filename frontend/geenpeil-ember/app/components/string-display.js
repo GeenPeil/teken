@@ -1,21 +1,16 @@
 import Component from '@ember/component';
 import { computed } from '@ember/object';
 import { htmlSafe } from '@ember/string';
+import { fixValue } from '../utils/form-fixes';
 
 export default Component.extend({
 
   classNames : ['string-display'],
 
   parts : computed('forItem',function() {
-    var value = this.get('formItem.value'),
+    var value = fixValue(this.get('formItem')),
         display = this.get('formItem.display'),
         properties = this.get('properties');
-
-    // FIXME - postcode display problem
-    if(this.get('formItem._id') === 'postcode') {
-      value = value.replace(/ /g,'') // remove spaces
-      value = value.substring(0,4) + ' ' + value.substring(4)
-    }
 
     if(display) {
       var valueParts = [];

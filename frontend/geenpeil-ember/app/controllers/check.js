@@ -2,6 +2,7 @@ import Controller from '@ember/controller';
 import { inject } from '@ember/controller';
 import { computed } from '@ember/object';
 import $ from 'jquery';
+import { fixValue } from '../utils/form-fixes';
 
 export default Controller.extend({
 
@@ -39,20 +40,11 @@ export default Controller.extend({
 
       // Set all form items
       this.get('applicationController').get('model.form.fields').forEach(function(item) {
-        message[item._id] = item.value;
+        message[item._id] = fixValue(item);
       });
 
       // Set ref
       message['ref'] = this.get('applicationController').get('ref');
-
-      // FIXME - General solution for these fields
-
-      // Strip the signature so only base64 is left
-      message['handtekening'] = message['handtekening'].replace(/^data:image\/(png|jpg);base64,/, "");
-
-      // Check and fix spacing in postcode
-      message['postcode'] = message['postcode'].replace(/ /g,'') // remove spaces
-      message['postcode'] = message['postcode'].substring(0,4) + ' ' + message['postcode'].substring(4)
 
       // Send the data
       var submitUrl = this.get('applicationController').get('model.form.properties.submitUrl')
