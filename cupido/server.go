@@ -59,6 +59,7 @@ func (s *Server) Run(setupDoneCh chan struct{}) {
 	// http.HandleFunc("/cupido/verify", s.newVerifyHandlerFunc())
 	http.HandleFunc("/cupido/health-check", s.newHealthCheckHandlerFunc())
 	http.HandleFunc("/cupido/api/stats", s.newAPIStatsHandlerFunc())
+	http.HandleFunc("/cupido/api/total", s.newAPIPublicStatsHandlerFunc(s.options.TotalOffset, s.options.TotalFactor))
 
 	if setupDoneCh != nil {
 		close(setupDoneCh)

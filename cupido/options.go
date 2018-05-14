@@ -21,5 +21,8 @@ type Options struct {
 	SMTPUsername string `long:"smtp-username" env:"SMTP_USERNAME" description:"Username for SMTP auth"`
 	SMTPPassword string `long:"smtp-password" env:"SMTP_PASSWORD" description:"Password for SMTP auth"`
 
+	TotalOffset float64 `long:"total-offset" env:"TOTAL_OFFSET" description:"Offset for the totals calculation, to account for invalid signatures."`
+	TotalFactor float64 `long:"total-factor" env:"TOTAL_FACTOR" description:"Factor for the totals calculation, to account for invalid signatures."`
+
 	APIKey string `long:"api-key" env:"API_KEY" description:"api authentication key"`
 }

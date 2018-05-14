@@ -8,6 +8,6 @@ type SubmitOutput struct {
 }
 
 type StatsOutput struct {
-	Total    uint64 `json:"total"`
-	Verified uint64 `json:"verified"`
+	Total uint64 `json:"total"`
+	// Verified uint64 `json:"verified"`
 }
