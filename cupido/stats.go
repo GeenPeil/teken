@@ -92,6 +92,12 @@ func (s *Server) newAPIPublicStatsHandlerFunc(offset, factor float64) http.Handl
 
 	return func(w http.ResponseWriter, r *http.Request) {
 		defer r.Body.Close()
+
+		if origin := r.Header.Get("Origin"); origin != "" {
+			w.Header().Set("Access-Control-Allow-Origin", "https://hartvoordemocratie.nl")
+			w.Header().Set("Access-Control-Allow-Methods", "GET, OPTIONS")
+		}
+
 		outputBytesLock.RLock()
 		w.Write(outputBytes)
 		outputBytesLock.RUnlock()
