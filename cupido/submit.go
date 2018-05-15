@@ -14,6 +14,7 @@ import (
 
 	"github.com/GeenPeil/teken/data"
 	"github.com/GeenPeil/teken/storage"
+	"github.com/huandu/xstrings"
 	"gopkg.in/gomail.v2-unstable"
 
 	"github.com/davecgh/go-spew/spew"
@@ -37,15 +38,20 @@ var (
 var (
 	tmplVerificationMailPlainText = template.Must(template.New("plain").Parse(`Geachte heer/mevrouw {{.Naam}},
 
-Bedankt voor uw handtekening! Help ons nu om nog veel meer mensen te bereiken, en doe een oproep aan uw familie, vrienden, buren en collega’s om óók te tekenen voor een referendum. U bent de sleutel tot het succes, en het is onze laatste kans!
+Dank voor uw ondersteuning van de campagne!
 
-Dit referendum is een race tegen de klok. De Eerste Kamer stemt begin juni over intrekking van de referendumwet, en daarmee kunnen ze dit initiatief de pas afsnijden, tenzij wij eerder zijn met het ophalen van de benodigde 300.000 handtekeningen.
+Mogen we nog een klein verzoek doen? Zou u deze mail willen doorsturen aan familie, vrienden en collega’s? Hieronder doen we namelijk een oproep aan hen om óók te tekenen op http://hartvoordemocratie.nl.
 
-We hebben dus haast, maar u kunt ons helpen. U bent oplettend en u was er vroeg bij, maar de meeste mensen weten nog helemaal niet dat zij óók kunnen tekenen voor een referendum over de ingrijpende nieuwe donorwet.
+Teken ook voor een donorreferendum!
+Hart voor Democratie voert campagne voor een referendum over de nieuwe donorwet en roept alle Nederlandse kiezers op om hun handtekening te zetten op http://hartvoordemocratie.nl
 
-Daar kunt u verandering in brengen! Vertel zo veel mogelijk mensen over de Hart voor Democratie-campagne en spoor ze allemaal aan om te tekenen op referendum.nl! Wacht niet, want we hebben geen tijd te verliezen!
+Wij vinden de nieuwe donorwet een perfect onderwerp voor een referendum, omdat de donorwet gaat over de vraag of de overheid mag beslissen over wat er met jouw lichaam gebeurt. Die vraag zou iedere kiezer persoonlijk moeten kunnen beantwoorden en een referendum is daarvoor het beste instrument.
 
-Bedankt en met grote groet,
+Met een goed, inhoudelijk debat over deze wet kunnen we bovendien laten zien dat het referendum wel degelijk goed werkt, en dat de regering deze vorm van inspraak niet van ons af zou mogen pakken.
+
+Wilt u deze campagne steunen? Onderteken dan een verzoek op http://hartvoordemocratie.nl.
+
+Met dank en grote groet,
 
 Bart Nijman
 Hart voor Democratie
@@ -273,7 +279,12 @@ func (s *Server) newSubmitHandlerFunc() http.HandlerFunc {
 			}
 
 			// Send mail
-			toNaam := strings.Title(strings.ToLower(h.Achternaam))
+			var toNaam string
+			if h.Tussenvoegsel != "" {
+				toNaam = xstrings.FirstRuneToUpper(strings.ToLower(h.Tussenvoegsel)) + " " + xstrings.FirstRuneToUpper(strings.ToLower(h.Achternaam))
+			} else {
+				toNaam = xstrings.FirstRuneToUpper(strings.ToLower(h.Achternaam))
+			}
 			// send mail
 			md := &mailData{
 				Naam: toNaam,
