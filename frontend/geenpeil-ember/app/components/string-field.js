@@ -104,7 +104,7 @@ export default Component.extend({
 
   matchExpressions : function() {
     var regexes = this.get('formItem.regex');
-    var value = this.get('formItem.value');
+    var value = this.get('formItem.value') || "";
 
     // Convert old single string regexes
     if(typeof regexes === 'string') {
