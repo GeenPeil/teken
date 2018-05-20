@@ -1,4 +1,4 @@
-<h1 class="cupido-heading">Formulier invullen</h1>
+<h1 class="cupido-heading">{{form.text.disclaimer_title}}</h1>
 
 <div class="content-block text-block">
   <span>{{{form.text.disclaimer_intro1}}}</span>
@@ -21,16 +21,16 @@
 
 <div class="content-block consent">
   <div>
-    Door het aanvinken van het onderstaande veld gaat u akkoord met deze voorwaarden en de <a target="_blank" href="https://hartvoordemocratie.nl/privacy.html">Privacyverklaring</a>.
+    {{{form.text.disclaimer_final}}}
   </div>
-  <label>{{input type="checkbox" checked=consent}}Ik ga akkoord</label>
+  <label>{{input type="checkbox" checked=consent}}{{form.text.disclaimer_button_accept}}</label>
 </div>
 
 <div class="content-block button-nav">
-  <button class="decline" {{action 'decline'}}>Terug</button>
+  <button class="decline" {{action 'decline'}}>{{form.text.button_back}}</button>
   {{#if consent}}
-    <button class="accept float-right" {{action 'accept'}}>Verder</button>
+    <button class="accept float-right" {{action 'accept'}}>{{form.text.button_continue}}</button>
   {{else}}
-    <button class="accept disabled float-right" {{action 'acceptWithoutConsent'}}>Verder</button>
+    <button class="accept disabled float-right" {{action 'acceptWithoutConsent'}}>{{form.text.button_continue}}</button>
   {{/if}}
 </div>

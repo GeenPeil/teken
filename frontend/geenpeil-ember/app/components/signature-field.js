@@ -41,6 +41,11 @@ export default Component.extend({
       this.toggleProperty('showEditor');
     },
 
+    closeEditor : function() {
+      this.set('showEditor', false);
+      this.save();
+    },
+
     clear : function() {
       this.get('ctx').clearRect(0, 0, this.get('width'), this.get('height'));
     }
@@ -48,18 +53,17 @@ export default Component.extend({
   },
 
   save : function() {
-    var dataURL = this.get('canvas').toDataURL();
 
-    // TODO - more better validation of image content
     // Checking for non falsey strings in response to some browser privacy features blocking toDataURL by returning a function
+    var dataURL = this.get('canvas').toDataURL();
     if(typeof dataURL === 'string' && dataURL) {
-      this.set('formItem.isValid',true);
       this.set('formItem.value',dataURL);
+      this.set('formItem.isValid',true);
     }
   },
 
   erase : function() {
-    var m = confirm("Wilt u de handtekening opnieuw zetten?");
+    var m = confirm(this.get('formItem.confirm_clearing'));
     if(m) {
       this.set('formItem.isValid',undefined);
       this.set('formItem.value',undefined);

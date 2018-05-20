@@ -8,6 +8,10 @@ export default Controller.extend({
 
   model : null,
 
+  form : computed('',function() {
+    return this.get('applicationController').get('model.form');
+  }),
+
   actions : {
 
     close : function() {
