@@ -57,8 +57,30 @@ export default Component.extend({
     // Checking for non falsey strings in response to some browser privacy features blocking toDataURL by returning a function
     var dataURL = this.get('canvas').toDataURL();
     if(typeof dataURL === 'string' && dataURL) {
+
+      var isValid = false;
+      var minPercentage = this.get('formItem.valid_pixel_percentage');
+      var percentage = 0;
+
+      try {
+        var imgdat = this.get('ctx').getImageData(0, 0, this.get('width'), this.get('height'));
+        var numpixels = imgdat.data.length / 4;
+        var numblack = 0;
+        for(var i=3;i<imgdat.data.length;i+=4) {
+          var alpha = imgdat.data[i];
+          if(alpha > 0) {
+            numblack++;
+          }
+        }
+        percentage = 100 * numblack / numpixels;
+        console.log('percentage black ', percentage);
+      }
+      catch(e) {
+        console.warn('could not count black pixels because ', e);
+      }
+
       this.set('formItem.value',dataURL);
-      this.set('formItem.isValid',true);
+      this.set('formItem.isValid',percentage >= minPercentage);
     }
   },
 

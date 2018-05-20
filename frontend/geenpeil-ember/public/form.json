@@ -232,6 +232,7 @@
                 "clear" : "Opnieuw",
                 "sign" : "Nu zetten",
                 "sign_again" : "Opnieuw zetten",
+                "valid_pixel_percentage" : 0,
                 "x" : 587,
                 "y" : 548,
                 "width" : 185,
