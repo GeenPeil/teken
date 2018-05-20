@@ -8,10 +8,10 @@ export default Route.extend({
 
   activate : function() {
     window.scrollTo(0,0);
-    var message = this.get('controller.model.form.text.alert_before_refresh');
     window.onbeforeunload = function() { 
+      var message = this.get('controller.form.text.alert_before_refresh');
       return message;
-    };
+    }.bind(this);
   },
 
   deactivate() {

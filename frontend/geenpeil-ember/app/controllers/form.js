@@ -111,9 +111,9 @@ export default Controller.extend({
           window._paq.push(['trackEvent', 'Form', this.get('sectionNumber'), 'Error', 'Invalid ' + errorFieldNames.join(', ')]);
         }
 
-        var title = this.get('model.form.text.alert_title_generic');
-        var textSingle = this.get('model.form.text.form_single_invalid');
-        var textMultiple = this.get('model.form.text.form_multiple_invalid');
+        var title = this.get('form.text.alert_title_generic');
+        var textSingle = this.get('form.text.form_single_invalid');
+        var textMultiple = this.get('form.text.form_multiple_invalid');
 
         if(errorFieldNames.length < 2) {
           swal(title, textSingle + errorFieldNames, 'warning');
