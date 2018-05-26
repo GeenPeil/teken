@@ -79,7 +79,7 @@ export default Controller.extend({
         }.bind(this),
         complete: function() {
           this.set('isSending', false);
-        }
+        }.bind(this)
       });
 
       //DEBUG
