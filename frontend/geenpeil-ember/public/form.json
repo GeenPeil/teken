@@ -212,7 +212,7 @@
                         "error": "Het e-mailadres is nog niet geldig"
                     },
                     {
-                        "expression": "(?=.*[.]\\w{2,3}$).*",
+                        "expression": "(?=.*[.]\\w{2,}$).*",
                         "error": "Vul het e-mailadres verder aan"
                     },
                     {
