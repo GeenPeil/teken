@@ -46,6 +46,9 @@ export default Controller.extend({
       // Set ref
       message['ref'] = this.get('applicationController').get('ref');
 
+      // Set host
+      message['host'] = location.host;
+
       // Send the data
       var submitUrl = this.get('applicationController').get('model.form.properties.submitUrl')
 
