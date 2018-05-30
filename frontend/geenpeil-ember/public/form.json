@@ -14,7 +14,7 @@
 
         "preferences" : {
           "stopOnEmpty" : true,
-          "lengthWarningText" : "*Om te kunnen voldoen aan de richtlijnen van de kiesraad is het aantal beschikbare tekens beperkt tot "
+          "lengthWarningText" : "Seçim konseyinin kurallarına uymak için, mevcut işaretlerin sayısı aşağıdakilerle sınırlıdır: "
         },
 
         "text" : {
@@ -30,22 +30,22 @@
             "disclaimer_4" : "Hollanda dışında yaşıyorsanız, bu çevrimiçi formu dolduramayıp <a href=\"https://www.referendumovereenwet.nl/wetten/33506\">burayı</a> (Hollandaca sayfaya geçiş yapar) tıklayıp orada yazanları takip etmeniz gerekir.",
             "disclaimer_5" : "Bilgileriniz üçüncü şahışlarla paylaşılmaz ve bu formun çıktısı dışında hiç bir şey için kullanılmaz. Bilgileriniz şifreli olarak kullanılır ve kaydedilir.",
             "disclaimer_6" : "Bu formu, üstte yazılan güncel başvuru için yanlızca bir defa doldurduğunuzu ve doğru bilgilerle doldurduğunuzu beyan ediyorsunuz.",
-            "disclaimer_must_accept" : "U moet akkoord gaan met de voorwaarden om het formulier in te vullen.",
+            "disclaimer_must_accept" : "Formu doldurmak için şartları kabul etmelisiniz.",
 
             "disclaimer_final" : "Altta görünen kutuyu tıklayarak, bu şartlarıyla <a target=\"_blank\" href=\"https://hartvoordemocratie.nl/privacy.html\">Gizlilik Açıklaması</a>'nı (Hollandaca sayfaya geçiş yapar) kabul ediyorsunuz.",
             "disclaimer_button_accept" : "Onaylıyorum",
 
-            "form_single_invalid" : "Kijk de invoer goed na. Er is een probleem in het veld: ",
-            "form_multiple_invalid" : "Kijk de invoer goed na. Er zijn nog problemen met de velden: ", 
+            "form_single_invalid" : "Dikkatle kontrol et. Giriş alanında bir sorun var: ",
+            "form_multiple_invalid" : "Dikkatlice kontrol et. Giriş alanları ile hala problemler var: ", 
             "form_part" : "Bölüm",
             "form_of" : "/",
 
             "check_title" : "Denetleme",
             "check" : "Bilgilerinizi iyice gözden geçiriniz. Doldurduğunuz formun örneğini görebilirsiniz. Güvenlik sorusunu yanıtladığınızdan sonra formu gönderilebilir.",
-            "check_not_all_valid" : "Het formulier bevat fouten of niet alle verplichte velden zijn ingevuld. Druk op 'Terug' om het formulier aan te vullen.",
+            "check_not_all_valid" : "Formda hatalar var veya tüm zorunlu giriş alanları tamamlanmadı. Formu tamamlamak için 'Geri' tuşuna basın.",
             "check_example" : "Örnek",
             "check_must_verify" : "Güvenlik sorusunu yanıtladığınızdan sonra formu gönderilebilir.",
-            "check_send_failed" : "Er is een probleem opgetreden bij het versturen.",
+            "check_send_failed" : "Göndermekte sorun vardı.",
             "check_invalid_email" : "Dit e-mailadres is al gebruikt.",
             "check_button_send" : "Gönder",
 
@@ -53,8 +53,8 @@
 
             "complete_success" : "Destek açıklamanız başarıyla gönderilmiştir.",
             "complete_share" : "İleriki adım: başkalarıyla paylaşın ki onlar da imzalasınlar!",
-            "complete_social_message" : "Teken%20ook%20voor%20een%20referendum%20over%20de%20donorwet!",
-            "complete_social_link" : "https%3A%2F%2Fhartvoordemocratie.nl",
+            "complete_social_message" : "Organ%20ba%C4%9F%C4%B1%C5%9F%C4%B1%20yasas%C4%B1%20ile%20ilgili%2C%20hemen%20halk%20oylamas%C4%B1%20i%C3%A7in%20imza%20at!",
+            "complete_social_link" : "https%3A%2F%2Freferandum.nl",
             "complete_donation_heading" : "Organ bağışı hayat kurtarır!",
             "complete_donation_1" : "Organ bağışı her yıl bir sürü hayat kurtarır. 'Çok fazla organ bağışçı var' diye bir şey olamaz, fakat organ bağışı çok özel ve duygusal bir meseledir.",
             "complete_donation_2" : "Bu yüzden, her Hollandalı'nın kendi seçimini kayıt etmesi önemlidir. Organ Bağışı Yasası'yla ilgili halk oylamasının gerçekleşmesi, organ bağışıyla ilgili bilgi ve bilincin büyümesine yardımcı olur.",
@@ -62,7 +62,7 @@
             "complete_donation_button_link" : "Organ Bağışı Kayıt Sistemi'ne gidiniz (Hollandaca sayfaya geçiş yapar)",
             "complete_powered_by" : "",
 
-            "alert_before_refresh" : "Door te refreshen verliest u ingevulde gegevens op het formulier en moet u opnieuw beginnen.",
+            "alert_before_refresh" : "Yenileyerek, formdaki girilen verilerinizi kaybedersiniz ve tekrar başlamanız gerekir.",
             "alert_title_generic" : "Dikkat edin",
             "alert_title_problem" : "Sorun",
 
@@ -91,7 +91,7 @@
                 "type" : "string",
                 "name" : "İlk resmi adınız",
                 "placeholder" : "Doldurunuz",
-                "instruction" : "Het veld bevat ongeldige tekens.",
+                "instruction" : "Giriş alanı geçersiz karakterler içeriyor.",
                 "explanation" : "Bunun için pasaport veya kimlik kartınıza bakınız",
                 "length" : 17,
                 "minLength" : 2,
@@ -105,7 +105,7 @@
                 "name" : "Göbek adı",
                 "explanation" : "(Gerekli değil)",
                 "placeholder" : "Doldurunuz veya boş bırakınız",
-                "instruction" : "Het veld bevat ongeldige tekens.",
+                "instruction" : "Giriş alanı geçersiz karakterler içeriyor.",
                 "length" : 7,
                 "x" : 422,
                 "y" : 548,
@@ -116,7 +116,7 @@
                 "type" : "string",
                 "name" : "Soyadınız",
                 "placeholder" : "Doldurunuz",
-                "instruction" : "Het veld bevat ongeldige tekens.",
+                "instruction" : "Giriş alanı geçersiz karakterler içeriyor.",
                 "length" : 25,
                 "x" : 51,
                 "y" : 596,
@@ -127,7 +127,7 @@
                 "type" : "string",
                 "name" : "Sokak",
                 "placeholder" : "Ev numarasız doldurunuz",
-                "instruction" : "Het veld bevat ongeldige tekens.",
+                "instruction" : "Giriş alanı geçersiz karakterler içeriyor.",
                 "length" : 25,
                 "x" : 51,
                 "y" : 650,
@@ -138,7 +138,7 @@
                 "type" : "string",
                 "name" : "Ev numarası",
                 "placeholder" : "Doldurunuz",
-                "instruction" : "Het veld bevat ongeldige tekens.",
+                "instruction" : "Giriş alanı geçersiz karakterler içeriyor.",
                 "length" : 9,
                 "x" : 587,
                 "y" : 650,
@@ -149,7 +149,7 @@
                 "type" : "string",
                 "name" : "Posta kodu",
                 "placeholder" : "Örneğin 1234 AB diye doldurunuz",
-                "instruction" : "Het veld bevat een ongeldige invoer.",
+                "instruction" : "Giriş alanı henüz geçerli değil.",
                 "length" : 7,
                 "minLength" : 6,
                 "x" : 53,
@@ -163,7 +163,7 @@
                 "type" : "string",
                 "name" : "İkamet yeri",
                 "placeholder" : "Doldurunuz",
-                "instruction" : "Het veld bevat ongeldige tekens.",
+                "instruction" : "Giriş alanı geçersiz karakterler içeriyor.",
                 "length" : 25,
                 "x" : 258,
                 "y" : 699,
@@ -175,7 +175,7 @@
                 "name" : "Doğum tarihi",
                 "placeholder" : "Örneğin 01-01-1970 diye doldurunuz",
                 "explanation" : "Doğum tarihinizi 'GG-AA-YYYY' olarak doldurunuz.<br>14-06-2000 Tarihinden önce doğmuş olmanız gerekir.",
-                "instruction" : "Het veld bevat een ongeldige invoer.",
+                "instruction" : "Giriş alanı henüz geçerli değil.",
                 "beforeDate" : "14-06-2000",
                 "length" : 10,
                 "minLength" : 8,
@@ -190,7 +190,7 @@
                 "type" : "string",
                 "name" : "Doğum yeri",
                 "placeholder" : "Doldurunuz",
-                "instruction" : "Het veld bevat ongeldige tekens.",
+                "instruction" : "Giriş alanı geçersiz karakterler içeriyor.",
                 "length" : 25,
                 "x" : 258,
                 "y" : 745,
@@ -209,15 +209,15 @@
                 "regex" : [
                     {
                         "expression": "\\S+@\\S+",
-                        "error": "Het e-mailadres is nog niet geldig"
+                        "error": "Giriş alanı henüz geçerli değil."
                     },
                     {
                         "expression": "(?=.*[.]\\w{2,}$).*",
-                        "error": "Vul het e-mailadres verder aan"
+                        "error": "Giriş alanı henüz geçerli değil."
                     },
                     {
                         "expression": "^(?!.*[.]con$).*$",
-                        "error": ".con is geen geldig domein"
+                        "error": "Giriş alanı henüz geçerli değil."
                     }
                 ]
             },
@@ -227,7 +227,7 @@
                 "name" : "İmza",
                 "explanation" : "İmza atmak için altta olan kutuyu tıklayınız. Dokunan ekran kullanmanızı öneriyoruz. Bilgisayar faresi veya dokunmalı fareyle imza atıyorsanız, imza atmak için farenin sol tuşunu basılı tutmanız gerekiyor.",
                 "instruction" : "Dikkat ediniz! Kimlik kartınızda mevcut olan imzanıza mümkün olduğu kadar benzeyen bir imza atınız.",
-                "confirm_clearing" : "Wilt u de handtekening opnieuw zetten?",
+                "confirm_clearing" : "İmzayı sıfırlamak istiyor musun?",
                 "done" : "Tamam",
                 "clear" : "Yineden",
                 "sign" : "Şimdi imza atın",
