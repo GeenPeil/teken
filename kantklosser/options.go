@@ -15,6 +15,8 @@ var flags struct {
 
 	StoragePrivkeyFile string `long:"storage-privkey-file" description:"storage private key" default:"./storage/testkey.pem"` // TODO: remove default, make mandatory
 	StorageLocation    string `long:"storage-location" desciption:"storage location" default:"./storage/testdata"`            // TODO: remove default, make mandatory
+
+	SkipAgeCheck bool `long:"skip-age-check" description:"Skip age check"`
 }
 
 func parseFlags() {

@@ -3,6 +3,7 @@ package main
 import (
 	"bytes"
 	"fmt"
+	"time"
 
 	"github.com/jung-kurt/gofpdf"
 
@@ -52,7 +53,21 @@ func NewPDF(name string) *pdf {
 	return p
 }
 
+var oldDate = time.Date(1900, 01, 01, 01, 01, 01, 01, time.UTC)
+
 func (p *pdf) AddHandtekening(h *data.Handtekening) error {
+	if !flags.SkipAgeCheck {
+		date, err := time.Parse("01-02-2006", h.Geboortedatum)
+		if err != nil {
+			fmt.Printf("Skipping invalid birthdate %s: %v\n", h.Geboortedatum, err)
+			return nil
+		}
+		if date.Before(oldDate) {
+			fmt.Printf("Skipping old birthdate %s (%s %s %s)\n", h.Geboortedatum, h.Voornaam, h.Achternaam, h.Email)
+			return nil
+		}
+	}
+
 	pagePos := p.inc.Last() % 2
 	if pagePos == 0 {
 		p.fpdf.AddPage()
