@@ -34,6 +34,7 @@ type Handtekening struct {
 	Handtekening    []byte `protobuf:"bytes,10,opt,name=handtekening,proto3" json:"handtekening,omitempty"`
 	Email           string `protobuf:"bytes,11,opt,name=email,proto3" json:"email,omitempty"`
 	CaptchaResponse string `protobuf:"bytes,999,opt,name=captchaResponse,proto3" json:"captchaResponse,omitempty"`
+	Host            string `protobuf:"bytes,998,opt,name=host,proto3" json:"host,omitempty"`
 }
 
 func (m *Handtekening) Reset()         { *m = Handtekening{} }
@@ -123,6 +124,14 @@ func (m *Handtekening) MarshalTo(data []byte) (int, error) {
 		i = encodeVarintHandtekening(data, i, uint64(len(m.Email)))
 		i += copy(data[i:], m.Email)
 	}
+	if len(m.Host) > 0 {
+		data[i] = 0xb2
+		i++
+		data[i] = 0x3e
+		i++
+		i = encodeVarintHandtekening(data, i, uint64(len(m.Host)))
+		i += copy(data[i:], m.Host)
+	}
 	if len(m.CaptchaResponse) > 0 {
 		data[i] = 0xba
 		i++
@@ -209,6 +218,10 @@ func (m *Handtekening) Size() (n int) {
 	l = len(m.Email)
 	if l > 0 {
 		n += 1 + l + sovHandtekening(uint64(l))
+	}
+	l = len(m.Host)
+	if l > 0 {
+		n += 2 + l + sovHandtekening(uint64(l))
 	}
 	l = len(m.CaptchaResponse)
 	if l > 0 {
@@ -493,6 +506,28 @@ func (m *Handtekening) Unmarshal(data []byte) error {
 				return io.ErrUnexpectedEOF
 			}
 			m.Email = string(data[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 998:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Host", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := data[iNdEx]
+				iNdEx++
+				stringLen |= (uint64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			postIndex := iNdEx + int(stringLen)
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Host = string(data[iNdEx:postIndex])
 			iNdEx = postIndex
 		case 999:
 			if wireType != 2 {

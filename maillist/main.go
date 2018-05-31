@@ -100,7 +100,7 @@ func main() {
 		log.Fatalf("error opening csv file: %v", err)
 	}
 	spreadsheet := csv.NewWriter(spreadsheetFile)
-	spreadsheet.Write([]string{"ID", "Voornaam", "Achternaam", "Email"})
+	spreadsheet.Write([]string{"ID", "Voornaam", "Achternaam", "Email", "Host"})
 
 	var numWorkers = (runtime.NumCPU() - 1) * 2
 	wgDone := sync.WaitGroup{}
@@ -139,7 +139,7 @@ func main() {
 				}
 
 				// write field to output csv file
-				fields := []string{strconv.FormatUint(id, 10), xstrings.FirstRuneToUpper(strings.ToLower(h.Voornaam)), achternaam, email}
+				fields := []string{strconv.FormatUint(id, 10), xstrings.FirstRuneToUpper(strings.ToLower(h.Voornaam)), achternaam, email, h.Host}
 				spreadsheetLock.Lock()
 				err = spreadsheet.Write(fields)
 				if err != nil {

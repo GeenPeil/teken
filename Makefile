@@ -1,6 +1,6 @@
 
 .PHONY: build
-build: build-cupido build-kantklosser build-maillist
+build: build-cupido build-kantklosser build-maillist build-locationlist
 
 
 .PHONY: build-cupido
@@ -15,3 +15,6 @@ build-kantklosser:
 build-maillist:
 	go build -o dist/bin/maillist github.com/GeenPeil/teken/maillist
 
+.PHONY: build-locationlist
+build-locationlist:
+	go build -o dist/bin/locationlist github.com/GeenPeil/teken/locationlist
