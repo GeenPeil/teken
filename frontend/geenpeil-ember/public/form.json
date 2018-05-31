@@ -18,20 +18,64 @@
         },
 
         "text" : {
-          "home1" : "300.000 papieren handtekeningen voor een definitief verzoek voor een referendum over de donorwet? Dat kan slimmer! Vul in deze app je gegevens in en onderteken digitaal. Wij zorgen dat je verzoek bijtijds bij de Kiesraad komt.",
-          "home2" : "Meer info over Hart voor Democratie? <a target=\"blank\" href=\"https://hartvoordemocratie.nl/faq.html\">hartvoordemocratie.nl</a>",
-          "disclaimer_intro1" : "Omdat dit serieuze zaken zijn, volgt nu een serieus stukje tekst. De disclaimer. Gaarne goed lezen als u wilt weten waar u aan moet voldoen en wat wij met uw gegevens doen (namelijk: zwaar beveiligen en alleen gebruiken voor dit referendum-initiatief).",
-          "disclaimer_1" : "Door uw gegevens in te vullen, steunt u het definitieve verzoek tot het houden van een referendum over de volgende wet:",
+            "home1" : "De nieuwe donorwet werpt een hele persoonlijke vraag op: Mag de overheid beslissen over wat er met jouw lichaam gebeurt? Daarom is deze wet een perfect onderwerp voor een referendum. Steunt Nederland actieve donorregistratie, of willen we liever een andere oplossing? <br><br> Teken ook! Je kunt met de button hieronder direct je handtekening zetten voor een referendum.",
+            "home2" : "Meer info over Hart voor Democratie? <a target=\"blank\" href=\"https://hartvoordemocratie.nl/faq.html\">hartvoordemocratie.nl</a>",
+            "home_button_sign_now" : "Nu formulier invullen",
 
-          "disclaimer_2" : "33506 - Wet tot wijziging van de Wet op de orgaandonatie in verband met het opnemen van een actief donorregistratiesysteem.",
-          "disclaimer_3" : "U kunt een verzoek indienen indien u Nederlander bent, 18 jaar of ouder bent op 14-06-2018 en niet uitgesloten bent van het kiesrecht.",
-          "disclaimer_4" : "Indien u buiten Nederland woont, kunt u geen gebruik maken van dit online formulier. <a href=\"https://www.referendumovereenwet.nl/wetten/33506\">Klik dan hier</a> en volg de instructies op het formulier.",
-          "disclaimer_5" : "Uw gegevens worden niet met derden gedeeld en niet gebruikt voor andere doeleinden dan het printen van het formulier. Uw informatie wordt versleuteld verwerkt en versleuteld opgeslagen.",
-          "disclaimer_6" : "U verklaart dat u slechts eenmaal een formulier indient ten behoeve van dit definitieve verzoek, en de gegevens naar waarheid invult.",
+            "disclaimer_title" : "Formulier invullen",
+            "disclaimer_intro1" : "Omdat dit serieuze zaken zijn, volgt nu een serieus stukje tekst. De disclaimer. Gaarne goed lezen als u wilt weten waar u aan moet voldoen en wat wij met uw gegevens doen (namelijk: zwaar beveiligen en alleen gebruiken voor dit referendum-initiatief).",
+            "disclaimer_1" : "Door uw gegevens in te vullen, steunt u het definitieve verzoek tot het houden van een referendum over de volgende wet:",
+            "disclaimer_2" : "33506 - Wet tot wijziging van de Wet op de orgaandonatie in verband met het opnemen van een actief donorregistratiesysteem.",
+            "disclaimer_3" : "U kunt een verzoek indienen indien u Nederlander bent, 18 jaar of ouder bent op 14-06-2018 en niet uitgesloten bent van het kiesrecht.",
+            "disclaimer_4" : "Indien u buiten Nederland woont, kunt u geen gebruik maken van dit online formulier. <a href=\"https://www.referendumovereenwet.nl/wetten/33506\">Klik dan hier</a> en volg de instructies op het formulier.",
+            "disclaimer_5" : "Uw gegevens worden niet met derden gedeeld en niet gebruikt voor andere doeleinden dan het printen van het formulier. Uw informatie wordt versleuteld verwerkt en versleuteld opgeslagen.",
+            "disclaimer_6" : "U verklaart dat u slechts eenmaal een formulier indient ten behoeve van dit definitieve verzoek, en de gegevens naar waarheid invult.",
+            "disclaimer_must_accept" : "U moet akkoord gaan met de voorwaarden om het formulier in te vullen.",
 
-          "check" : "Kijk uw gegevens goed na. U kunt een voorbeeld van het ingevulde formulier bekijken. Het formulier kan pas verzonden worden als u de beveiligingsvraag heeft beantwoord.",
-          "complete1" : "U ontvangt van ons per mail een unieke link. Na het klikken op die link wordt de ondersteuning pas definitief. Check uw mail dus! Een e-mailadres kan slechts eenmaal worden gebruikt.",
-          "complete2" : "LET OP!  Door de drukte kan de e-mail er langer over doen om aan te komen. Ook kan de e-mail soms in de spambox terecht komen."
+            "disclaimer_final" : "Door het aanvinken van het onderstaande veld gaat u akkoord met deze voorwaarden en de <a target=\"_blank\" href=\"https://hartvoordemocratie.nl/privacy.html\">Privacyverklaring</a>.",
+            "disclaimer_button_accept" : "Ik ga akkoord",
+
+            "form_single_invalid" : "Kijk de invoer goed na. Er is een probleem in het veld: ",
+            "form_multiple_invalid" : "Kijk de invoer goed na. Er zijn nog problemen met de velden: ", 
+            "form_part" : "Deel",
+            "form_of" : " van ",
+
+            "check_title" : "Controleren",
+            "check" : "Kijk uw gegevens goed na. U kunt een voorbeeld van het ingevulde formulier bekijken. Het formulier kan pas verzonden worden als u de beveiligingsvraag heeft beantwoord.",
+            "check_not_all_valid" : "Het formulier bevat fouten of niet alle verplichte velden zijn ingevuld. Druk op 'Terug' om het formulier aan te vullen.",
+            "check_example" : "Voorbeeld",
+            "check_must_verify" : "U moet de beveilingsvraag beantwoorden voordat u het formulier kan versturen.",
+            "check_send_failed" : "Er is een probleem opgetreden bij het versturen.",
+            "check_invalid_email" : "Dit e-mailadres is al gebruikt.",
+            "check_button_send" : "Versturen",
+
+            "preview_title" : "Voorbeeld",
+
+            "complete_success" : "Je ondersteuningsverklaring is succesvol verzonden!",
+            "complete_share" : "Volgende stap: deel dit met anderen zodat zij ook tekenen!",
+            "complete_social_message" : "Teken%20ook%20voor%20een%20referendum%20over%20de%20donorwet!",
+            "complete_social_link" : "https%3A%2F%2Fhartvoordemocratie.nl",
+            "complete_donation_heading" : "Orgaandonatie redt levens!",
+            "complete_donation_1" : "Orgaandonatie redt jaarlijks vele levens. Donoren zijn er nooit te veel, maar orgaandonatie is een hele persoonlijke en emotionele kwestie.",
+            "complete_donation_2" : "Daarom is het belangrijk dat iedere Nederlander zijn of haar keuze vastlegt. Een referendum over de donorwet zal helpen om de kennis en bewustwording over orgaandonatie te vergroten.",
+            "complete_donation_3" : "Heeft u eigenlijk al eens nagedacht over donorschap? In het nationale donorregister kunt u verschillende opties bekijken en uw keuze voor <span class=\"highlight\">‘ja’</span>, <span class=\"highlight\">‘nee’</span> of <span class=\"highlight\">’dat mogen mijn nabestaanden bepalen’</span> vastleggen. Neem eens een kijkje:",
+            "complete_donation_button_link" : "GA NAAR HET DONORREGISTER",
+            "complete_powered_by" : "Dit initiatief is powered by",
+
+            "alert_before_refresh" : "Door te refreshen verliest u ingevulde gegevens op het formulier en moet u opnieuw beginnen.",
+            "alert_title_generic" : "Let op",
+            "alert_title_problem" : "Probleem",
+
+            "button_back" : "Terug",
+            "button_continue" : "Verder",
+            "button_stop" : "Stoppen",
+            "button_close" : "Sluiten",
+
+            "down_title" : "Probleem",
+            "down_text" : "De applicatie is niet bereikbaar of overbelast. Probeer het later nog eens.",
+
+            "defunct_complete1" : "U ontvangt van ons per mail een unieke link. Na het klikken op die link wordt de ondersteuning pas definitief. Check uw mail dus! Een e-mailadres kan slechts eenmaal worden gebruikt.",
+            "defunct_complete2" : "LET OP!  Door de drukte kan de e-mail er langer over doen om aan te komen. Ook kan de e-mail soms in de spambox terecht komen."
         },
 
         "sections" : [
@@ -165,11 +209,11 @@
                 "regex" : [
                     {
                         "expression": "\\S+@\\S+",
-                        "error": "Je e-mailadres is nog niet geldig"
+                        "error": "Het e-mailadres is nog niet geldig"
                     },
                     {
-                        "expression": "(?=.*[.]\\w{2,3}$).*",
-                        "error": "Vul je e-mailadres verder aan"
+                        "expression": "(?=.*[.]\\w{2,}$).*",
+                        "error": "Vul het e-mailadres verder aan"
                     },
                     {
                         "expression": "^(?!.*[.]con$).*$",
@@ -183,6 +227,12 @@
                 "name" : "Handtekening",
                 "explanation" : "Druk op de knop om een handtekening te zetten. Wij raden het gebruik van een touchscreen aan. Als u tekent met een muis of touchpad moet u de linkermuisknop ingedrukt houden boven het vlak om te tekenen.",
                 "instruction" : "Let op! Plaats een handtekening die zo veel mogelijk lijkt op die op uw identiteitsbewijs.",
+                "confirm_clearing" : "Wilt u de handtekening opnieuw zetten?",
+                "done" : "Klaar",
+                "clear" : "Opnieuw",
+                "sign" : "Nu zetten",
+                "sign_again" : "Opnieuw zetten",
+                "valid_pixel_percentage" : 0,
                 "x" : 587,
                 "y" : 548,
                 "width" : 185,
@@ -194,7 +244,8 @@
                 "name" : "Verificatie",
                 "instruction" : "Beantwoord de beveiligingsvraag.",
                 "sitekey" : "6LeGdFAUAAAAAC0HCkLgyed69WvZN2Y6WdYPx6HU",
-                "theme" : "light"
+                "theme" : "light",
+                "lang" : "nl"
             }
         ]
     }

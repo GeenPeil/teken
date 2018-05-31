@@ -3,7 +3,7 @@
   <div class="row success-message">
     <div class="col-md-2"></div>
     <div class="col-md-8">
-      <h1><i class="fas fa-check"></i> Je ondersteuningsverklaring is succesvol verzonden!</h1>
+      <h1><i class="fas fa-check"></i> {{form.text.complete_success}}</h1>
     </div>
     <div class="col-md-2"></div>
   </div>
@@ -11,13 +11,13 @@
   <div class="row social-message">
     <div class="col-md-3"></div>
     <div class="col-md-6">
-      <h3>Volgende stap: deel dit met anderen zodat zij ook tekenen!</h3>
+      <h3>{{form.text.complete_share}}</h3>
       <hr/>
       <div class="share-buttons">
-        <a class="facebook" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fhartvoordemocratie.nl{{refString}}&amp;t=Teken%20ook%20voor%20een%20referendum%20over%20de%20donorwet!" target="_blank"><i class="fab fa-facebook-f"></i> Facebook</a> &nbsp;
-        <a class="twitter" href="https://www.twitter.com/intent/tweet?text=Teken%20ook%20voor%20een%20referendum%20over%20de%20donorwet!%20https%3A%2F%2Fhartvoordemocratie.nl{{refString}}" target="_blank"><i class="fab fa-twitter"></i> Twitter</a> &nbsp;
-        <a class="whatsapp" href="whatsapp://send?text=Teken%20ook%20voor%20een%20referendum%20over%20de%20donorwet!%20https%3A%2F%2Fhartvoordemocratie.nl{{refString}}" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a> &nbsp;
-        <a class="email" href="mailto:?subject=Teken%20ook%20voor%20een%20referendum%20over%20de%20donorwet!%20https%3A%2F%2Fhartvoordemocratie.nl{{refString}}" target="_blank"><i class="fas fa-envelope"></i> Mail</a>
+        <a class="facebook" href="https://www.facebook.com/sharer/sharer.php?u={{form.text.complete_social_link}}{{refString}}&amp;t={{form.text.complete_social_message}}" target="_blank"><i class="fab fa-facebook-f"></i> Facebook</a> &nbsp;
+        <a class="twitter" href="https://www.twitter.com/intent/tweet?text={{form.text.complete_social_message}}%20{{form.text.complete_social_link}}{{refString}}" target="_blank"><i class="fab fa-twitter"></i> Twitter</a> &nbsp;
+        <a class="whatsapp" href="whatsapp://send?text={{form.text.complete_social_message}}%20{{form.text.complete_social_link}}{{refString}}" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a> &nbsp;
+        <a class="email" href="mailto:?subject={{form.text.complete_social_message}}%20{{form.text.complete_social_link}}{{refString}}" target="_blank"><i class="fas fa-envelope"></i> Mail</a>
       </div>
     </div>
     <div class="col-md-3"></div>
@@ -26,18 +26,16 @@
   <div class="row donorregister-message">
     <div class="col-md-2"></div>
     <div class="col-md-8">
-      <h1>Orgaandonatie redt levens!</h1>
+      <h1>{{form.text.complete_donation_heading}}</h1>
       <hr/>
-      <p class="lead">Orgaandonatie redt jaarlijks vele levens. Donoren zijn er nooit te veel, maar orgaandonatie is een hele persoonlijke en emotionele kwestie.</p>
-      <p>Daarom is het belangrijk dat iedere Nederlander zijn of haar keuze vastlegt. Een referendum over de donorwet zal helpen om de kennis en bewustwording over orgaandonatie te vergroten.</p>
+      <p class="lead">{{form.text.complete_donation_1}}</p>
+      <p>{{form.text.complete_donation_2}}</p>
       <div class="row rounded" style="background-color: #22265c;">
         <div class="col-md-12">    
           <p class="lead" style="color:#fff;">
-            Heeft u eigenlijk al eens nagedacht over donorschap? In het nationale donorregister kunt u verschillende opties bekijken 
-            en uw keuze voor <span class="highlight">‘ja’</span>, <span class="highlight">‘nee’</span> of <span class="highlight">’dat mogen mijn nabestaanden bepalen’</span> vastleggen. 
-            Neem eens een kijkje:
-            </p>
-          <a onclick={{action 'clickLink'}} style="white-space: normal;" href="https://www.donorregister.nl/" rel="noreferrer" target="_blank" class="btn btn-primary btn-lg">GA NAAR HET DONORREGISTER</a>
+            {{{form.text.complete_donation_3}}}
+          </p>
+          <a onclick={{action 'clickLink'}} style="white-space: normal;" href="https://www.donorregister.nl/" rel="noreferrer" target="_blank" class="btn btn-primary btn-lg">{{form.text.complete_donation_button_link}}</a>
         </div>
       </div>
     </div>
@@ -46,7 +44,7 @@
 
   <div class="row">
     <div class="col-md-12">
-      <p><small>Dit initiatief is powered by</small> <img src="assets/GeenPeil-logo-highres.png" height="25px" class="rounded" style="background-color: #22265c; padding: 5px;" /></p>
+      <p><small>{{text.form.complete_powered_by}}</small> <img src="assets/GeenPeil-logo-highres.png" height="25px" class="rounded" style="background-color: #22265c; padding: 5px;" /></p>
     </div>
   </div>
 

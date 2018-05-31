@@ -1,4 +1,4 @@
-<h1 class="cupido-heading">Deel {{sectionNumber}} van {{totalSections}}</h1>
+<h1 class="cupido-heading">{{form.text.form_part}} {{sectionNumber}}{{form.text.form_of}}{{totalSections}}</h1>
 
 <div class="content-block">
   {{#each formItems as |formItem|}}
@@ -10,17 +10,17 @@
 
   <button class="continue float-right" {{action 'continue'}}>
     {{#if isLastSection}}
-      Verder
+      {{form.text.button_continue}}
     {{else}}
-      Verder
+      {{form.text.button_continue}}
     {{/if}}
   </button>
 
   <button class="cancel" {{action 'cancel'}}>
     {{#if isFirstSection}}
-      Stoppen
+      {{form.text.button_stop}}
     {{else}}
-      Terug
+      {{form.text.button_back}}
     {{/if}}
   </button>
 

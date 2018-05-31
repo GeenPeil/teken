@@ -46,16 +46,22 @@ export default Controller.extend({
       // Set ref
       message['ref'] = this.get('applicationController').get('ref');
 
+      // Set host
+      message['host'] = location.host;
+
       // Send the data
       var submitUrl = this.get('applicationController').get('model.form.properties.submitUrl')
+
+      // Get alert texts
+      var title = this.get('model.form.text.alert_title_problem');
+
       $.ajax({
         type : 'POST',
         url: submitUrl,
         data : JSON.stringify(message),
         contentType : 'application/json',
         error : function() {
-          swal('Probleem', 'Er is een probleem opgetreden bij het versturen.', 'warning');
-          this.set('isSending', false);
+          this.sendFailed();
         }.bind(this),
         success : function(r) {
           var response = JSON.parse(r);
@@ -65,18 +71,18 @@ export default Controller.extend({
             this.transitionToRoute('complete');
           }
           else {
-
             if(response.error === 'mail has been used') {
-              swal('Probleem', 'Dit e-mailadres is al gebruikt.', 'warning');
+              this.sendEmailUsed();
             }
             else {
-              swal('Probleem', 'Er is een probleem opgetreden bij het versturen.', 'warning');
+              this.sendFailed();
             }
-            this.set('isSending', false);
-
           }
 
         }.bind(this),
+        complete: function() {
+          this.set('isSending', false);
+        }.bind(this)
       });
 
       //DEBUG
@@ -85,7 +91,21 @@ export default Controller.extend({
     },
 
     sendNotVerified: function() {
-      swal('Let op', 'U moet de beveilingsvraag beantwoorden voordat u het formulier kan versturen.', 'warning');
+      var title = this.get('model.form.text.alert_title_generic');
+      var text = this.get('model.form.text.check_must_verify');
+      swal(title, text, 'warning');
+    },
+
+    sendFailed: function() {
+      var title = this.get('model.form.text.alert_title_problem');
+      var text = this.get('model.form.text.check_send_failed');
+      swal(title, text, 'warning');
+    },
+
+    sendEmailUsed: function() {
+      var title = this.get('model.form.text.alert_title_problem');
+      var text = this.get('model.form.text.check_invalid_email');
+      swal(title, text, 'warning');
     }
 
   },

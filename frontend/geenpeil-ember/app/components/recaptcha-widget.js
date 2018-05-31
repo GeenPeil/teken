@@ -13,7 +13,8 @@ export default Component.extend({
       window.onRecaptchaLoaded = function() {
         this.renderCaptcha();
       }.bind(this);
-      script.src = 'https://www.google.com/recaptcha/api.js?onload=onRecaptchaLoaded&render=explicit&hl=nl';
+      var lang = this.get('formItem.lang');
+      script.src = 'https://www.google.com/recaptcha/api.js?onload=onRecaptchaLoaded&render=explicit&hl='+lang;
       document.getElementsByTagName('head')[0].appendChild(script);
     }
     else {

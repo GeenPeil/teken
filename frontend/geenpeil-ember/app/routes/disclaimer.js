@@ -9,7 +9,9 @@ export default Route.extend({
     },
 
     acceptWithoutConsent : function() {
-      swal ('Let op', 'U moet akkoord gaan met de voorwaarden om het formulier in te vullen.', 'error');
+      var title = this.get('controller.model.form.text.alert_title_generic');
+      var text = this.get('controller.model.form.text.disclaimer_must_accept');
+      swal (title, text, 'error');
     },
 
     decline : function() {

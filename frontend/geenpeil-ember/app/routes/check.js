@@ -16,8 +16,9 @@ export default Route.extend({
 
   activate : function() {
     window.onbeforeunload = function() { 
-      return "Door te refreshen verliest u ingevulde gegevens op het formulier en moet u opnieuw beginnen."; 
-    };
+      var message = this.get('controller.form.text.alert_before_refresh');
+      return message;
+    }.bind(this);
   },
 
   deactivate() {

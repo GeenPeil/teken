@@ -12,9 +12,9 @@
 
 <button class="sign-button" {{action 'clicked'}}>
   {{#if formItem.isValid}}
-    Opnieuw zetten
+    {{formItem.sign_again}}
   {{else}}
-    Nu zetten
+    {{formItem.sign}}
   {{/if}}
 </button>
 
@@ -23,8 +23,8 @@
 {{#if showEditor}}
   <div class="signature-editor">
     <div class="button-container">
-      <button {{action 'toggleEditor'}}>Klaar</button>
-      <button {{action 'clear'}}>Opnieuw</button>
+      <button {{action 'closeEditor'}}>{{formItem.done}}</button>
+      <button {{action 'clear'}}>{{formItem.clear}}</button>
     </div>
     <canvas id="can" width={{width}} height={{height}}></canvas>
   </div>

@@ -23,6 +23,10 @@ export default Controller.extend({
     return this.get('applicationController.model.form.preferences');
   }),
 
+  form : computed('',function() {
+    return this.get('applicationController').get('model.form');
+  }),
+
   formItems : computed('section', function() {
     return this.get('section').map(function(id) {
       return this.get('applicationController').formItemForId(id);
@@ -107,11 +111,15 @@ export default Controller.extend({
           window._paq.push(['trackEvent', 'Form', this.get('sectionNumber'), 'Error', 'Invalid ' + errorFieldNames.join(', ')]);
         }
 
+        var title = this.get('form.text.alert_title_generic');
+        var textSingle = this.get('form.text.form_single_invalid');
+        var textMultiple = this.get('form.text.form_multiple_invalid');
+
         if(errorFieldNames.length < 2) {
-          swal('Let op', 'Kijk de invoer goed na. Er is een probleem in het veld: ' + errorFieldNames, 'warning');
+          swal(title, textSingle + errorFieldNames, 'warning');
         }
         else {
-          swal('Let op', 'Kijk de invoer goed na. Er zijn nog problemen met de velden: ' + errorFieldNames.join(', ') + '.', 'warning');
+          swal(title, textMultiple + errorFieldNames.join(', ') + '.', 'warning');
         }
       }
 
