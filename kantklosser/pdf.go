@@ -54,13 +54,19 @@ func NewPDF(name string) *pdf {
 }
 
 var oldDate = time.Date(1900, 01, 01, 01, 01, 01, 01, time.UTC)
+var dateFormat = `02-01-2006`
 
 func (p *pdf) AddHandtekening(h *data.Handtekening) error {
 	if !flags.SkipAgeCheck {
-		date, err := time.Parse("01-02-2006", h.Geboortedatum)
+		date, err := time.Parse(dateFormat, h.Geboortedatum)
 		if err != nil {
-			fmt.Printf("Skipping invalid birthdate %s: %v\n", h.Geboortedatum, err)
-			return nil
+			var errPlausibleDate error
+			date, errPlausibleDate = time.Parse(dateFormat, h.Geboortedatum[3:5]+"-"+h.Geboortedatum[0:2]+"-"+h.Geboortedatum[6:])
+			if errPlausibleDate != nil {
+				fmt.Printf("Skipping invalid birthdate %s: %v\n", h.Geboortedatum, err)
+				return nil
+			}
+			fmt.Printf("Graceful on date %s, accepted as %s\n", h.Geboortedatum, date.Format(dateFormat))
 		}
 		if date.Before(oldDate) {
 			fmt.Printf("Skipping old birthdate %s (%s %s %s)\n", h.Geboortedatum, h.Voornaam, h.Achternaam, h.Email)
