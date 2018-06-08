@@ -38,18 +38,11 @@ var (
 var (
 	tmplVerificationMailPlainText = template.Must(template.New("plain").Parse(`Geachte heer/mevrouw {{.Naam}},
 
-Dank voor uw ondersteuning van de campagne!
+Dank voor uw handtekening!
 
-Mogen we nog een klein verzoek doen? Zou u deze mail willen doorsturen aan familie, vrienden en collega’s? Hieronder doen we namelijk een oproep aan hen om óók te tekenen op http://hartvoordemocratie.nl.
+Zou u ook uw familie, vrienden en collega’s willen vragen om te tekenen op https://hartvoordemocratie.nl ? We hebben namelijk nog maar een paar dagen om voldoende handtekeningen op te halen - tot uiterlijk 13 juni kan er online getekend worden!
 
-Teken ook voor een donorreferendum!
-Hart voor Democratie voert campagne voor een referendum over de nieuwe donorwet en roept alle Nederlandse kiezers op om hun handtekening te zetten op http://hartvoordemocratie.nl
-
-Wij vinden de nieuwe donorwet een perfect onderwerp voor een referendum, omdat de donorwet gaat over de vraag of de overheid mag beslissen over wat er met jouw lichaam gebeurt. Die vraag zou iedere kiezer persoonlijk moeten kunnen beantwoorden en een referendum is daarvoor het beste instrument.
-
-Met een goed, inhoudelijk debat over deze wet kunnen we bovendien laten zien dat het referendum wel degelijk goed werkt, en dat de regering deze vorm van inspraak niet van ons af zou mogen pakken.
-
-Wilt u deze campagne steunen? Onderteken dan een verzoek op http://hartvoordemocratie.nl.
+Doe ook mee aan onze ‘Donderklap’! U kunt uw facebook- of twitter-account koppelen aan een ‘groepsoproep’, die maandag 11 juni in de ochtend massaal verzonden wordt door iedereen die zich heeft aangemeld. Doe mee, meld je hier aan: https://www.thunderclap.it/projects/70305-teken-voor-een-donorreferendum
 
 Met dank en grote groet,
 
